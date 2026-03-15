@@ -8,44 +8,9 @@
   # Directory to publish (Astro output folder)
   publish = "dist"
   
-  # Node.js version (matching package.json engines)
-  # Netlify will use Node.js 22.x for the build
-  
 [build.environment]
   # Build environment variables
   NODE_VERSION = "22.12.0"
-  NPM_FLAGS = "--legacy-peer-deps"
-
-# Netlify Forms configuration
-[build.processing]
-  skip_processing = false
-
-[build.processing.css]
-  bundle = true
-  minify = true
-
-[build.processing.js]
-  bundle = true
-  minify = true
-
-[build.processing.html]
-  pretty_urls = true
-
-[build.processing.images]
-  compress = true
-
-# Form detection and spam filtering
-[[plugins]]
-  package = "@netlify/plugin-forms"
-
-# Redirects and rewrites
-# Single Page Application fallback (in case of future dynamic routes)
-[[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
-  force = false
-  conditions = {Role = ["admin"]}
 
 # Security headers
 [[headers]]
@@ -68,16 +33,4 @@
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
 
-# Development context (branch deploys)
-[context.deploy-preview]
-  command = "npm run build"
-  
-[context.branch-deploy]
-  command = "npm run build"
 
-# Production context
-[context.production]
-  command = "npm run build"
-  
-  [context.production.environment]
-    NODE_ENV = "production"
