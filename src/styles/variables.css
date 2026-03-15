@@ -1,0 +1,82 @@
+/* ============================================================
+   REGULUS BRAND - CSS VARIABLES
+   Official: Navy (#011830), Black (#000000), White (#FFFFFF)
+   Font: Lato (400, 700, 900)
+   ============================================================ */
+
+:root {
+  /* COLORS */
+  --color-primary: #011830;
+  --color-secondary: #000000;
+  --color-tertiary: #FFFFFF;
+  --color-accent: #EA883A;      /* Orange - highlights, gradients, separators */
+
+  /* Semantic Aliases */
+  --color-background: #FFFFFF;
+  --color-text: #000000;
+  --color-heading: #011830;
+  --color-link: #011830;
+  --color-border: #000000;
+  --color-border-light: #cccccc;
+
+  /* Button Colors */
+  --color-button-primary-bg: #011830;
+  --color-button-primary-text: #FFFFFF;
+  --color-button-secondary-bg: #000000;
+  --color-button-secondary-text: #FFFFFF;
+
+  /* TYPOGRAPHY */
+  --font-primary: 'Lato', sans-serif;
+  --font-weight-regular: 400;
+  --font-weight-bold: 700;
+  --font-weight-black: 900;
+
+  /* Font Sizes */
+  --font-size-xs: 12px;
+  --font-size-sm: 14px;
+  --font-size-base: 16px;
+  --font-size-lg: 18px;
+  --font-size-h4: 20px;
+  --font-size-h3: 24px;
+  --font-size-h2: 32px;
+  --font-size-h1: 48px;
+
+  /* Line Heights */
+  --line-height-tight: 1.2;
+  --line-height-normal: 1.5;
+  --line-height-relaxed: 1.6;
+
+  /* SPACING - 8px Base */
+  --spacing-xs: 8px;
+  --spacing-sm: 16px;
+  --spacing-md: 24px;
+  --spacing-lg: 32px;
+  --spacing-xl: 48px;
+  --spacing-2xl: 64px;
+
+  /* Border Radius */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.12);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+  /* Transitions */
+  --transition-fast: 0.2s ease;
+  --transition-normal: 0.3s ease;
+
+  /* Layout */
+  --container-max-width: 1200px;
+  --container-padding: 48px;
+}
+
+@media (max-width: 768px) {
+  :root {
+    --font-size-h1: 32px;
+    --font-size-h2: 24px;
+    --font-size-h3: 20px;
+    --font-size-h4: 18px;
+    --container-padding: 16px;
+  }
+}

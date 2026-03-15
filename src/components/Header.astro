@@ -1,0 +1,204 @@
+---
+interface Props {
+  currentPage?: string;
+}
+
+const { currentPage = '' } = Astro.props;
+
+const navItems = [
+  { href: '/cursos', label: 'Cursos' },
+  { href: '/instrutores', label: 'Instrutores' },
+  { href: '/encontros', label: 'Encontros' },
+  { href: '/blog', label: 'Blog' },
+  { href: '/sobre', label: 'Sobre' },
+  { href: '/contato', label: 'Contato' },
+];
+---
+
+<header class="header">
+  <div class="header-container">
+    <a href="/" class="logo">
+      <span class="logo-text">REGULUS</span>
+      <span class="logo-tagline">Escola de Astrologia</span>
+    </a>
+    
+    <button class="mobile-menu-btn" aria-label="Menu" aria-expanded="false">
+      <span class="hamburger"></span>
+    </button>
+    
+    <nav class="nav" aria-label="Navegação principal">
+      <ul class="nav-list">
+        {navItems.map((item) => (
+          <li class="nav-item">
+            <a 
+              href={item.href} 
+              class={`nav-link ${currentPage === item.href ? 'active' : ''}`}
+            >
+              {item.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<style>
+  .header {
+    background-color: var(--color-primary);
+    padding: var(--spacing-sm) 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .header-container {
+    max-width: var(--container-max-width);
+    margin: 0 auto;
+    padding: 0 var(--container-padding);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .logo {
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    color: var(--color-tertiary);
+  }
+
+  .logo:hover {
+    text-decoration: none;
+  }
+
+  .logo-text {
+    font-size: 24px;
+    font-weight: var(--font-weight-black);
+    letter-spacing: 2px;
+    line-height: 1;
+  }
+
+  .logo-tagline {
+    font-size: 12px;
+    font-weight: var(--font-weight-regular);
+    letter-spacing: 1px;
+    opacity: 0.9;
+  }
+
+  .nav-list {
+    display: flex;
+    gap: var(--spacing-md);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .nav-link {
+    color: var(--color-tertiary);
+    font-weight: var(--font-weight-bold);
+    font-size: var(--font-size-sm);
+    text-decoration: none;
+    padding: var(--spacing-xs) 0;
+    position: relative;
+    transition: var(--transition-fast);
+  }
+
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--color-tertiary);
+    transition: var(--transition-fast);
+  }
+
+  .nav-link:hover::after,
+  .nav-link.active::after {
+    width: 100%;
+  }
+
+  .nav-link:hover {
+    text-decoration: none;
+  }
+
+  .mobile-menu-btn {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: var(--spacing-xs);
+  }
+
+  .hamburger {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background-color: var(--color-tertiary);
+    position: relative;
+  }
+
+  .hamburger::before,
+  .hamburger::after {
+    content: '';
+    position: absolute;
+    width: 24px;
+    height: 2px;
+    background-color: var(--color-tertiary);
+    left: 0;
+  }
+
+  .hamburger::before {
+    top: -8px;
+  }
+
+  .hamburger::after {
+    bottom: -8px;
+  }
+
+  @media (max-width: 768px) {
+    .header-container {
+      padding: 0 var(--spacing-sm);
+    }
+
+    .mobile-menu-btn {
+      display: block;
+    }
+
+    .nav {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background-color: var(--color-primary);
+      padding: var(--spacing-sm);
+      display: none;
+    }
+
+    .nav.open {
+      display: block;
+    }
+
+    .nav-list {
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .nav-link {
+      display: block;
+      padding: var(--spacing-sm);
+    }
+  }
+</style>
+
+<script>
+  const menuBtn = document.querySelector('.mobile-menu-btn');
+  const nav = document.querySelector('.nav');
+
+  menuBtn?.addEventListener('click', () => {
+    const isOpen = nav?.classList.toggle('open');
+    menuBtn.setAttribute('aria-expanded', String(isOpen));
+  });
+</script>

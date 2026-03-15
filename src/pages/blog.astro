@@ -1,0 +1,583 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+const categories = [
+  { name: 'Todos', slug: 'todos' },
+  { name: 'Notícias', slug: 'noticias' },
+  { name: 'Insights Astrológicos', slug: 'insights' },
+  { name: 'Dicas', slug: 'dicas' },
+  { name: 'Eventos', slug: 'eventos' },
+];
+
+const blogPosts = [
+  {
+    title: 'O que esperar do trânsito de Plutão em Aquário em 2025',
+    date: '15 de Janeiro de 2025',
+    excerpt: 'Plutão inicia sua jornada definitiva por Aquário, trazendo transformações profundas para a coletividade. Descubra como esse trânsito afetará cada signo e áreas da vida.',
+    category: 'Insights Astrológicos',
+    slug: 'transito-plutao-aquario-2025',
+  },
+  {
+    title: 'XIV Encontro Regulus de Astrologia: Inscrições Abertas',
+    date: '10 de Janeiro de 2025',
+    excerpt: 'As inscrições para o maior evento de astrologia do Brasil já estão abertas. Confira a programação completa e garanta sua vaga para os dias 16 e 17 de agosto.',
+    category: 'Eventos',
+    slug: 'xiv-encontro-regulus-inscricoes',
+  },
+  {
+    title: '50 Anos de Regulus: Uma História de Dedicação à Astrologia',
+    date: '05 de Janeiro de 2025',
+    excerpt: 'Em 2025, a Escola Regulus completa 50 anos de história. Relembre a trajetória iniciada pelo Professor Waldyr Bonadei Fücher e conheça os marcos dessa jornada.',
+    category: 'Notícias',
+    slug: '50-anos-regulus',
+  },
+  {
+    title: 'Como Interpretar a Casa 7 no Mapa Natal',
+    date: '28 de Dezembro de 2024',
+    excerpt: 'A Casa 7 revela muito sobre nossos relacionamentos e parcerias. Aprenda técnicas práticas para interpretar essa casa e compreender melhor suas relações.',
+    category: 'Dicas',
+    slug: 'interpretar-casa-7-mapa-natal',
+  },
+  {
+    title: 'Saturno em Áries: Preparando-se para o Novo Ciclo',
+    date: '20 de Dezembro de 2024',
+    excerpt: 'Em maio de 2025, Saturno ingressa em Áries pela primeira vez desde 1999. Entenda o significado desse trânsito e como se preparar para os desafios e oportunidades.',
+    category: 'Insights Astrológicos',
+    slug: 'saturno-aries-novo-ciclo',
+  },
+  {
+    title: 'Novos Cursos de Especialização: Astrologia Médica e Empresarial',
+    date: '15 de Dezembro de 2024',
+    excerpt: 'A Regulus amplia sua grade com dois novos cursos de especialização. Conheça os programas de Astrologia Médica e Astrologia Empresarial com início em março.',
+    category: 'Notícias',
+    slug: 'novos-cursos-especializacao',
+  },
+];
+---
+
+<BaseLayout title="Blog & Artigos">
+  <Header currentPage="/blog" />
+  
+  <main>
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="container">
+        <div class="hero-content">
+          <h1>Blog & Artigos</h1>
+          <p class="hero-subtitle">
+            Acompanhe as últimas novidades, insights astrológicos, dicas práticas 
+            e informações sobre eventos da Escola Regulus.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Blog Section -->
+    <section class="section blog-section">
+      <div class="container">
+        <div class="blog-layout">
+          <!-- Sidebar -->
+          <aside class="sidebar">
+            <div class="sidebar-widget">
+              <h3 class="sidebar-title">Categorias</h3>
+              <ul class="category-list">
+                {categories.map((cat) => (
+                  <li>
+                    <a 
+                      href={`#${cat.slug}`} 
+                      class={`category-link ${cat.slug === 'todos' ? 'active' : ''}`}
+                    >
+                      {cat.name}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div class="sidebar-widget">
+              <h3 class="sidebar-title">Newsletter</h3>
+              <p class="sidebar-text">
+                Receba novidades e artigos diretamente no seu email.
+              </p>
+              <form class="newsletter-form">
+                <input 
+                  type="email" 
+                  placeholder="Seu email" 
+                  class="newsletter-input"
+                  required
+                />
+                <button type="submit" class="btn-primary newsletter-btn">
+                  Inscrever
+                </button>
+              </form>
+            </div>
+          </aside>
+
+          <!-- Blog Grid -->
+          <div class="blog-content">
+            <div class="blog-grid">
+              {blogPosts.map((post) => (
+                <article class="blog-card">
+                  <div class="blog-card-header">
+                    <span class="blog-category">{post.category}</span>
+                    <span class="blog-date">{post.date}</span>
+                  </div>
+                  <div class="blog-card-body">
+                    <h2 class="blog-title">
+                      <a href={`/blog/${post.slug}`}>{post.title}</a>
+                    </h2>
+                    <p class="blog-excerpt">{post.excerpt}</p>
+                  </div>
+                  <div class="blog-card-footer">
+                    <a href={`/blog/${post.slug}`} class="read-more">
+                      Leia Mais
+                      <span class="arrow">→</span>
+                    </a>
+                  </div>
+                </article>
+              ))}
+            </div>
+
+            <!-- Pagination -->
+            <nav class="pagination" aria-label="Paginação do blog">
+              <a href="#" class="pagination-link active">1</a>
+              <a href="#" class="pagination-link">2</a>
+              <a href="#" class="pagination-link">3</a>
+              <span class="pagination-ellipsis">...</span>
+              <a href="#" class="pagination-link">Próxima →</a>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="section cta">
+      <div class="container">
+        <div class="cta-content text-center">
+          <h2>Quer Aprender Mais Sobre Astrologia?</h2>
+          <p>
+            Conheça nossos cursos de formação e especialização. 
+            A Regulus oferece a melhor estrutura de ensino em astrologia do Brasil.
+          </p>
+          <a href="/cursos" class="btn-primary">Conheça Nossos Cursos</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  /* Hero Section */
+  .hero {
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary) 70%, #EA883A 100%);
+    color: var(--color-tertiary);
+    padding: var(--spacing-2xl) 0;
+    position: relative;
+  }
+  
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--color-accent) 0%, var(--color-primary) 100%);
+  }
+
+  .hero-content {
+    max-width: 800px;
+    text-align: center;
+    margin: 0 auto;
+  }
+
+  .hero h1 {
+    font-size: var(--font-size-h1);
+    font-weight: var(--font-weight-black);
+    margin-bottom: var(--spacing-md);
+    color: var(--color-tertiary);
+    line-height: 1.1;
+  }
+
+  .hero-subtitle {
+    font-size: var(--font-size-lg);
+    line-height: var(--line-height-relaxed);
+    opacity: 0.95;
+  }
+
+  /* Container */
+  .container {
+    max-width: var(--container-max-width);
+    margin: 0 auto;
+    padding: 0 var(--container-padding);
+  }
+
+  /* Section */
+  .section {
+    padding: var(--spacing-2xl) 0;
+  }
+
+  /* Blog Layout */
+  .blog-layout {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: var(--spacing-xl);
+  }
+
+  /* Sidebar */
+  .sidebar {
+    position: sticky;
+    top: 100px;
+    height: fit-content;
+  }
+
+  .sidebar-widget {
+    background-color: #f8f8f8;
+    padding: var(--spacing-md);
+    border-radius: var(--radius-md);
+    margin-bottom: var(--spacing-md);
+  }
+
+  .sidebar-title {
+    font-size: var(--font-size-h4);
+    font-weight: var(--font-weight-bold);
+    margin-bottom: var(--spacing-sm);
+    color: var(--color-heading);
+    position: relative;
+    padding-bottom: var(--spacing-xs);
+  }
+
+  .sidebar-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 40px;
+    height: 3px;
+    background-color: var(--color-accent);
+    border-radius: 2px;
+  }
+
+  .category-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .category-list li {
+    margin-bottom: var(--spacing-xs);
+  }
+
+  .category-link {
+    display: block;
+    padding: var(--spacing-xs) 0;
+    color: var(--color-text);
+    font-size: var(--font-size-sm);
+    transition: var(--transition-fast);
+    font-weight: var(--font-weight-regular);
+  }
+
+  .category-link:hover,
+  .category-link.active {
+    color: var(--color-accent);
+    font-weight: var(--font-weight-bold);
+    text-decoration: none;
+  }
+
+  .sidebar-text {
+    font-size: var(--font-size-sm);
+    color: var(--color-text);
+    opacity: 0.9;
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .newsletter-form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xs);
+  }
+
+  .newsletter-input {
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border: 1px solid var(--color-border-light);
+    border-radius: var(--radius-sm);
+    font-size: var(--font-size-sm);
+    font-family: var(--font-primary);
+  }
+
+  .newsletter-input:focus {
+    outline: none;
+    border-color: var(--color-primary);
+  }
+
+  .newsletter-btn {
+    padding: var(--spacing-xs) var(--spacing-sm);
+    font-size: var(--font-size-sm);
+  }
+
+  /* Blog Grid */
+  .blog-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-md);
+  }
+
+  /* Blog Card */
+  .blog-card {
+    background-color: var(--color-tertiary);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    display: flex;
+    flex-direction: column;
+    transition: var(--transition-normal);
+    border: 1px solid var(--color-border-light);
+  }
+
+  .blog-card:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-4px);
+  }
+
+  .blog-card-header {
+    padding: var(--spacing-sm) var(--spacing-md);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--color-border-light);
+  }
+
+  .blog-category {
+    background-color: var(--color-accent);
+    color: var(--color-tertiary);
+    padding: 4px 12px;
+    border-radius: var(--radius-sm);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-bold);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .blog-date {
+    font-size: var(--font-size-xs);
+    color: var(--color-text);
+    opacity: 0.7;
+  }
+
+  .blog-card-body {
+    padding: var(--spacing-md);
+    flex: 1;
+  }
+
+  .blog-title {
+    font-size: var(--font-size-h4);
+    font-weight: var(--font-weight-bold);
+    margin-bottom: var(--spacing-sm);
+    line-height: var(--line-height-tight);
+  }
+
+  .blog-title a {
+    color: var(--color-heading);
+    text-decoration: none;
+    transition: var(--transition-fast);
+  }
+
+  .blog-title a:hover {
+    color: var(--color-accent);
+  }
+
+  .blog-excerpt {
+    font-size: var(--font-size-sm);
+    line-height: var(--line-height-relaxed);
+    color: var(--color-text);
+    opacity: 0.9;
+  }
+
+  .blog-card-footer {
+    padding: var(--spacing-md);
+    padding-top: 0;
+  }
+
+  .read-more {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    color: var(--color-accent);
+    font-weight: var(--font-weight-bold);
+    font-size: var(--font-size-sm);
+    text-decoration: none;
+    transition: var(--transition-fast);
+  }
+
+  .read-more:hover {
+    color: var(--color-primary);
+    text-decoration: none;
+  }
+
+  .read-more .arrow {
+    transition: var(--transition-fast);
+  }
+
+  .read-more:hover .arrow {
+    transform: translateX(4px);
+  }
+
+  /* Pagination */
+  .pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: var(--spacing-xs);
+    margin-top: var(--spacing-xl);
+  }
+
+  .pagination-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 40px;
+    height: 40px;
+    padding: 0 var(--spacing-sm);
+    border: 1px solid var(--color-border-light);
+    border-radius: var(--radius-sm);
+    color: var(--color-text);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-bold);
+    text-decoration: none;
+    transition: var(--transition-fast);
+  }
+
+  .pagination-link:hover {
+    border-color: var(--color-accent);
+    color: var(--color-accent);
+    text-decoration: none;
+  }
+
+  .pagination-link.active {
+    background-color: var(--color-accent);
+    border-color: var(--color-accent);
+    color: var(--color-tertiary);
+  }
+
+  .pagination-ellipsis {
+    color: var(--color-text);
+    opacity: 0.5;
+  }
+
+  /* CTA Section */
+  .cta {
+    background-color: var(--color-primary);
+    color: var(--color-tertiary);
+    position: relative;
+  }
+
+  .cta::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--color-accent) 0%, var(--color-primary) 100%);
+  }
+
+  .cta-content {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .cta h2 {
+    color: var(--color-tertiary);
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .cta p {
+    margin-bottom: var(--spacing-md);
+    opacity: 0.95;
+  }
+
+  .cta .btn-primary {
+    background-color: var(--color-tertiary);
+    color: var(--color-primary);
+  }
+
+  /* Utility Classes */
+  .text-center {
+    text-align: center;
+  }
+
+  /* Button Styles */
+  .btn-primary {
+    display: inline-block;
+    background-color: var(--color-button-primary-bg);
+    color: var(--color-button-primary-text);
+    padding: var(--spacing-sm) var(--spacing-md);
+    border-radius: var(--radius-sm);
+    font-weight: var(--font-weight-bold);
+    font-size: var(--font-size-base);
+    text-decoration: none;
+    transition: var(--transition-fast);
+    border: none;
+    cursor: pointer;
+  }
+
+  .btn-primary:hover {
+    opacity: 0.9;
+    text-decoration: none;
+  }
+
+  /* Responsive */
+  @media (max-width: 1024px) {
+    .blog-layout {
+      grid-template-columns: 1fr;
+    }
+
+    .sidebar {
+      position: static;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--spacing-md);
+    }
+
+    .sidebar-widget {
+      margin-bottom: 0;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .hero {
+      padding: var(--spacing-xl) 0;
+    }
+
+    .hero h1 {
+      font-size: var(--font-size-h2);
+    }
+
+    .container {
+      padding: 0 var(--spacing-sm);
+    }
+
+    .sidebar {
+      grid-template-columns: 1fr;
+    }
+
+    .blog-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .blog-card-header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: var(--spacing-xs);
+    }
+
+    .pagination {
+      flex-wrap: wrap;
+    }
+  }
+</style>

@@ -1,0 +1,33 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description = 'Regulus - Escola de Astrologia desde 1975. Cursos de formação em astrologia, eventos e livraria especializada.' } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <meta name="keywords" content="astrologia, curso de astrologia, escola de astrologia, regulus, São Paulo, formação em astrologia" />
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    
+    <!-- Preload fonts -->
+    <link rel="preload" href="/fonts/Lato/Lato-Regular.ttf" as="font" type="font/ttf" crossorigin />
+    <link rel="preload" href="/fonts/Lato/Lato-Bold.ttf" as="font" type="font/ttf" crossorigin />
+    <link rel="preload" href="/fonts/Lato/Lato-Black.ttf" as="font" type="font/ttf" crossorigin />
+    
+    <title>{title} | Regulus Astrologia</title>
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>

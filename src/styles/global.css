@@ -1,0 +1,144 @@
+/* ============================================================
+   REGULUS - GLOBAL STYLES
+   ============================================================ */
+
+@import './variables.css';
+@import './typography.css';
+
+/* Reset */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-primary);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-relaxed);
+  color: var(--color-text);
+  background-color: var(--color-background);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Links */
+a {
+  color: var(--color-link);
+  text-decoration: none;
+  font-weight: var(--font-weight-bold);
+  transition: var(--transition-fast);
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Images */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Lists */
+ul, ol {
+  list-style: none;
+}
+
+/* Buttons */
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+/* Container */
+.container {
+  width: 100%;
+  max-width: var(--container-max-width);
+  margin: 0 auto;
+  padding: 0 var(--container-padding);
+}
+
+/* Section */
+.section {
+  padding: var(--spacing-xl) 0;
+}
+
+/* Primary Button */
+.btn-primary {
+  display: inline-block;
+  background-color: var(--color-button-primary-bg);
+  color: var(--color-button-primary-text);
+  font-family: var(--font-primary);
+  font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-base);
+  padding: 12px 24px;
+  border-radius: var(--radius-sm);
+  text-decoration: none;
+  transition: var(--transition-fast);
+  border: none;
+  cursor: pointer;
+}
+
+.btn-primary:hover {
+  opacity: 0.9;
+  text-decoration: none;
+}
+
+/* Secondary Button */
+.btn-secondary {
+  display: inline-block;
+  background-color: var(--color-button-secondary-bg);
+  color: var(--color-button-secondary-text);
+  font-family: var(--font-primary);
+  font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-base);
+  padding: 12px 24px;
+  border-radius: var(--radius-sm);
+  text-decoration: none;
+  transition: var(--transition-fast);
+  border: none;
+  cursor: pointer;
+}
+
+.btn-secondary:hover {
+  opacity: 0.9;
+  text-decoration: none;
+}
+
+/* Utility Classes */
+.text-center { text-align: center; }
+.text-left { text-align: left; }
+.text-right { text-align: right; }
+
+.mt-1 { margin-top: var(--spacing-xs); }
+.mt-2 { margin-top: var(--spacing-sm); }
+.mt-3 { margin-top: var(--spacing-md); }
+.mt-4 { margin-top: var(--spacing-lg); }
+
+.mb-1 { margin-bottom: var(--spacing-xs); }
+.mb-2 { margin-bottom: var(--spacing-sm); }
+.mb-3 { margin-bottom: var(--spacing-md); }
+.mb-4 { margin-bottom: var(--spacing-lg); }
+
+/* Visually Hidden (Accessibility) */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}

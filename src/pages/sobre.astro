@@ -1,0 +1,772 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+const partners = [
+  { name: 'Oficina da Alma', description: 'Parceria em cursos e eventos de autoconhecimento' },
+  { name: 'Abracadabra Zen', description: 'Colaboração em práticas integrativas' },
+  { name: 'AstroBrasil', description: 'Comunidade brasileira de astrologia' },
+  { name: 'CNA', description: 'Congresso Nacional de Astrologia' },
+];
+
+const timeline = [
+  { year: '1975', event: 'Fundação da Escola Regulus pelo Prof. Waldyr Bonadei Fücher' },
+  { year: '1981', event: 'Nova fase com sede própria em São Paulo' },
+  { year: '2012', event: 'Falecimento do Prof. Waldyr, continuidade do legado' },
+  { year: 'Hoje', event: 'Referência nacional em formação de astrólogos profissionais' },
+];
+---
+
+<BaseLayout title="Sobre" description="Conheça a história da Escola Regulus de Astrologia, fundada em 1975 pelo Prof. Waldyr Bonadei Fücher. Tradição e excelência no ensino astrológico.">
+  <Header currentPage="/sobre" />
+  
+  <main>
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="container">
+        <div class="hero-content">
+          <h1>Sobre a Regulus</h1>
+          <p class="hero-subtitle">
+            Uma história de dedicação ao ensino da astrologia, 
+            iluminando caminhos desde 1975.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- History Section -->
+    <section class="section history">
+      <div class="container">
+        <div class="history-content">
+          <h2>Nossa História</h2>
+          <div class="timeline">
+            {timeline.map((item) => (
+              <div class="timeline-item">
+                <div class="timeline-marker"></div>
+                <div class="timeline-content">
+                  <span class="timeline-year">{item.year}</span>
+                  <p>{item.event}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+          <div class="history-text">
+            <p>
+              Em <strong>1975</strong>, o Astrólogo e Professor <strong>Waldyr Bonadei Fücher</strong> 
+              deu início às primeiras turmas do curso de Astrologia na cidade de São Paulo. 
+              Movido pela paixão pela ciência dos astros e pelo desejo de compartilhar seu 
+              conhecimento, ele estabeleceu as bases do que se tornaria uma das mais 
+              respeitadas escolas de astrologia do Brasil.
+            </p>
+            <p>
+              Em <strong>1981</strong>, a escola entrou em uma nova fase, estabelecendo sua 
+              <strong>sede própria</strong> e ampliando significativamente sua estrutura de ensino. 
+              Com instalações dedicadas, a Regulus pôde oferecer uma experiência educacional 
+              ainda mais completa aos seus alunos.
+            </p>
+            <p>
+              Ao longo das décadas, a Escola Regulus consolidou sua reputação como referência 
+              no ensino astrológico brasileiro, formando gerações de astrólogos profissionais 
+              que hoje atuam em todo o país.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Mission Section -->
+    <section class="section mission">
+      <div class="container">
+        <div class="mission-grid">
+          <div class="mission-card">
+            <h3>Nossa Missão</h3>
+            <p>
+              Formar astrólogos profissionais de excelência, seguindo rigorosamente as 
+              diretrizes do <strong>CBO (Classificação Brasileira de Ocupações)</strong>, 
+              que reconhece a astrologia como profissão regulamentada no Brasil.
+            </p>
+            <p>
+              Nossa grade curricular é cuidadosamente estruturada para proporcionar uma 
+              formação completa, desde os fundamentos até as técnicas mais avançadas de 
+              interpretação e previsão astrológica.
+            </p>
+          </div>
+          <div class="mission-card highlight">
+            <h3>O Nome Regulus</h3>
+            <p>
+              <strong>Regulus</strong> é a estrela mais brilhante da constelação de Leão, 
+              também conhecida como <em>Cor Leonis</em> (Coração do Leão). Seu nome vem 
+              do latim e significa "pequeno rei".
+            </p>
+            <p>
+              A escolha deste nome reflete a ambição de ser uma luz guia no ensino da 
+              astrologia, brilhando com intensidade e orientando aqueles que buscam 
+              compreender os mistérios celestes.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ISAR Section -->
+    <section class="section isar">
+      <div class="container">
+        <div class="isar-content">
+          <div class="isar-badge">Afiliação Internacional</div>
+          <h2>ISAR - International Society for Astrological Research</h2>
+          <p>
+            A Escola Regulus é afiliada ao <strong>ISAR (International Society for 
+            Astrological Research)</strong>, uma das mais prestigiadas organizações 
+            internacionais de astrologia, comprometida com a pesquisa, ética e 
+            profissionalização da prática astrológica.
+          </p>
+          <p>
+            Essa afiliação atesta nosso compromisso com os mais altos padrões de 
+            qualidade no ensino e na prática da astrologia, conectando nossos alunos 
+            a uma comunidade global de astrólogos profissionais.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Partners Section -->
+    <section class="section partners">
+      <div class="container">
+        <h2 class="section-title text-center">Nossos Parceiros</h2>
+        <p class="section-subtitle text-center">
+          Colaboramos com organizações que compartilham nossa visão de excelência 
+          no conhecimento astrológico e práticas integrativas.
+        </p>
+        <div class="partners-grid">
+          {partners.map((partner) => (
+            <div class="partner-card">
+              <h4>{partner.name}</h4>
+              <p>{partner.description}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Location Section -->
+    <section class="section location">
+      <div class="container">
+        <div class="location-grid">
+          <div class="location-info">
+            <h2>Nossa Localização</h2>
+            <address class="location-address">
+              <p class="street">Rua Estela, 515 cj.71-E</p>
+              <p class="neighborhood">Vila Mariana - São Paulo, SP</p>
+              <p class="cep">CEP: 04011-904</p>
+            </address>
+            <div class="location-metro">
+              <span class="metro-icon">🚇</span>
+              <span>Próximo ao <strong>Metrô Paraíso</strong></span>
+            </div>
+            <div class="location-contact">
+              <p><strong>Telefone:</strong> (11) 5549-2655</p>
+              <p><small>Atendimento: 14h às 19h</small></p>
+              <p><strong>Email:</strong> <a href="mailto:astrologia@regulus.com.br">astrologia@regulus.com.br</a></p>
+            </div>
+          </div>
+          <div class="location-map">
+            <div class="map-placeholder">
+              <p>Vila Mariana, São Paulo</p>
+              <p class="map-note">Fácil acesso pelo Metrô Paraíso</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Memorial Section -->
+    <section class="section memorial">
+      <div class="container">
+        <div class="memorial-content">
+          <div class="memorial-divider"></div>
+          <h2>In Memoriam</h2>
+          <div class="memorial-tribute">
+            <h3>Prof. Waldyr Bonadei Fücher</h3>
+            <p class="memorial-dates">18 de Agosto de 1926 — 19 de Fevereiro de 2012</p>
+            <blockquote>
+              "O céu ganhou mais uma estrela, e a terra se acostuma com a saudade."
+            </blockquote>
+            <p class="memorial-text">
+              Fundador da Escola Regulus, o Professor Waldyr dedicou sua vida ao estudo 
+              e ensino da astrologia. Seu legado permanece vivo através dos milhares de 
+              astrólogos que formou e da escola que continua iluminando caminhos.
+            </p>
+            <p class="memorial-text">
+              Sua visão pioneira e seu compromisso com a excelência no ensino 
+              estabeleceram os alicerces sobre os quais a Regulus continua construindo 
+              sua história de sucesso.
+            </p>
+          </div>
+          <div class="memorial-divider"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="section cta">
+      <div class="container">
+        <div class="cta-content text-center">
+          <h2>Faça Parte Desta História</h2>
+          <p>
+            Venha conhecer a Escola Regulus e descubra como podemos ajudá-lo 
+            em sua jornada astrológica.
+          </p>
+          <div class="cta-buttons">
+            <a href="/cursos" class="btn-primary">Conheça Nossos Cursos</a>
+            <a href="/contato" class="btn-secondary">Entre em Contato</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  /* Hero Section */
+  .hero {
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary) 70%, var(--color-accent) 100%);
+    color: var(--color-tertiary);
+    padding: var(--spacing-2xl) 0;
+    position: relative;
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--color-accent) 0%, var(--color-primary) 100%);
+  }
+
+  .hero-content {
+    max-width: 800px;
+  }
+
+  .hero h1 {
+    font-size: var(--font-size-h1);
+    font-weight: var(--font-weight-black);
+    margin-bottom: var(--spacing-md);
+    color: var(--color-tertiary);
+    line-height: 1.1;
+  }
+
+  .hero-subtitle {
+    font-size: var(--font-size-lg);
+    line-height: var(--line-height-relaxed);
+    opacity: 0.95;
+  }
+
+  /* History Section */
+  .history {
+    background-color: var(--color-tertiary);
+  }
+
+  .history-content h2 {
+    margin-bottom: var(--spacing-lg);
+    position: relative;
+    display: inline-block;
+  }
+
+  .history-content h2::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    width: 60px;
+    height: 4px;
+    background-color: var(--color-accent);
+    border-radius: 2px;
+  }
+
+  .timeline {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-lg);
+    padding-left: var(--spacing-md);
+    border-left: 2px solid var(--color-border-light);
+  }
+
+  .timeline-item {
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    gap: var(--spacing-sm);
+  }
+
+  .timeline-marker {
+    position: absolute;
+    left: calc(-1 * var(--spacing-md) - 7px);
+    top: 4px;
+    width: 12px;
+    height: 12px;
+    background-color: var(--color-accent);
+    border-radius: 50%;
+    border: 2px solid var(--color-tertiary);
+    box-shadow: 0 0 0 2px var(--color-accent);
+  }
+
+  .timeline-content {
+    flex: 1;
+  }
+
+  .timeline-year {
+    font-weight: var(--font-weight-black);
+    color: var(--color-accent);
+    font-size: var(--font-size-lg);
+    display: block;
+    margin-bottom: var(--spacing-xs);
+  }
+
+  .timeline-content p {
+    margin: 0;
+    color: var(--color-text);
+    line-height: var(--line-height-relaxed);
+  }
+
+  .history-text {
+    max-width: 800px;
+  }
+
+  .history-text p {
+    margin-bottom: var(--spacing-sm);
+    line-height: var(--line-height-relaxed);
+  }
+
+  .history-text p:last-child {
+    margin-bottom: 0;
+  }
+
+  /* Mission Section */
+  .mission {
+    background-color: #f8f8f8;
+  }
+
+  .mission-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-lg);
+  }
+
+  .mission-card {
+    background-color: var(--color-tertiary);
+    padding: var(--spacing-lg);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .mission-card.highlight {
+    background-color: var(--color-primary);
+    color: var(--color-tertiary);
+  }
+
+  .mission-card h3 {
+    margin-bottom: var(--spacing-sm);
+    position: relative;
+    display: inline-block;
+  }
+
+  .mission-card h3::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 40px;
+    height: 3px;
+    background-color: var(--color-accent);
+    border-radius: 2px;
+  }
+
+  .mission-card.highlight h3 {
+    color: var(--color-tertiary);
+  }
+
+  .mission-card p {
+    margin-bottom: var(--spacing-sm);
+    line-height: var(--line-height-relaxed);
+  }
+
+  .mission-card p:last-child {
+    margin-bottom: 0;
+  }
+
+  .mission-card.highlight p {
+    opacity: 0.95;
+  }
+
+  /* ISAR Section */
+  .isar {
+    background-color: var(--color-tertiary);
+    position: relative;
+  }
+
+  .isar::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--color-primary) 0%, var(--color-accent) 50%, var(--color-primary) 100%);
+  }
+
+  .isar-content {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .isar-badge {
+    display: inline-block;
+    background-color: var(--color-accent);
+    color: var(--color-tertiary);
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border-radius: var(--radius-sm);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-bold);
+    margin-bottom: var(--spacing-md);
+  }
+
+  .isar h2 {
+    margin-bottom: var(--spacing-md);
+  }
+
+  .isar p {
+    margin-bottom: var(--spacing-sm);
+    line-height: var(--line-height-relaxed);
+  }
+
+  .isar p:last-child {
+    margin-bottom: 0;
+  }
+
+  /* Partners Section */
+  .partners {
+    background-color: #f8f8f8;
+  }
+
+  .section-title {
+    margin-bottom: var(--spacing-xs);
+    display: inline-block;
+    position: relative;
+  }
+
+  .section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 4px;
+    background-color: var(--color-accent);
+    border-radius: 2px;
+  }
+
+  .section-subtitle {
+    color: var(--color-text);
+    opacity: 0.8;
+    margin-bottom: var(--spacing-lg);
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .partners-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--spacing-md);
+  }
+
+  .partner-card {
+    background-color: var(--color-tertiary);
+    padding: var(--spacing-md);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+    text-align: center;
+    transition: var(--transition-normal);
+    border-top: 3px solid var(--color-accent);
+  }
+
+  .partner-card:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-4px);
+  }
+
+  .partner-card h4 {
+    margin-bottom: var(--spacing-xs);
+    color: var(--color-primary);
+  }
+
+  .partner-card p {
+    font-size: var(--font-size-sm);
+    color: var(--color-text);
+    opacity: 0.8;
+    margin: 0;
+    line-height: var(--line-height-relaxed);
+  }
+
+  /* Location Section */
+  .location {
+    background-color: var(--color-tertiary);
+  }
+
+  .location-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-xl);
+    align-items: center;
+  }
+
+  .location-info h2 {
+    margin-bottom: var(--spacing-md);
+    position: relative;
+    display: inline-block;
+  }
+
+  .location-info h2::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    width: 60px;
+    height: 4px;
+    background-color: var(--color-accent);
+    border-radius: 2px;
+  }
+
+  .location-address {
+    font-style: normal;
+    margin-bottom: var(--spacing-md);
+  }
+
+  .location-address .street {
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-bold);
+    margin-bottom: var(--spacing-xs);
+  }
+
+  .location-address .neighborhood,
+  .location-address .cep {
+    color: var(--color-text);
+    opacity: 0.8;
+    margin-bottom: 4px;
+  }
+
+  .location-metro {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    background-color: #f8f8f8;
+    padding: var(--spacing-sm);
+    border-radius: var(--radius-md);
+    margin-bottom: var(--spacing-md);
+    border-left: 3px solid var(--color-accent);
+  }
+
+  .metro-icon {
+    font-size: 24px;
+  }
+
+  .location-contact p {
+    margin-bottom: var(--spacing-xs);
+  }
+
+  .location-contact a {
+    color: var(--color-accent);
+    font-weight: var(--font-weight-bold);
+  }
+
+  .location-map {
+    background-color: #f8f8f8;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+  }
+
+  .map-placeholder {
+    padding: var(--spacing-2xl);
+    text-align: center;
+    background: linear-gradient(135deg, var(--color-primary) 0%, #0a2d50 100%);
+    color: var(--color-tertiary);
+    min-height: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .map-placeholder p {
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-bold);
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .map-note {
+    font-size: var(--font-size-sm) !important;
+    font-weight: var(--font-weight-regular) !important;
+    opacity: 0.9;
+  }
+
+  /* Memorial Section */
+  .memorial {
+    background-color: var(--color-primary);
+    color: var(--color-tertiary);
+  }
+
+  .memorial-content {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .memorial-divider {
+    width: 100px;
+    height: 3px;
+    background-color: var(--color-accent);
+    margin: 0 auto var(--spacing-lg);
+    border-radius: 2px;
+  }
+
+  .memorial-divider:last-child {
+    margin-top: var(--spacing-lg);
+    margin-bottom: 0;
+  }
+
+  .memorial h2 {
+    color: var(--color-tertiary);
+    margin-bottom: var(--spacing-md);
+    font-size: var(--font-size-h3);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+
+  .memorial-tribute h3 {
+    color: var(--color-tertiary);
+    font-size: var(--font-size-h2);
+    margin-bottom: var(--spacing-xs);
+  }
+
+  .memorial-dates {
+    font-size: var(--font-size-lg);
+    color: var(--color-accent);
+    margin-bottom: var(--spacing-md);
+    font-weight: var(--font-weight-bold);
+  }
+
+  .memorial blockquote {
+    font-size: var(--font-size-lg);
+    font-style: italic;
+    opacity: 0.95;
+    margin: 0 0 var(--spacing-md) 0;
+    padding: var(--spacing-md);
+    border-left: 3px solid var(--color-accent);
+    text-align: left;
+    background-color: rgba(255, 255, 255, 0.05);
+    border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  }
+
+  .memorial-text {
+    text-align: left;
+    line-height: var(--line-height-relaxed);
+    opacity: 0.95;
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .memorial-text:last-child {
+    margin-bottom: 0;
+  }
+
+  /* CTA Section */
+  .cta {
+    background-color: var(--color-tertiary);
+    position: relative;
+  }
+
+  .cta::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--color-accent) 0%, var(--color-primary) 50%, var(--color-accent) 100%);
+  }
+
+  .cta-content {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .cta h2 {
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .cta p {
+    margin-bottom: var(--spacing-md);
+    opacity: 0.9;
+  }
+
+  .cta-buttons {
+    display: flex;
+    gap: var(--spacing-sm);
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  /* Responsive */
+  @media (max-width: 1024px) {
+    .mission-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .partners-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .location-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .hero {
+      padding: var(--spacing-xl) 0;
+    }
+
+    .hero h1 {
+      font-size: var(--font-size-h2);
+    }
+
+    .partners-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .cta-buttons {
+      flex-direction: column;
+    }
+
+    .cta-buttons .btn-primary,
+    .cta-buttons .btn-secondary {
+      width: 100%;
+      text-align: center;
+    }
+
+    .timeline {
+      padding-left: var(--spacing-sm);
+    }
+
+    .timeline-marker {
+      left: calc(-1 * var(--spacing-sm) - 7px);
+    }
+  }
+</style>

@@ -1,0 +1,580 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+const courses = [
+  {
+    title: 'Interpretação do Mapa Natal',
+    description: 'Aprenda a interpretar o mapa astrológico de nascimento, compreendendo planetas, casas, aspectos e a síntese do mapa.',
+    level: 'Básico',
+    duration: '6 meses',
+  },
+  {
+    title: 'Astrologia Horária',
+    description: 'Técnica milenar para responder perguntas específicas através do mapa do momento da pergunta.',
+    level: 'Intermediário',
+    duration: '6 meses',
+  },
+  {
+    title: 'Revolução Solar',
+    description: 'Análise do mapa anual de aniversário para previsões e tendências do ano pessoal.',
+    level: 'Intermediário',
+    duration: '4 meses',
+  },
+  {
+    title: 'Sinastria',
+    description: 'Estudo da compatibilidade entre mapas, aplicável a relacionamentos pessoais e profissionais.',
+    level: 'Intermediário',
+    duration: '4 meses',
+  },
+  {
+    title: 'Astrologia Médica',
+    description: 'Correlações entre o mapa astrológico e tendências de saúde, com foco em prevenção e bem-estar.',
+    level: 'Avançado',
+    duration: '6 meses',
+  },
+  {
+    title: 'Trânsitos e Progressões',
+    description: 'Técnicas de previsão através dos movimentos planetários e progressões secundárias.',
+    level: 'Intermediário',
+    duration: '6 meses',
+  },
+];
+
+const levelColors: Record<string, string> = {
+  'Básico': '#2e7d32',
+  'Intermediário': '#ed6c02',
+  'Avançado': '#d32f2f',
+};
+---
+
+<BaseLayout title="Cursos" description="Cursos de astrologia da Escola Regulus - Formação completa do básico ao avançado. Curso de Formação em Astrologia com 2 anos de duração.">
+  <Header currentPage="/cursos" />
+  
+  <main>
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="container">
+        <div class="hero-content">
+          <h1>Cursos de Astrologia</h1>
+          <p class="hero-subtitle">
+            Formação completa em astrologia com professores experientes e metodologia 
+            comprovada há mais de 50 anos. Do básico ao avançado, desenvolvemos 
+            profissionais capacitados e certificados.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Main Course Section -->
+    <section class="section main-course">
+      <div class="container">
+        <div class="main-course-card">
+          <div class="main-course-badge">Curso Principal</div>
+          <div class="main-course-content">
+            <h2>Curso de Formação em Astrologia</h2>
+            <p class="main-course-description">
+              Programa completo de formação profissional em astrologia, desenvolvido 
+              para transformar iniciantes em astrólogos qualificados. O curso abrange 
+              desde os fundamentos até técnicas avançadas de interpretação e previsão.
+            </p>
+            
+            <div class="main-course-features">
+              <div class="feature">
+                <span class="feature-icon">📚</span>
+                <div class="feature-text">
+                  <strong>Duração</strong>
+                  <span>2 anos completos</span>
+                </div>
+              </div>
+              <div class="feature">
+                <span class="feature-icon">📊</span>
+                <div class="feature-text">
+                  <strong>Nível</strong>
+                  <span>Básico ao Avançado</span>
+                </div>
+              </div>
+              <div class="feature">
+                <span class="feature-icon">✅</span>
+                <div class="feature-text">
+                  <strong>Certificação</strong>
+                  <span>Conforme CBO</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="main-course-details">
+              <h3>O que você vai aprender:</h3>
+              <ul>
+                <li>Fundamentos da astrologia: signos, planetas, casas e aspectos</li>
+                <li>Interpretação completa do mapa natal</li>
+                <li>Técnicas de previsão: trânsitos, progressões e revoluções</li>
+                <li>Sinastria e compatibilidade</li>
+                <li>Astrologia horária e eletiva</li>
+                <li>Ética e prática profissional</li>
+              </ul>
+            </div>
+
+            <p class="cbo-note">
+              <strong>Reconhecimento CBO:</strong> Nosso curso segue as diretrizes da 
+              Classificação Brasileira de Ocupações (CBO 5168-05), preparando você para 
+              atuar profissionalmente como astrólogo.
+            </p>
+
+            <a href="/contato" class="btn-primary">Inscreva-se Agora</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Courses Grid Section -->
+    <section class="section courses">
+      <div class="container">
+        <h2 class="section-title text-center">Cursos de Especialização</h2>
+        <p class="section-subtitle text-center">
+          Aprofunde seus conhecimentos em áreas específicas da astrologia com nossos 
+          cursos de extensão e especialização.
+        </p>
+        
+        <div class="courses-grid">
+          {courses.map((course) => (
+            <article class="course-card">
+              <div class="course-card-header">
+                <span class="course-level" style={`background-color: ${levelColors[course.level]}`}>
+                  {course.level}
+                </span>
+              </div>
+              <div class="course-card-body">
+                <h3>{course.title}</h3>
+                <p>{course.description}</p>
+                <div class="course-meta">
+                  <span class="course-duration">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <circle cx="12" cy="12" r="10"></circle>
+                      <polyline points="12 6 12 12 16 14"></polyline>
+                    </svg>
+                    {course.duration}
+                  </span>
+                </div>
+              </div>
+              <div class="course-card-footer">
+                <a href="/contato" class="btn-secondary">Saiba Mais</a>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="section cta">
+      <div class="container">
+        <div class="cta-content text-center">
+          <h2>Pronto para Começar sua Jornada?</h2>
+          <p>
+            Entre em contato conosco para saber mais sobre nossos cursos, 
+            horários das turmas e valores de investimento. 
+            Estamos prontos para ajudá-lo a trilhar o caminho das estrelas.
+          </p>
+          <div class="cta-buttons">
+            <a href="/contato" class="btn-primary">Fale Conosco</a>
+            <a href="https://wa.me/5511999999999" target="_blank" rel="noopener noreferrer" class="btn-secondary">
+              WhatsApp
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  /* Hero Section */
+  .hero {
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary) 70%, #EA883A 100%);
+    color: var(--color-tertiary);
+    padding: var(--spacing-2xl) 0;
+    position: relative;
+  }
+  
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--color-accent) 0%, var(--color-primary) 100%);
+  }
+
+  .hero-content {
+    max-width: 800px;
+  }
+
+  .hero h1 {
+    font-size: var(--font-size-h1);
+    font-weight: var(--font-weight-black);
+    margin-bottom: var(--spacing-md);
+    color: var(--color-tertiary);
+    line-height: 1.1;
+  }
+
+  .hero-subtitle {
+    font-size: var(--font-size-lg);
+    line-height: var(--line-height-relaxed);
+    opacity: 0.95;
+  }
+
+  /* Main Course Section */
+  .main-course {
+    background-color: var(--color-tertiary);
+  }
+
+  .main-course-card {
+    background-color: #f8f8f8;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+    position: relative;
+  }
+
+  .main-course-badge {
+    position: absolute;
+    top: var(--spacing-md);
+    right: var(--spacing-md);
+    background-color: var(--color-accent);
+    color: var(--color-tertiary);
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border-radius: var(--radius-sm);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-bold);
+  }
+
+  .main-course-content {
+    padding: var(--spacing-lg);
+  }
+
+  .main-course-content h2 {
+    font-size: var(--font-size-h2);
+    margin-bottom: var(--spacing-md);
+    color: var(--color-primary);
+    position: relative;
+    display: inline-block;
+  }
+
+  .main-course-content h2::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    width: 60px;
+    height: 4px;
+    background-color: var(--color-accent);
+    border-radius: 2px;
+  }
+
+  .main-course-description {
+    font-size: var(--font-size-lg);
+    line-height: var(--line-height-relaxed);
+    margin-bottom: var(--spacing-lg);
+    margin-top: var(--spacing-md);
+  }
+
+  .main-course-features {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-lg);
+    padding: var(--spacing-md);
+    background-color: var(--color-tertiary);
+    border-radius: var(--radius-md);
+  }
+
+  .feature {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+  }
+
+  .feature-icon {
+    font-size: 28px;
+  }
+
+  .feature-text {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .feature-text strong {
+    font-size: var(--font-size-sm);
+    color: var(--color-primary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .feature-text span {
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-bold);
+  }
+
+  .main-course-details {
+    margin-bottom: var(--spacing-lg);
+  }
+
+  .main-course-details h3 {
+    font-size: var(--font-size-h4);
+    margin-bottom: var(--spacing-sm);
+    color: var(--color-primary);
+  }
+
+  .main-course-details ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .main-course-details li {
+    padding: var(--spacing-xs) 0;
+    padding-left: var(--spacing-md);
+    position: relative;
+  }
+
+  .main-course-details li::before {
+    content: '★';
+    position: absolute;
+    left: 0;
+    color: var(--color-accent);
+    font-size: var(--font-size-sm);
+  }
+
+  .cbo-note {
+    background-color: var(--color-primary);
+    color: var(--color-tertiary);
+    padding: var(--spacing-md);
+    border-radius: var(--radius-sm);
+    margin-bottom: var(--spacing-lg);
+    font-size: var(--font-size-sm);
+  }
+
+  .cbo-note strong {
+    color: var(--color-accent);
+  }
+
+  /* Courses Grid Section */
+  .courses {
+    background-color: var(--color-tertiary);
+    position: relative;
+  }
+
+  .courses::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--color-primary) 0%, var(--color-accent) 50%, var(--color-primary) 100%);
+  }
+
+  .section-title {
+    margin-bottom: var(--spacing-xs);
+    display: inline-block;
+    position: relative;
+  }
+
+  .text-center .section-title,
+  .section-title.text-center {
+    display: block;
+  }
+
+  .section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 4px;
+    background-color: var(--color-accent);
+    border-radius: 2px;
+  }
+
+  .section-subtitle {
+    color: var(--color-text);
+    opacity: 0.8;
+    margin-bottom: var(--spacing-lg);
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .courses-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--spacing-md);
+  }
+
+  .course-card {
+    background-color: #f8f8f8;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    display: flex;
+    flex-direction: column;
+    transition: var(--transition-normal);
+  }
+
+  .course-card:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-4px);
+  }
+
+  .course-card-header {
+    padding: var(--spacing-sm) var(--spacing-md);
+    padding-bottom: 0;
+  }
+
+  .course-level {
+    display: inline-block;
+    color: var(--color-tertiary);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-bold);
+    padding: 4px 12px;
+    border-radius: var(--radius-sm);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .course-card-body {
+    padding: var(--spacing-md);
+    flex: 1;
+  }
+
+  .course-card-body h3 {
+    font-size: var(--font-size-h4);
+    margin-bottom: var(--spacing-sm);
+    color: var(--color-primary);
+  }
+
+  .course-card-body p {
+    font-size: var(--font-size-sm);
+    line-height: var(--line-height-relaxed);
+    opacity: 0.9;
+  }
+
+  .course-meta {
+    margin-top: var(--spacing-sm);
+    padding-top: var(--spacing-sm);
+    border-top: 1px solid var(--color-border-light);
+  }
+
+  .course-duration {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: var(--font-size-sm);
+    color: var(--color-accent);
+    font-weight: var(--font-weight-bold);
+  }
+
+  .course-duration svg {
+    color: var(--color-accent);
+  }
+
+  .course-card-footer {
+    padding: var(--spacing-md);
+    padding-top: 0;
+  }
+
+  .course-card-footer .btn-secondary {
+    width: 100%;
+    text-align: center;
+    background-color: var(--color-primary);
+    color: var(--color-tertiary);
+  }
+
+  /* CTA Section */
+  .cta {
+    background-color: var(--color-primary);
+    color: var(--color-tertiary);
+  }
+
+  .cta-content {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .cta h2 {
+    color: var(--color-tertiary);
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .cta p {
+    margin-bottom: var(--spacing-lg);
+    opacity: 0.95;
+  }
+
+  .cta-buttons {
+    display: flex;
+    gap: var(--spacing-sm);
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .cta .btn-primary {
+    background-color: var(--color-tertiary);
+    color: var(--color-primary);
+  }
+
+  .cta .btn-secondary {
+    background-color: transparent;
+    border: 2px solid var(--color-tertiary);
+    color: var(--color-tertiary);
+  }
+
+  /* Responsive */
+  @media (max-width: 1024px) {
+    .courses-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .main-course-features {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .hero {
+      padding: var(--spacing-xl) 0;
+    }
+
+    .hero h1 {
+      font-size: var(--font-size-h2);
+    }
+
+    .main-course-features {
+      grid-template-columns: 1fr;
+    }
+
+    .main-course-badge {
+      position: static;
+      display: inline-block;
+      margin-bottom: var(--spacing-sm);
+    }
+
+    .courses-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .cta-buttons {
+      flex-direction: column;
+    }
+
+    .cta-buttons .btn-primary,
+    .cta-buttons .btn-secondary {
+      width: 100%;
+    }
+  }
+</style>

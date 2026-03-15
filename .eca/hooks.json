@@ -1,0 +1,20 @@
+{
+  "$schema": "https://eca.dev/hooks.schema.json",
+  "description": "ECA hooks for Regulus project - runs lint after file changes",
+  "hooks": {
+    "after_edit": {
+      "description": "Run after any file edit to catch syntax errors",
+      "command": "npm run check",
+      "enabled": true,
+      "file_patterns": ["*.astro", "*.css", "*.ts", "*.js"],
+      "timeout": 30000
+    },
+    "after_write": {
+      "description": "Run after new file creation to validate",
+      "command": "npm run check",
+      "enabled": true,
+      "file_patterns": ["*.astro", "*.css", "*.ts", "*.js"],
+      "timeout": 30000
+    }
+  }
+}

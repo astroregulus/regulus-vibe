@@ -1,0 +1,678 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+const featuredEvent = {
+  title: 'XIV Encontro Regulus de Astrologia',
+  date: '16 e 17 de Agosto de 2025',
+  location: 'São Paulo, SP',
+  description: 'O maior evento de astrologia do Brasil está de volta! Dois dias intensos de palestras, workshops e networking com os melhores astrólogos do país e convidados internacionais.',
+  highlights: [
+    'Palestras com renomados astrólogos nacionais e internacionais',
+    'Workshops práticos e interativos',
+    'Networking com profissionais e estudantes de astrologia',
+    'Livraria especializada com lançamentos exclusivos',
+    'Certificado de participação',
+  ],
+};
+
+const pastEvents = [
+  { number: 'XIII', year: '2024', title: 'XIII Encontro Regulus de Astrologia' },
+  { number: 'XII', year: '2023', title: 'XII Encontro Regulus de Astrologia' },
+  { number: 'XI', year: '2022', title: 'XI Encontro Regulus de Astrologia' },
+  { number: 'X', year: '2019', title: 'X Encontro Regulus de Astrologia' },
+  { number: 'IX', year: '2018', title: 'IX Encontro Regulus de Astrologia' },
+  { number: 'VIII', year: '2017', title: 'VIII Encontro Regulus de Astrologia' },
+  { number: 'VII', year: '2016', title: 'VII Encontro Regulus de Astrologia' },
+  { number: 'VI', year: '2015', title: 'VI Encontro Regulus de Astrologia' },
+  { number: 'V', year: '2014', title: 'V Encontro Regulus de Astrologia' },
+  { number: 'IV', year: '2013', title: 'IV Encontro Regulus de Astrologia' },
+  { number: 'III', year: '2012', title: 'III Encontro Regulus de Astrologia' },
+  { number: 'II', year: '2011', title: 'II Encontro Regulus de Astrologia' },
+  { number: 'I', year: '2010', title: 'I Encontro Regulus de Astrologia' },
+];
+---
+
+<BaseLayout title="Encontros" description="Encontros Regulus de Astrologia - O maior evento de astrologia do Brasil. Palestras, workshops e networking com os melhores astrólogos.">
+  <Header currentPage="/encontros" />
+  
+  <main>
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="container">
+        <div class="hero-content">
+          <span class="hero-badge">Eventos</span>
+          <h1>Encontros Regulus de Astrologia</h1>
+          <p class="hero-subtitle">
+            Desde 2010, reunimos a comunidade astrológica brasileira em um evento único, 
+            promovendo conhecimento, troca de experiências e celebração da arte celeste.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Featured Event Section -->
+    <section class="section featured-event">
+      <div class="container">
+        <div class="featured-content">
+          <div class="featured-header">
+            <span class="event-badge">Próximo Evento</span>
+            <h2>{featuredEvent.title}</h2>
+            <div class="event-meta">
+              <span class="event-date">{featuredEvent.date}</span>
+              <span class="separator">•</span>
+              <span class="event-location">{featuredEvent.location}</span>
+            </div>
+          </div>
+          
+          <div class="featured-body">
+            <p class="event-description">{featuredEvent.description}</p>
+            
+            <div class="event-highlights">
+              <h3>O que você vai encontrar:</h3>
+              <ul>
+                {featuredEvent.highlights.map((highlight) => (
+                  <li>
+                    <span class="highlight-icon">★</span>
+                    {highlight}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+          
+          <div class="featured-footer">
+            <a href="/contato" class="btn-primary">Inscreva-se no XIV Encontro</a>
+            <a href="https://youtube.com/@astrologiaregulus" target="_blank" rel="noopener noreferrer" class="btn-secondary">
+              Assista Edições Anteriores
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About the Event Section -->
+    <section class="section about-event">
+      <div class="container">
+        <div class="about-grid">
+          <div class="about-text">
+            <h2>O Maior Evento de Astrologia do Brasil</h2>
+            <p class="lead">
+              Os Encontros Regulus de Astrologia são uma tradição que começou em 2010 e se consolidou 
+              como o principal evento do calendário astrológico brasileiro.
+            </p>
+            <p>
+              Durante dois dias, astrólogos profissionais, estudantes e entusiastas se reúnem para 
+              assistir palestras de renomados mestres, participar de workshops práticos e trocar 
+              experiências com colegas de todo o Brasil.
+            </p>
+            <p>
+              Nosso evento também conta com uma livraria especializada, oferecendo títulos exclusivos 
+              e lançamentos que não são encontrados em outros lugares.
+            </p>
+          </div>
+          <div class="about-stats">
+            <div class="stat-card">
+              <span class="stat-number">13</span>
+              <span class="stat-label">Edições Realizadas</span>
+            </div>
+            <div class="stat-card">
+              <span class="stat-number">15+</span>
+              <span class="stat-label">Anos de Tradição</span>
+            </div>
+            <div class="stat-card">
+              <span class="stat-number">100+</span>
+              <span class="stat-label">Palestras Ministradas</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Past Events Section -->
+    <section class="section past-events">
+      <div class="container">
+        <div class="section-header text-center">
+          <h2 class="section-title">Edições Anteriores</h2>
+          <p class="section-subtitle">
+            Confira a trajetória dos Encontros Regulus de Astrologia ao longo dos anos. 
+            As gravações de várias edições estão disponíveis em nosso canal no YouTube.
+          </p>
+        </div>
+        
+        <div class="timeline">
+          {pastEvents.map((event) => (
+            <div class="timeline-item">
+              <div class="timeline-marker">
+                <span class="event-number">{event.number}</span>
+              </div>
+              <div class="timeline-content">
+                <span class="timeline-year">{event.year}</span>
+                <h4 class="timeline-title">{event.title}</h4>
+              </div>
+            </div>
+          ))}
+        </div>
+        
+        <div class="youtube-cta text-center">
+          <div class="youtube-card">
+            <div class="youtube-icon">▶</div>
+            <h3>Assista às Gravações no YouTube</h3>
+            <p>
+              Não conseguiu participar de alguma edição? Disponibilizamos as gravações das 
+              palestras em nosso canal oficial no YouTube. Inscreva-se e não perca nenhum conteúdo!
+            </p>
+            <a 
+              href="https://youtube.com/@astrologiaregulus" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              class="btn-primary"
+            >
+              Acessar Canal no YouTube
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="section cta">
+      <div class="container">
+        <div class="cta-content text-center">
+          <h2>Participe do Próximo Encontro</h2>
+          <p>
+            Não perca a oportunidade de fazer parte do XIV Encontro Regulus de Astrologia. 
+            Garanta sua vaga e viva essa experiência única!
+          </p>
+          <div class="cta-buttons">
+            <a href="/contato" class="btn-primary">Quero Me Inscrever</a>
+            <a href="/cursos" class="btn-secondary">Conhecer os Cursos</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  /* Hero Section */
+  .hero {
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary) 70%, var(--color-accent) 100%);
+    color: var(--color-tertiary);
+    padding: var(--spacing-2xl) 0;
+    position: relative;
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--color-accent) 0%, var(--color-primary) 100%);
+  }
+
+  .hero-content {
+    max-width: 800px;
+  }
+
+  .hero-badge {
+    display: inline-block;
+    background-color: var(--color-accent);
+    color: var(--color-tertiary);
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border-radius: var(--radius-sm);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-bold);
+    margin-bottom: var(--spacing-md);
+  }
+
+  .hero h1 {
+    font-size: var(--font-size-h1);
+    font-weight: var(--font-weight-black);
+    margin-bottom: var(--spacing-md);
+    color: var(--color-tertiary);
+    line-height: 1.1;
+  }
+
+  .hero-subtitle {
+    font-size: var(--font-size-lg);
+    line-height: var(--line-height-relaxed);
+    opacity: 0.95;
+  }
+
+  /* Featured Event Section */
+  .featured-event {
+    background-color: var(--color-tertiary);
+    position: relative;
+  }
+
+  .featured-content {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .featured-header {
+    text-align: center;
+    margin-bottom: var(--spacing-lg);
+  }
+
+  .event-badge {
+    display: inline-block;
+    background-color: var(--color-accent);
+    color: var(--color-tertiary);
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border-radius: var(--radius-sm);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-bold);
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .featured-header h2 {
+    font-size: var(--font-size-h2);
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .event-meta {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-sm);
+    font-size: var(--font-size-lg);
+  }
+
+  .event-date {
+    font-weight: var(--font-weight-bold);
+    color: var(--color-accent);
+  }
+
+  .separator {
+    color: var(--color-accent);
+  }
+
+  .event-location {
+    color: var(--color-text);
+  }
+
+  .featured-body {
+    margin-bottom: var(--spacing-lg);
+  }
+
+  .event-description {
+    font-size: var(--font-size-lg);
+    line-height: var(--line-height-relaxed);
+    text-align: center;
+    margin-bottom: var(--spacing-lg);
+  }
+
+  .event-highlights {
+    background-color: #f8f8f8;
+    padding: var(--spacing-lg);
+    border-radius: var(--radius-md);
+    border-left: 4px solid var(--color-accent);
+  }
+
+  .event-highlights h3 {
+    font-size: var(--font-size-h4);
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .event-highlights ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .event-highlights li {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-xs);
+    font-size: var(--font-size-base);
+  }
+
+  .highlight-icon {
+    color: var(--color-accent);
+    font-size: var(--font-size-sm);
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .featured-footer {
+    display: flex;
+    gap: var(--spacing-sm);
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  /* About Event Section */
+  .about-event {
+    background-color: #f8f8f8;
+  }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: var(--spacing-xl);
+    align-items: center;
+  }
+
+  .about-text h2 {
+    margin-bottom: var(--spacing-md);
+    position: relative;
+    display: inline-block;
+  }
+
+  .about-text h2::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    width: 60px;
+    height: 4px;
+    background-color: var(--color-accent);
+    border-radius: 2px;
+  }
+
+  .about-text .lead {
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-bold);
+    margin-bottom: var(--spacing-md);
+    color: var(--color-primary);
+  }
+
+  .about-text p {
+    margin-bottom: var(--spacing-sm);
+    line-height: var(--line-height-relaxed);
+  }
+
+  .about-stats {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+  }
+
+  .stat-card {
+    background-color: var(--color-primary);
+    color: var(--color-tertiary);
+    padding: var(--spacing-md) var(--spacing-lg);
+    border-radius: var(--radius-md);
+    text-align: center;
+  }
+
+  .stat-number {
+    display: block;
+    font-size: var(--font-size-h1);
+    font-weight: var(--font-weight-black);
+    color: var(--color-accent);
+    line-height: 1;
+    margin-bottom: var(--spacing-xs);
+  }
+
+  .stat-label {
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-bold);
+  }
+
+  /* Past Events Section */
+  .past-events {
+    background-color: var(--color-tertiary);
+  }
+
+  .section-header {
+    margin-bottom: var(--spacing-xl);
+  }
+
+  .section-title {
+    margin-bottom: var(--spacing-sm);
+    position: relative;
+    display: inline-block;
+  }
+
+  .section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 4px;
+    background-color: var(--color-accent);
+    border-radius: 2px;
+  }
+
+  .section-subtitle {
+    max-width: 600px;
+    margin: var(--spacing-md) auto 0;
+    opacity: 0.9;
+  }
+
+  /* Timeline */
+  .timeline {
+    max-width: 800px;
+    margin: 0 auto var(--spacing-xl);
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: var(--spacing-md);
+  }
+
+  .timeline-item {
+    background-color: #f8f8f8;
+    border-radius: var(--radius-md);
+    padding: var(--spacing-md);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    transition: var(--transition-normal);
+  }
+
+  .timeline-item:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
+  }
+
+  .timeline-marker {
+    width: 48px;
+    height: 48px;
+    background-color: var(--color-primary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .event-number {
+    color: var(--color-accent);
+    font-weight: var(--font-weight-black);
+    font-size: var(--font-size-sm);
+  }
+
+  .timeline-content {
+    flex: 1;
+  }
+
+  .timeline-year {
+    display: block;
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-accent);
+    margin-bottom: 2px;
+  }
+
+  .timeline-title {
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-primary);
+    margin: 0;
+  }
+
+  /* YouTube CTA */
+  .youtube-cta {
+    margin-top: var(--spacing-xl);
+  }
+
+  .youtube-card {
+    background-color: var(--color-primary);
+    color: var(--color-tertiary);
+    padding: var(--spacing-xl);
+    border-radius: var(--radius-md);
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .youtube-icon {
+    width: 64px;
+    height: 64px;
+    background-color: var(--color-accent);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    margin: 0 auto var(--spacing-md);
+  }
+
+  .youtube-card h3 {
+    color: var(--color-tertiary);
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .youtube-card p {
+    opacity: 0.95;
+    margin-bottom: var(--spacing-md);
+    line-height: var(--line-height-relaxed);
+  }
+
+  .youtube-card .btn-primary {
+    background-color: var(--color-tertiary);
+    color: var(--color-primary);
+  }
+
+  /* CTA Section */
+  .cta {
+    background-color: var(--color-primary);
+    color: var(--color-tertiary);
+    position: relative;
+  }
+
+  .cta::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--color-accent) 0%, var(--color-primary) 50%, var(--color-accent) 100%);
+  }
+
+  .cta-content {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .cta h2 {
+    color: var(--color-tertiary);
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .cta p {
+    opacity: 0.95;
+    margin-bottom: var(--spacing-lg);
+  }
+
+  .cta-buttons {
+    display: flex;
+    gap: var(--spacing-sm);
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .cta .btn-primary {
+    background-color: var(--color-tertiary);
+    color: var(--color-primary);
+  }
+
+  .cta .btn-secondary {
+    background-color: transparent;
+    border: 2px solid var(--color-tertiary);
+    color: var(--color-tertiary);
+  }
+
+  /* Responsive */
+  @media (max-width: 1024px) {
+    .about-grid {
+      grid-template-columns: 1fr;
+      gap: var(--spacing-lg);
+    }
+
+    .about-stats {
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .stat-card {
+      flex: 1;
+      min-width: 150px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .hero {
+      padding: var(--spacing-xl) 0;
+    }
+
+    .hero h1 {
+      font-size: var(--font-size-h2);
+    }
+
+    .event-meta {
+      flex-direction: column;
+      gap: var(--spacing-xs);
+    }
+
+    .separator {
+      display: none;
+    }
+
+    .featured-footer {
+      flex-direction: column;
+    }
+
+    .featured-footer .btn-primary,
+    .featured-footer .btn-secondary {
+      width: 100%;
+      text-align: center;
+    }
+
+    .timeline {
+      grid-template-columns: 1fr;
+    }
+
+    .about-stats {
+      flex-direction: column;
+    }
+
+    .stat-card {
+      min-width: auto;
+    }
+
+    .cta-buttons {
+      flex-direction: column;
+    }
+
+    .cta-buttons .btn-primary,
+    .cta-buttons .btn-secondary {
+      width: 100%;
+    }
+
+    .youtube-card {
+      padding: var(--spacing-lg);
+    }
+  }
+</style>

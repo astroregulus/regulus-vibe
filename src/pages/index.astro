@@ -1,0 +1,468 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+const featuredCourses = [
+  {
+    title: 'Curso de Formação em Astrologia',
+    description: 'Programa completo de formação profissional em astrologia, com duração de 2 anos.',
+    level: 'Básico ao Avançado',
+    duration: '2 anos',
+  },
+  {
+    title: 'Astrologia Horária',
+    description: 'Aprenda a técnica da astrologia horária para responder perguntas específicas.',
+    level: 'Intermediário',
+    duration: '6 meses',
+  },
+  {
+    title: 'Revolução Solar',
+    description: 'Técnicas de previsão através da análise do mapa de revolução solar anual.',
+    level: 'Intermediário',
+    duration: '4 meses',
+  },
+];
+
+const upcomingEvent = {
+  title: 'XIV Encontro Regulus de Astrologia',
+  date: '16 e 17 de Agosto de 2025',
+  description: 'O maior evento de astrologia do Brasil. Palestras, workshops e networking com os melhores astrólogos.',
+};
+---
+
+<BaseLayout title="Início">
+  <Header currentPage="/" />
+  
+  <main>
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="container">
+        <div class="hero-content">
+          <h1>Escola Regulus de Astrologia</h1>
+          <p class="hero-subtitle">
+            Desde 1975 formando os melhores astrólogos do Brasil. 
+            Uma tradição de excelência no ensino da ciência dos astros.
+          </p>
+          <div class="hero-buttons">
+            <a href="/cursos" class="btn-primary">Conheça Nossos Cursos</a>
+            <a href="/contato" class="btn-secondary">Fale Conosco</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="section about">
+      <div class="container">
+        <div class="about-content">
+          <h2>Há 50 Anos Iluminando Caminhos</h2>
+          <p class="lead">
+            Em 1975, o Astrólogo e Professor Waldyr Bonadei Fücher iniciou as primeiras turmas 
+            do curso de Astrologia. Desde então, a Regulus se tornou referência no ensino 
+            astrológico no Brasil.
+          </p>
+          <p>
+            Atualmente, a escola possui uma grade curricular completa para formação básica, 
+            respeitando as definições do CBO (Classificação Brasileira de Ocupações), 
+            além de cursos de aperfeiçoamento, extensão e especializações.
+          </p>
+          <a href="/sobre" class="btn-primary">Saiba Mais Sobre Nossa História</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Featured Courses Section -->
+    <section class="section courses">
+      <div class="container">
+        <h2 class="section-title text-center">Cursos em Destaque</h2>
+        <p class="section-subtitle text-center">
+          Formação completa em astrologia com professores experientes e metodologia comprovada.
+        </p>
+        
+        <div class="courses-grid">
+          {featuredCourses.map((course) => (
+            <article class="course-card">
+              <div class="course-card-header">
+                <span class="course-level">{course.level}</span>
+              </div>
+              <div class="course-card-body">
+                <h3>{course.title}</h3>
+                <p>{course.description}</p>
+                <div class="course-meta">
+                  <span class="course-duration">Duração: {course.duration}</span>
+                </div>
+              </div>
+              <div class="course-card-footer">
+                <a href="/cursos" class="btn-primary">Saiba Mais</a>
+              </div>
+            </article>
+          ))}
+        </div>
+        
+        <div class="text-center mt-4">
+          <a href="/cursos" class="btn-secondary">Ver Todos os Cursos</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Event Section -->
+    <section class="section event">
+      <div class="container">
+        <div class="event-content">
+          <span class="event-badge">Próximo Evento</span>
+          <h2>{upcomingEvent.title}</h2>
+          <p class="event-date">{upcomingEvent.date}</p>
+          <p class="event-description">{upcomingEvent.description}</p>
+          <div class="event-buttons">
+            <a href="/encontros" class="btn-primary">Saiba Mais</a>
+            <a href="https://youtube.com/@astrologiaregulus" target="_blank" rel="noopener noreferrer" class="btn-secondary">
+              Assista Edições Anteriores
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="section cta">
+      <div class="container">
+        <div class="cta-content text-center">
+          <h2>Comece Sua Jornada na Astrologia</h2>
+          <p>
+            Entre em contato conosco e descubra como a astrologia pode transformar 
+            sua vida e carreira profissional.
+          </p>
+          <a href="/contato" class="btn-primary">Entre em Contato</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  /* Hero Section */
+  .hero {
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary) 70%, #EA883A 100%);
+    color: var(--color-tertiary);
+    padding: var(--spacing-2xl) 0;
+    min-height: 60vh;
+    display: flex;
+    align-items: center;
+    position: relative;
+  }
+  
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--color-accent) 0%, var(--color-primary) 100%);
+  }
+
+  .hero-content {
+    max-width: 800px;
+  }
+
+  .hero h1 {
+    font-size: var(--font-size-h1);
+    font-weight: var(--font-weight-black);
+    margin-bottom: var(--spacing-md);
+    color: var(--color-tertiary);
+    line-height: 1.1;
+  }
+
+  .hero-subtitle {
+    font-size: var(--font-size-lg);
+    line-height: var(--line-height-relaxed);
+    margin-bottom: var(--spacing-lg);
+    opacity: 0.95;
+  }
+
+  .hero-buttons {
+    display: flex;
+    gap: var(--spacing-sm);
+    flex-wrap: wrap;
+  }
+
+  .hero .btn-primary {
+    background-color: var(--color-tertiary);
+    color: var(--color-primary);
+  }
+
+  .hero .btn-secondary {
+    background-color: transparent;
+    border: 2px solid var(--color-tertiary);
+    color: var(--color-tertiary);
+  }
+
+  /* About Section */
+  .about {
+    background-color: var(--color-tertiary);
+    position: relative;
+  }
+
+  .about-content {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .about h2 {
+    margin-bottom: var(--spacing-md);
+    display: inline-block;
+    position: relative;
+  }
+
+  .about h2::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    width: 60px;
+    height: 4px;
+    background-color: var(--color-accent);
+    border-radius: 2px;
+  }
+
+  .about .lead {
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .about p {
+    margin-bottom: var(--spacing-md);
+  }
+
+  /* Courses Section */
+  .courses {
+    background-color: #f8f8f8;
+  }
+
+  .section-title {
+    margin-bottom: var(--spacing-xs);
+    display: inline-block;
+    position: relative;
+  }
+
+  .section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 4px;
+    background-color: var(--color-accent);
+    border-radius: 2px;
+  }
+
+  .section-subtitle {
+    color: var(--color-text);
+    opacity: 0.8;
+    margin-bottom: var(--spacing-lg);
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .courses-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--spacing-md);
+  }
+
+  .course-card {
+    background-color: var(--color-tertiary);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    display: flex;
+    flex-direction: column;
+    transition: var(--transition-normal);
+  }
+
+  .course-card:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-4px);
+  }
+
+  .course-card-header {
+    background-color: var(--color-primary);
+    padding: var(--spacing-sm) var(--spacing-md);
+  }
+
+  .course-level {
+    color: var(--color-tertiary);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-bold);
+  }
+
+  .course-card-body {
+    padding: var(--spacing-md);
+    flex: 1;
+  }
+
+  .course-card-body h3 {
+    font-size: var(--font-size-h4);
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .course-card-body p {
+    font-size: var(--font-size-sm);
+    line-height: var(--line-height-relaxed);
+    opacity: 0.9;
+  }
+
+  .course-meta {
+    margin-top: var(--spacing-sm);
+  }
+
+  .course-duration {
+    font-size: var(--font-size-sm);
+    color: var(--color-accent);
+    font-weight: var(--font-weight-bold);
+  }
+
+  .course-card-footer {
+    padding: var(--spacing-md);
+    padding-top: 0;
+  }
+
+  .course-card-footer .btn-primary {
+    width: 100%;
+    text-align: center;
+  }
+
+  /* Event Section */
+  .event {
+    background-color: var(--color-primary);
+    color: var(--color-tertiary);
+  }
+
+  .event-content {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .event-badge {
+    display: inline-block;
+    background-color: var(--color-accent);
+    color: var(--color-tertiary);
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border-radius: var(--radius-sm);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-bold);
+    margin-bottom: var(--spacing-md);
+  }
+
+  .event h2 {
+    color: var(--color-tertiary);
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .event-date {
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-bold);
+    margin-bottom: var(--spacing-md);
+    color: var(--color-accent);
+  }
+
+  .event-description {
+    font-size: var(--font-size-base);
+    opacity: 0.95;
+    margin-bottom: var(--spacing-lg);
+  }
+
+  .event-buttons {
+    display: flex;
+    gap: var(--spacing-sm);
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .event .btn-primary {
+    background-color: var(--color-tertiary);
+    color: var(--color-primary);
+  }
+
+  .event .btn-secondary {
+    background-color: transparent;
+    border: 2px solid var(--color-tertiary);
+    color: var(--color-tertiary);
+  }
+
+  /* CTA Section */
+  .cta {
+    background-color: var(--color-tertiary);
+    position: relative;
+  }
+
+  .cta::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--color-primary) 0%, var(--color-accent) 50%, var(--color-primary) 100%);
+  }
+
+  .cta-content {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .cta h2 {
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .cta p {
+    margin-bottom: var(--spacing-md);
+    opacity: 0.9;
+  }
+
+  /* Responsive */
+  @media (max-width: 1024px) {
+    .courses-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .hero {
+      padding: var(--spacing-xl) 0;
+      min-height: auto;
+    }
+
+    .hero h1 {
+      font-size: var(--font-size-h2);
+    }
+
+    .hero-buttons {
+      flex-direction: column;
+    }
+
+    .hero-buttons .btn-primary,
+    .hero-buttons .btn-secondary {
+      width: 100%;
+      text-align: center;
+    }
+
+    .courses-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .event-buttons {
+      flex-direction: column;
+    }
+
+    .event-buttons .btn-primary,
+    .event-buttons .btn-secondary {
+      width: 100%;
+    }
+  }
+</style>
