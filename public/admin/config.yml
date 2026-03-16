@@ -1,0 +1,80 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: public/images
+public_folder: /images
+
+# Locale for the CMS editor UI
+locale: pt
+
+collections:
+  - name: courses
+    label: Cursos de Especialização
+    label_singular: Curso
+    description: Cursos de extensão e especialização oferecidos pela Escola Regulus.
+    files:
+      - name: courses_list
+        label: Lista de Cursos
+        file: src/data/courses.json
+        fields:
+          - name: courses
+            label: Cursos
+            label_singular: Curso
+            widget: list
+            fields:
+              - name: title
+                label: Título
+                widget: string
+                hint: Nome do curso de especialização.
+              - name: description
+                label: Descrição
+                widget: text
+                hint: Breve descrição do conteúdo do curso.
+              - name: level
+                label: Nível
+                widget: select
+                options:
+                  - label: Básico
+                    value: Básico
+                  - label: Intermediário
+                    value: Intermediário
+                  - label: Avançado
+                    value: Avançado
+              - name: duration
+                label: Duração
+                widget: string
+                hint: Ex. "6 meses", "4 meses".
+
+  - name: instructors
+    label: Instrutores
+    label_singular: Instrutor
+    description: Corpo docente ativo da Escola Regulus de Astrologia.
+    files:
+      - name: instructors_list
+        label: Lista de Instrutores
+        file: src/data/instructors.json
+        fields:
+          - name: instructors
+            label: Instrutores
+            label_singular: Instrutor
+            widget: list
+            fields:
+              - name: nome
+                label: Nome
+                widget: string
+              - name: iniciais
+                label: Iniciais
+                widget: string
+                hint: Duas letras exibidas no avatar. Ex. "RA".
+                pattern:
+                  - "^[A-Z]{2}$"
+                  - Deve conter exatamente 2 letras maiúsculas.
+              - name: especialidade
+                label: Especialidade
+                widget: string
+                hint: Área de especialização do instrutor.
+              - name: bio
+                label: Biografia
+                widget: text
+                hint: Breve apresentação profissional do instrutor.

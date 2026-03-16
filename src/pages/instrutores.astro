@@ -2,45 +2,8 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-
-const instrutores = [
-  {
-    nome: 'Profa. Regina Atena',
-    iniciais: 'RA',
-    especialidade: 'Astrologia Horária',
-    bio: 'Especialista em Astrologia Horária com mais de 20 anos de experiência. Formada pela Regulus em 1998, dedicou-se ao estudo das técnicas clássicas e à aplicação prática das perguntas horárias.',
-  },
-  {
-    nome: 'Prof. Carlos Eduardo Lima',
-    iniciais: 'CL',
-    especialidade: 'Revolução Solar',
-    bio: 'Professor de Revolução Solar e técnicas de previsão. Atuante na escola desde 2005, é reconhecido por sua didática clara e abordagem sistemática das previsões astrológicas.',
-  },
-  {
-    nome: 'Profa. Maria Helena Santos',
-    iniciais: 'MS',
-    especialidade: 'Astrologia Médica',
-    bio: 'Pioneira no ensino de Astrologia Médica no Brasil. Com formação em saúde e astrologia, integra conhecimentos para uma visão holística do mapa natal e suas indicações de saúde.',
-  },
-  {
-    nome: 'Prof. André Vieira',
-    iniciais: 'AV',
-    especialidade: 'Curso de Formação',
-    bio: 'Coordenador do Curso de Formação em Astrologia. Responsável por introduzir centenas de alunos ao mundo astrológico, conduzindo a jornada do básico ao avançado.',
-  },
-  {
-    nome: 'Profa. Beatriz Oliveira',
-    iniciais: 'BO',
-    especialidade: 'Sinastria e Relacionamentos',
-    bio: 'Especialista em Sinastria e Astrologia de Relacionamentos. Seu trabalho foca na análise de compatibilidade e dinâmicas entre mapas, auxiliando na compreensão dos vínculos humanos.',
-  },
-  {
-    nome: 'Prof. Roberto Mendes',
-    iniciais: 'RM',
-    especialidade: 'Astrologia Mundial',
-    bio: 'Estudioso de Astrologia Mundial e ciclos planetários. Dedica-se à análise de tendências coletivas e eventos mundiais através da lente astrológica.',
-  },
-];
+import instructorsData from '../data/instructors.json';
+const instrutores = instructorsData.instructors;
 ---
 
 <BaseLayout title="Instrutores" description="Conheça os instrutores da Escola Regulus de Astrologia. Profissionais experientes dedicados ao ensino de qualidade em astrologia.">
