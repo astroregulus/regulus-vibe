@@ -1,0 +1,40 @@
+{
+  "courses": [
+    {
+      "title": "Interpretação do Mapa Natal",
+      "description": "Aprenda a interpretar o mapa astrológico de nascimento, compreendendo planetas, casas, aspectos e a síntese do mapa.",
+      "level": "Básico",
+      "duration": "6 meses"
+    },
+    {
+      "title": "Astrologia Horária",
+      "description": "Técnica milenar para responder perguntas específicas através do mapa do momento da pergunta.",
+      "level": "Intermediário",
+      "duration": "6 meses"
+    },
+    {
+      "title": "Revolução Solar",
+      "description": "Análise do mapa anual de aniversário para previsões e tendências do ano pessoal.",
+      "level": "Intermediário",
+      "duration": "4 meses"
+    },
+    {
+      "title": "Sinastria",
+      "description": "Estudo da compatibilidade entre mapas, aplicável a relacionamentos pessoais e profissionais.",
+      "level": "Intermediário",
+      "duration": "4 meses"
+    },
+    {
+      "title": "Astrologia Médica",
+      "description": "Correlações entre o mapa astrológico e tendências de saúde, com foco em prevenção e bem-estar.",
+      "level": "Avançado",
+      "duration": "6 meses"
+    },
+    {
+      "title": "Trânsitos e Progressões",
+      "description": "Técnicas de previsão através dos movimentos planetários e progressões secundárias.",
+      "level": "Intermediário",
+      "duration": "6 meses"
+    }
+  ]
+}
