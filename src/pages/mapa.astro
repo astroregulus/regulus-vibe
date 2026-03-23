@@ -21,6 +21,19 @@ import Footer from '../components/Footer.astro';
         <!-- Chart -->
         <div class="chart-col">
           <div class="chart-card">
+            <div class="chart-card-header">
+              <span class="theme-label">Tema</span>
+              <button class="theme-btn theme-btn--elements"
+                      id="theme-elements"
+                      aria-pressed="true"
+                      aria-label="Tema Elementos"
+                      title="Elementos"></button>
+              <button class="theme-btn theme-btn--mono"
+                      id="theme-mono"
+                      aria-pressed="false"
+                      aria-label="Tema Monocromático"
+                      title="Monocromático"></button>
+            </div>
             <div id="chart"></div>
           </div>
         </div>
@@ -69,6 +82,19 @@ import Footer from '../components/Footer.astro';
               </div>
             </div>
 
+            <!-- Action section (inline in editor on desktop, fixed bar on mobile) -->
+            <div class="action-bar" id="action-bar">
+              <div class="auto-toggle">
+                <span class="auto-label">Atualização automática</span>
+                <button class="toggle-btn" id="toggle-auto" role="switch" aria-checked="false" aria-label="Atualização automática">
+                  <span class="toggle-knob"></span>
+                </button>
+              </div>
+              <button class="btn-update" id="btn-update">
+                Atualizar Mapa
+              </button>
+            </div>
+
           </div>
         </div>
 
@@ -78,21 +104,6 @@ import Footer from '../components/Footer.astro';
   </main>
 
   <Footer />
-
-  <!-- Action bar: placed AFTER Footer so it is the last child of <body>.
-       This guarantees position:fixed is never clipped by a parent
-       stacking context (overflow, transform, backdrop-filter, etc.) -->
-  <div class="action-bar" id="action-bar">
-    <div class="auto-toggle">
-      <span class="auto-label">Atualização automática</span>
-      <button class="toggle-btn" id="toggle-auto" role="switch" aria-checked="false" aria-label="Atualização automática">
-        <span class="toggle-knob"></span>
-      </button>
-    </div>
-    <button class="btn-update" id="btn-update">
-      Atualizar Mapa
-    </button>
-  </div>
 </BaseLayout>
 
 <!-- ─────────────────────────────────────────────────────────────────
@@ -121,8 +132,7 @@ import Footer from '../components/Footer.astro';
   /* ── Workspace ── */
   .workspace {
     background: #07111f;
-    /* bottom clearance = action-bar height + safe-area (home indicator on real/emulated devices) */
-    padding: 32px 0 calc(80px + env(safe-area-inset-bottom));
+    padding: 32px 0;
   }
   .workspace-inner {
     max-width: 1200px;
@@ -142,6 +152,55 @@ import Footer from '../components/Footer.astro';
     border: 1px solid rgba(255,255,255,0.07);
     position: sticky;
     top: 88px;
+  }
+  .chart-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 6px;
+    margin-bottom: 12px;
+  }
+  .theme-label {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: rgba(255,255,255,0.25);
+    margin-right: 2px;
+  }
+  .theme-btn {
+    width: 28px;
+    height: 28px;
+    border-radius: 8px;
+    border: 2px solid rgba(255,255,255,0.1);
+    cursor: pointer;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    padding: 0;
+    flex-shrink: 0;
+    position: relative;
+  }
+  .theme-btn:hover {
+    border-color: rgba(234,136,58,0.4);
+  }
+  .theme-btn[aria-pressed="true"] {
+    border-color: #EA883A;
+    box-shadow: 0 0 8px rgba(234,136,58,0.25);
+  }
+  .theme-btn--elements {
+    background: conic-gradient(
+      from 0deg,
+      #3d2008 0deg 90deg,
+      #1a2a1a 90deg 180deg,
+      #1a2535 180deg 270deg,
+      #0a2530 270deg 360deg
+    );
+  }
+  .theme-btn--mono {
+    background: linear-gradient(
+      135deg,
+      #132d46 0%, #132d46 48%,
+      #1a3a5c 52%, #1a3a5c 100%
+    );
   }
   #chart { width: 100%; }
   #chart svg {
@@ -360,27 +419,23 @@ import Footer from '../components/Footer.astro';
     cursor: grab;
   }
 
-  /* ── Action bar (desktop + mobile) ── */
+  /* ── Action bar ── */
+  /* Desktop: inline inside the editor card */
   .action-bar {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    z-index: 9999;
-    /* fully opaque — backdrop-filter creates a stacking context that can
-       clip fixed children on some browsers, so we avoid it here */
-    background: #07111f;
-    border-top: 1px solid rgba(255,255,255,0.1);
-    padding: 12px 32px calc(12px + env(safe-area-inset-bottom));
     display: flex;
-    align-items: center;
-    gap: 20px;
+    flex-direction: column;
+    gap: 14px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 14px;
+    padding: 20px;
   }
 
   /* Auto-update toggle */
   .auto-toggle {
     display: flex;
     align-items: center;
+    justify-content: space-between;
     gap: 10px;
     flex-shrink: 0;
   }
@@ -429,7 +484,7 @@ import Footer from '../components/Footer.astro';
 
   /* Update button */
   .btn-update {
-    flex: 1;
+    width: 100%;
     background: #EA883A;
     color: #fff;
     font-family: inherit;
@@ -456,7 +511,7 @@ import Footer from '../components/Footer.astro';
   /* ═══════════════  MOBILE  ═══════════════ */
   @media (max-width: 900px) {
     .workspace {
-      padding: 0 0 calc(80px + env(safe-area-inset-bottom));
+      padding: 0 0 calc(120px + env(safe-area-inset-bottom));
     }
     .workspace-inner {
       grid-template-columns: 1fr;
@@ -474,6 +529,9 @@ import Footer from '../components/Footer.astro';
       border-right: none;
       border-top: none;
       padding: 16px;
+    }
+    .chart-card-header {
+      margin-bottom: 8px;
     }
 
     .editor-card {
@@ -501,18 +559,24 @@ import Footer from '../components/Footer.astro';
       gap: 14px;
     }
 
-    /* Action bar: stack vertically on small screens */
+    /* On mobile: pull action-bar out of the editor card flow
+       and fix it at the bottom of the viewport */
     .action-bar {
-      flex-direction: column;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 9999;
+      background: #07111f;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      border-radius: 0;
+      border-left: none;
+      border-right: none;
+      border-bottom: none;
       gap: 10px;
       padding: 12px 16px calc(12px + env(safe-area-inset-bottom));
     }
-    .auto-toggle {
-      width: 100%;
-      justify-content: space-between;
-    }
     .btn-update {
-      width: 100%;
       font-size: 16px;
       padding: 14px;
       border-radius: 10px;
@@ -554,6 +618,94 @@ import Footer from '../components/Footer.astro';
 
   const cusps = [0,30,60,90,120,150,180,210,240,270,300,330];
 
+  /* ── Chart theme settings ── */
+  type ChartTheme = 'elements' | 'mono';
+
+  const THEME_ELEMENTS = {
+    COLOR_BACKGROUND: '#0d1b2a',
+    COLOR_ARIES:       '#3d2008',
+    COLOR_TAURUS:      '#1a2a1a',
+    COLOR_GEMINI:      '#1a2535',
+    COLOR_CANCER:      '#0a2530',
+    COLOR_LEO:         '#3d2008',
+    COLOR_VIRGO:       '#1a2a1a',
+    COLOR_LIBRA:       '#1a2535',
+    COLOR_SCORPIO:     '#0a2530',
+    COLOR_SAGITTARIUS: '#3d2008',
+    COLOR_CAPRICORN:   '#1a2a1a',
+    COLOR_AQUARIUS:    '#1a2535',
+    COLOR_PISCES:      '#0a2530',
+    COLORS_SIGNS: [
+      '#3d2008','#1a2a1a','#1a2535','#0a2530',
+      '#3d2008','#1a2a1a','#1a2535','#0a2530',
+      '#3d2008','#1a2a1a','#1a2535','#0a2530',
+    ],
+    POINTS_COLOR: '#e0d5c0',
+    POINTS_TEXT_SIZE: 8,
+    POINTS_STROKE: 1.8,
+    SIGNS_COLOR: '#c0b090',
+    SIGNS_STROKE: 1.5,
+    CIRCLE_COLOR: '#2a4a6b',
+    CIRCLE_STRONG: 2,
+    LINE_COLOR: '#2a4a6b',
+    SYMBOL_AXIS_FONT_COLOR: '#EA883A',
+    SYMBOL_AXIS_STROKE: 1.6,
+    CUSPS_STROKE: 1,
+    CUSPS_FONT_COLOR: '#5a7a9a',
+    ASPECTS: {
+      conjunction: { degree: 0,   orbit: 10, color: 'transparent' },
+      square:      { degree: 90,  orbit: 8,  color: '#c45a3a' },
+      trine:       { degree: 120, orbit: 8,  color: '#2d8a5e' },
+      opposition:  { degree: 180, orbit: 10, color: '#4a7a9a' },
+    },
+    SHOW_DIGNITIES_TEXT: true,
+  };
+
+  const THEME_MONO = {
+    COLOR_BACKGROUND: '#0d1b2a',
+    COLOR_ARIES:       '#132d46',
+    COLOR_TAURUS:      '#1a3a5c',
+    COLOR_GEMINI:      '#132d46',
+    COLOR_CANCER:      '#1a3a5c',
+    COLOR_LEO:         '#132d46',
+    COLOR_VIRGO:       '#1a3a5c',
+    COLOR_LIBRA:       '#132d46',
+    COLOR_SCORPIO:     '#1a3a5c',
+    COLOR_SAGITTARIUS: '#132d46',
+    COLOR_CAPRICORN:   '#1a3a5c',
+    COLOR_AQUARIUS:    '#132d46',
+    COLOR_PISCES:      '#1a3a5c',
+    COLORS_SIGNS: [
+      '#132d46','#1a3a5c','#132d46','#1a3a5c',
+      '#132d46','#1a3a5c','#132d46','#1a3a5c',
+      '#132d46','#1a3a5c','#132d46','#1a3a5c',
+    ],
+    POINTS_COLOR: '#EA883A',
+    POINTS_TEXT_SIZE: 8,
+    POINTS_STROKE: 1.8,
+    SIGNS_COLOR: '#c0b090',
+    SIGNS_STROKE: 1.5,
+    CIRCLE_COLOR: '#2a4a6b',
+    CIRCLE_STRONG: 2,
+    LINE_COLOR: '#2a4a6b',
+    SYMBOL_AXIS_FONT_COLOR: '#EA883A',
+    SYMBOL_AXIS_STROKE: 1.6,
+    CUSPS_STROKE: 1,
+    CUSPS_FONT_COLOR: '#5a7a9a',
+    ASPECTS: {
+      conjunction: { degree: 0,   orbit: 10, color: 'transparent' },
+      square:      { degree: 90,  orbit: 8,  color: '#c45a3a' },
+      trine:       { degree: 120, orbit: 8,  color: '#2d8a5e' },
+      opposition:  { degree: 180, orbit: 10, color: '#4a7a9a' },
+    },
+    SHOW_DIGNITIES_TEXT: true,
+  };
+
+  const THEMES: Record<ChartTheme, typeof THEME_ELEMENTS> = {
+    elements: THEME_ELEMENTS,
+    mono: THEME_MONO,
+  };
+
   /* ── Helpers ── */
   const absFrom  = (p: Planet) => p.signIdx * 30 + p.deg + p.min / 60;
   const posLabel = (p: Planet) => `${p.deg}° ${String(p.min).padStart(2,'0')}' ${SIGNS_PT[p.signIdx]}`;
@@ -564,6 +716,8 @@ import Footer from '../components/Footer.astro';
   /* ── State ── */
   let activeIdx  = 0;
   let autoUpdate = false;
+  let currentTheme: ChartTheme =
+    (localStorage.getItem('chart-theme') as ChartTheme) || 'elements';
 
   /* ── DOM refs ── */
   const chipRow    = document.getElementById('chip-row')!;
@@ -581,6 +735,24 @@ import Footer from '../components/Footer.astro';
   const toggleBtn  = document.getElementById('toggle-auto')!;
   const actionBar  = document.getElementById('action-bar')!;
   const workspace  = document.querySelector('.workspace') as HTMLElement;
+  const themeBtnElements = document.getElementById('theme-elements')!;
+  const themeBtnMono     = document.getElementById('theme-mono')!;
+
+  /* ── Theme switcher ── */
+  function setTheme(theme: ChartTheme) {
+    currentTheme = theme;
+    localStorage.setItem('chart-theme', theme);
+    themeBtnElements.setAttribute('aria-pressed', String(theme === 'elements'));
+    themeBtnMono.setAttribute('aria-pressed', String(theme === 'mono'));
+    renderChart();
+  }
+
+  themeBtnElements.addEventListener('click', () => setTheme('elements'));
+  themeBtnMono.addEventListener('click', () => setTheme('mono'));
+
+  /* Restore persisted theme on load (update button states) */
+  themeBtnElements.setAttribute('aria-pressed', String(currentTheme === 'elements'));
+  themeBtnMono.setAttribute('aria-pressed', String(currentTheme === 'mono'));
 
   /* ── Auto-update toggle ── */
   toggleBtn.addEventListener('click', () => {
@@ -678,10 +850,75 @@ import Footer from '../components/Footer.astro';
     const container = document.getElementById('chart');
     if (!container) return;
     container.innerHTML = '';
+
     const w = container.getBoundingClientRect().width || container.offsetWidth || 600;
     const size = Math.min(w, 600);
-    const chart = new Chart('chart', size, size, { SYMBOL_SCALE: size / 600 });
+    const scale = size / 600;
+
+    /* Merge theme settings with dynamic SYMBOL_SCALE */
+    const themeSettings = { ...THEMES[currentTheme], SYMBOL_SCALE: scale };
+    const chart = new Chart('chart', size, size, themeSettings);
     chart.radix({ planets: buildPlanets(), cusps }).aspects();
+
+    /* ── Inject watermark into SVG center ── */
+    const svg = container.querySelector('svg');
+    if (svg) {
+      const ns = 'http://www.w3.org/2000/svg';
+      const cx = size / 2;
+      const cy = size / 2;
+      const margin = 50;
+      const innerR = (size / 2 - margin) / 2; /* radius / INDOOR_CIRCLE_RADIUS_RATIO */
+
+      const wmGroup = document.createElementNS(ns, 'g');
+      wmGroup.setAttribute('opacity', '0.12');
+
+      /* "REGULUS" — main brand text */
+      const textMain = document.createElementNS(ns, 'text');
+      textMain.setAttribute('x', cx.toString());
+      textMain.setAttribute('y', (cy - 6 * scale).toString());
+      textMain.setAttribute('text-anchor', 'middle');
+      textMain.setAttribute('dominant-baseline', 'auto');
+      textMain.setAttribute('font-family', 'Lato, sans-serif');
+      textMain.setAttribute('font-weight', '900');
+      textMain.setAttribute('font-size', (innerR * 0.42).toString());
+      textMain.setAttribute('fill', '#EA883A');
+      textMain.setAttribute('letter-spacing', '0.14em');
+      textMain.textContent = 'REGULUS';
+      wmGroup.appendChild(textMain);
+
+      /* "Escola de Astrologia" — tagline */
+      const textSub = document.createElementNS(ns, 'text');
+      textSub.setAttribute('x', cx.toString());
+      textSub.setAttribute('y', (cy + 10 * scale).toString());
+      textSub.setAttribute('text-anchor', 'middle');
+      textSub.setAttribute('dominant-baseline', 'hanging');
+      textSub.setAttribute('font-family', 'Lato, sans-serif');
+      textSub.setAttribute('font-weight', '400');
+      textSub.setAttribute('font-size', (innerR * 0.16).toString());
+      textSub.setAttribute('fill', '#c0b090');
+      textSub.setAttribute('letter-spacing', '0.08em');
+      textSub.textContent = 'Escola de Astrologia';
+      wmGroup.appendChild(textSub);
+
+      /* Decorative circle around the watermark */
+      const wmCircle = document.createElementNS(ns, 'circle');
+      wmCircle.setAttribute('cx', cx.toString());
+      wmCircle.setAttribute('cy', cy.toString());
+      wmCircle.setAttribute('r', (innerR * 0.72).toString());
+      wmCircle.setAttribute('fill', 'none');
+      wmCircle.setAttribute('stroke', '#EA883A');
+      wmCircle.setAttribute('stroke-width', (1.2 * scale).toString());
+      wmGroup.appendChild(wmCircle);
+
+      /* Insert before the aspects group so it sits behind aspect lines */
+      const aspectsGroup = svg.querySelector('[id$="-aspects"]');
+      if (aspectsGroup && aspectsGroup.parentNode) {
+        aspectsGroup.parentNode.insertBefore(wmGroup, aspectsGroup);
+      } else {
+        const rootG = svg.querySelector('g');
+        if (rootG) rootG.appendChild(wmGroup);
+      }
+    }
   }
 
   /* ── Init ── */
