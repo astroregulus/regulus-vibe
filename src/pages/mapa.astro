@@ -121,7 +121,8 @@ import Footer from '../components/Footer.astro';
   /* ── Workspace ── */
   .workspace {
     background: #07111f;
-    padding: 32px 0 80px; /* space above the fixed action bar */
+    /* bottom clearance = action-bar height + safe-area (home indicator on real/emulated devices) */
+    padding: 32px 0 calc(80px + env(safe-area-inset-bottom));
   }
   .workspace-inner {
     max-width: 1200px;
@@ -455,7 +456,7 @@ import Footer from '../components/Footer.astro';
   /* ═══════════════  MOBILE  ═══════════════ */
   @media (max-width: 900px) {
     .workspace {
-      padding: 0 0 80px;
+      padding: 0 0 calc(80px + env(safe-area-inset-bottom));
     }
     .workspace-inner {
       grid-template-columns: 1fr;
