@@ -14,6 +14,7 @@
     "lint": "astro check && astro build --dry-run"
   },
   "dependencies": {
+    "@astrodraw/astrochart": "^3.0.2",
     "astro": "^6.0.4"
   },
   "devDependencies": {

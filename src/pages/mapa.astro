@@ -1,0 +1,694 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<BaseLayout title="Mapa Astral" description="Visualize e personalize um mapa astral com posições planetárias.">
+  <Header currentPage="/mapa" />
+
+  <main>
+    <section class="hero">
+      <div class="container">
+        <h1 class="hero-title">Mapa Astral</h1>
+        <p class="hero-subtitle">Posicione os planetas e visualize seu mapa</p>
+      </div>
+    </section>
+
+    <section class="workspace">
+      <div class="workspace-inner">
+
+        <!-- Chart -->
+        <div class="chart-col">
+          <div class="chart-card">
+            <div id="chart"></div>
+          </div>
+        </div>
+
+        <!-- Editor -->
+        <div class="editor-col">
+          <div class="editor-card">
+            <p class="editor-hint">Selecione um planeta para ajustar sua posição</p>
+
+            <!-- Planet chip tabs -->
+            <div class="chip-row" id="chip-row" role="tablist" aria-label="Planetas"></div>
+
+            <!-- Single control panel (changes when chip selected) -->
+            <div class="control-panel" id="control-panel">
+              <div class="cp-header">
+                <span class="cp-glyph" id="cp-glyph"></span>
+                <div class="cp-info">
+                  <span class="cp-name" id="cp-name"></span>
+                  <span class="cp-pos"  id="cp-pos"></span>
+                </div>
+              </div>
+
+              <!-- Sign selector: prev / sign name / next -->
+              <div class="sign-picker">
+                <button class="sign-arrow" id="sign-prev" aria-label="Signo anterior">&#8249;</button>
+                <span class="sign-name" id="sign-name"></span>
+                <button class="sign-arrow" id="sign-next" aria-label="Próximo signo">&#8250;</button>
+              </div>
+
+              <!-- Degree -->
+              <div class="ctrl-row">
+                <div class="ctrl-meta">
+                  <span class="ctrl-label">Grau</span>
+                  <span class="ctrl-val" id="deg-val"></span>
+                </div>
+                <input class="astro-slider" id="deg-slider" type="range" min="0" max="29" />
+              </div>
+
+              <!-- Minute -->
+              <div class="ctrl-row">
+                <div class="ctrl-meta">
+                  <span class="ctrl-label">Minuto</span>
+                  <span class="ctrl-val" id="min-val"></span>
+                </div>
+                <input class="astro-slider" id="min-slider" type="range" min="0" max="59" />
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <Footer />
+
+  <!-- Action bar: placed AFTER Footer so it is the last child of <body>.
+       This guarantees position:fixed is never clipped by a parent
+       stacking context (overflow, transform, backdrop-filter, etc.) -->
+  <div class="action-bar" id="action-bar">
+    <div class="auto-toggle">
+      <span class="auto-label">Atualização automática</span>
+      <button class="toggle-btn" id="toggle-auto" role="switch" aria-checked="false" aria-label="Atualização automática">
+        <span class="toggle-knob"></span>
+      </button>
+    </div>
+    <button class="btn-update" id="btn-update">
+      Atualizar Mapa
+    </button>
+  </div>
+</BaseLayout>
+
+<!-- ─────────────────────────────────────────────────────────────────
+     STYLES  —  is:global so JS-created elements inherit them too
+───────────────────────────────────────────────────────────────────── -->
+<style is:global>
+  /* ── Hero ── */
+  .hero {
+    background: linear-gradient(135deg, #011830 0%, #0a2a4a 100%);
+    padding: 48px 0;
+    text-align: center;
+  }
+  .hero-title {
+    color: #fff;
+    font-size: 48px;
+    font-weight: 900;
+    margin-bottom: 8px;
+  }
+  .hero-subtitle {
+    color: #EA883A;
+    font-size: 18px;
+    font-weight: 400;
+    margin: 0;
+  }
+
+  /* ── Workspace ── */
+  .workspace {
+    background: #07111f;
+    padding: 32px 0 80px; /* space above the fixed action bar */
+  }
+  .workspace-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 32px;
+    display: grid;
+    grid-template-columns: 1fr 360px;
+    gap: 32px;
+    align-items: start;
+  }
+
+  /* ── Chart card ── */
+  .chart-card {
+    background: #0d1b2a;
+    border-radius: 16px;
+    padding: 24px;
+    border: 1px solid rgba(255,255,255,0.07);
+    position: sticky;
+    top: 88px;
+  }
+  #chart { width: 100%; }
+  #chart svg {
+    width: 100% !important;
+    height: auto !important;
+    display: block;
+  }
+
+  /* ── Editor card ── */
+  .editor-card {
+    background: #0d1b2a;
+    border-radius: 16px;
+    padding: 24px;
+    border: 1px solid rgba(255,255,255,0.07);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .editor-hint {
+    color: rgba(255,255,255,0.45);
+    font-size: 13px;
+    margin: 0;
+    text-align: center;
+  }
+
+  /* ── Planet chip tabs ── */
+  .chip-row {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 8px;
+  }
+  .planet-chip {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    padding: 10px 4px 8px;
+    border-radius: 10px;
+    border: 1px solid rgba(255,255,255,0.08);
+    background: rgba(255,255,255,0.04);
+    cursor: pointer;
+    transition: background 0.15s, border-color 0.15s;
+    font-family: inherit;
+    /* no inherited color = white text */
+    color: #fff;
+  }
+  .planet-chip:hover {
+    background: rgba(255,255,255,0.09);
+    border-color: rgba(255,255,255,0.18);
+  }
+  .planet-chip.active {
+    background: rgba(234,136,58,0.15);
+    border-color: #EA883A;
+  }
+  .chip-glyph {
+    font-size: 20px;
+    line-height: 1;
+    color: #fff;
+  }
+  .chip-name {
+    font-size: 10px;
+    font-weight: 700;
+    color: rgba(255,255,255,0.65);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    line-height: 1;
+  }
+  .planet-chip.active .chip-name {
+    color: #EA883A;
+  }
+
+  /* ── Control panel ── */
+  .control-panel {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 14px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+
+  .cp-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .cp-glyph {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: rgba(1,24,48,0.8);
+    border: 1px solid rgba(255,255,255,0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    flex-shrink: 0;
+    color: #fff;
+    line-height: 1;
+  }
+  .cp-info {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+  .cp-name {
+    font-size: 16px;
+    font-weight: 700;
+    color: #fff;
+  }
+  .cp-pos {
+    font-size: 14px;
+    color: #EA883A;
+    font-weight: 400;
+  }
+
+  /* ── Sign picker ── */
+  .sign-picker {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  .sign-arrow {
+    background: none;
+    border: none;
+    color: rgba(255,255,255,0.6);
+    font-size: 28px;
+    line-height: 1;
+    padding: 10px 16px;
+    cursor: pointer;
+    font-family: inherit;
+    transition: color 0.15s, background 0.15s;
+    flex-shrink: 0;
+  }
+  .sign-arrow:hover {
+    color: #fff;
+    background: rgba(255,255,255,0.08);
+  }
+  .sign-arrow:active {
+    background: rgba(234,136,58,0.2);
+    color: #EA883A;
+  }
+  .sign-name {
+    flex: 1;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 700;
+    color: #fff;
+  }
+
+  /* ── Degree / Minute rows ── */
+  .ctrl-row {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .ctrl-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+  .ctrl-label {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    color: rgba(255,255,255,0.4);
+  }
+  .ctrl-val {
+    font-size: 15px;
+    font-weight: 700;
+    color: #fff;
+  }
+  .astro-slider {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 6px;
+    border-radius: 3px;
+    background: linear-gradient(
+      to right,
+      #EA883A 0%,
+      #EA883A var(--pct, 0%),
+      rgba(255,255,255,0.12) var(--pct, 0%),
+      rgba(255,255,255,0.12) 100%
+    );
+    outline: none;
+    cursor: pointer;
+  }
+  .astro-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: #fff;
+    box-shadow: 0 0 0 3px rgba(234,136,58,0.5);
+    cursor: grab;
+    transition: box-shadow 0.15s;
+  }
+  .astro-slider::-webkit-slider-thumb:active {
+    cursor: grabbing;
+    box-shadow: 0 0 0 6px rgba(234,136,58,0.3);
+  }
+  .astro-slider::-moz-range-thumb {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: #fff;
+    border: none;
+    box-shadow: 0 0 0 3px rgba(234,136,58,0.5);
+    cursor: grab;
+  }
+
+  /* ── Action bar (desktop + mobile) ── */
+  .action-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 9999;
+    /* fully opaque — backdrop-filter creates a stacking context that can
+       clip fixed children on some browsers, so we avoid it here */
+    background: #07111f;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    padding: 12px 32px calc(12px + env(safe-area-inset-bottom));
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  /* Auto-update toggle */
+  .auto-toggle {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+  }
+  .auto-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.55);
+    white-space: nowrap;
+  }
+  .toggle-btn {
+    width: 44px;
+    height: 24px;
+    border-radius: 12px;
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.15);
+    cursor: pointer;
+    position: relative;
+    transition: background 0.2s, border-color 0.2s;
+    flex-shrink: 0;
+    padding: 0;
+  }
+  .toggle-btn[aria-checked="true"] {
+    background: #EA883A;
+    border-color: #EA883A;
+  }
+  .toggle-knob {
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: #fff;
+    transition: transform 0.2s;
+    display: block;
+  }
+  .toggle-btn[aria-checked="true"] .toggle-knob {
+    transform: translateX(20px);
+  }
+
+  /* When auto-update is ON, dim the manual button */
+  .action-bar.auto-on .btn-update {
+    opacity: 0.35;
+    pointer-events: none;
+  }
+
+  /* Update button */
+  .btn-update {
+    flex: 1;
+    background: #EA883A;
+    color: #fff;
+    font-family: inherit;
+    font-size: 15px;
+    font-weight: 700;
+    padding: 13px 20px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    transition: opacity 0.2s, transform 0.1s;
+    letter-spacing: 0.02em;
+  }
+  .btn-update:hover  { opacity: 0.88; }
+  .btn-update:active { transform: scale(0.98); }
+
+  /* ── Chart pulse on update ── */
+  @keyframes chart-pulse {
+    0%   { opacity: 1; }
+    45%  { opacity: 0.3; }
+    100% { opacity: 1; }
+  }
+  .chart-updating #chart { animation: chart-pulse 0.4s ease; }
+
+  /* ═══════════════  MOBILE  ═══════════════ */
+  @media (max-width: 900px) {
+    .workspace {
+      padding: 0 0 80px;
+    }
+    .workspace-inner {
+      grid-template-columns: 1fr;
+      padding: 0;
+      gap: 0;
+    }
+
+    .chart-col  { order: 1; }
+    .editor-col { order: 2; }
+
+    .chart-card {
+      position: static;
+      border-radius: 0;
+      border-left: none;
+      border-right: none;
+      border-top: none;
+      padding: 16px;
+    }
+
+    .editor-card {
+      border-radius: 0;
+      border-left: none;
+      border-right: none;
+      border-bottom: none;
+      padding: 16px;
+      gap: 16px;
+    }
+
+    .chip-row {
+      grid-template-columns: repeat(5, 1fr);
+      gap: 6px;
+    }
+    .planet-chip {
+      padding: 8px 2px 6px;
+      border-radius: 8px;
+    }
+    .chip-glyph { font-size: 18px; }
+    .chip-name  { font-size: 9px; }
+
+    .control-panel {
+      padding: 16px;
+      gap: 14px;
+    }
+
+    /* Action bar: stack vertically on small screens */
+    .action-bar {
+      flex-direction: column;
+      gap: 10px;
+      padding: 12px 16px calc(12px + env(safe-area-inset-bottom));
+    }
+    .auto-toggle {
+      width: 100%;
+      justify-content: space-between;
+    }
+    .btn-update {
+      width: 100%;
+      font-size: 16px;
+      padding: 14px;
+      border-radius: 10px;
+    }
+
+    .editor-hint { display: none; }
+  }
+</style>
+
+<!-- ─────────────────────────────────────────────────────────────────
+     SCRIPT
+───────────────────────────────────────────────────────────────────── -->
+<script>
+  import { Chart } from '@astrodraw/astrochart';
+
+  /* ── Constants ── */
+  const SIGNS_PT = [
+    'Áries','Touro','Gêmeos','Câncer','Leão','Virgem',
+    'Libra','Escorpião','Sagitário','Capricórnio','Aquário','Peixes',
+  ];
+
+  interface Planet {
+    key: string; name: string; glyph: string;
+    signIdx: number; deg: number; min: number;
+  }
+
+  const PLANETS: Planet[] = [
+    { key:'Sun',     name:'Sol',      glyph:'☉', signIdx:0,  deg:10, min:0  },
+    { key:'Moon',    name:'Lua',      glyph:'☽', signIdx:1,  deg:15, min:22 },
+    { key:'Mercury', name:'Mercúrio', glyph:'☿', signIdx:0,  deg:28, min:5  },
+    { key:'Venus',   name:'Vênus',    glyph:'♀', signIdx:2,  deg:12, min:44 },
+    { key:'Mars',    name:'Marte',    glyph:'♂', signIdx:4,  deg:10, min:30 },
+    { key:'Jupiter', name:'Júpiter',  glyph:'♃', signIdx:7,  deg:0,  min:8  },
+    { key:'Saturn',  name:'Saturno',  glyph:'♄', signIdx:8,  deg:25, min:17 },
+    { key:'Uranus',  name:'Urano',    glyph:'♅', signIdx:10, deg:15, min:3  },
+    { key:'Neptune', name:'Netuno',   glyph:'♆', signIdx:11, deg:10, min:51 },
+    { key:'Pluto',   name:'Plutão',   glyph:'♇', signIdx:9,  deg:17, min:2  },
+  ];
+
+  const cusps = [0,30,60,90,120,150,180,210,240,270,300,330];
+
+  /* ── Helpers ── */
+  const absFrom  = (p: Planet) => p.signIdx * 30 + p.deg + p.min / 60;
+  const posLabel = (p: Planet) => `${p.deg}° ${String(p.min).padStart(2,'0')}' ${SIGNS_PT[p.signIdx]}`;
+  const setPct   = (el: HTMLInputElement, v: number, max: number) =>
+    el.style.setProperty('--pct', (v / max * 100).toFixed(1) + '%');
+  const clamp    = (v: number, lo: number, hi: number) => Math.max(lo, Math.min(hi, Math.round(v)));
+
+  /* ── State ── */
+  let activeIdx  = 0;
+  let autoUpdate = false;
+
+  /* ── DOM refs ── */
+  const chipRow    = document.getElementById('chip-row')!;
+  const cpGlyph    = document.getElementById('cp-glyph')!;
+  const cpName     = document.getElementById('cp-name')!;
+  const cpPos      = document.getElementById('cp-pos')!;
+  const signNameEl = document.getElementById('sign-name')!;
+  const signPrev   = document.getElementById('sign-prev')!;
+  const signNext   = document.getElementById('sign-next')!;
+  const degSlider  = document.getElementById('deg-slider') as HTMLInputElement;
+  const minSlider  = document.getElementById('min-slider') as HTMLInputElement;
+  const degVal     = document.getElementById('deg-val')!;
+  const minVal     = document.getElementById('min-val')!;
+  const btnUpdate  = document.getElementById('btn-update')!;
+  const toggleBtn  = document.getElementById('toggle-auto')!;
+  const actionBar  = document.getElementById('action-bar')!;
+  const workspace  = document.querySelector('.workspace') as HTMLElement;
+
+  /* ── Auto-update toggle ── */
+  toggleBtn.addEventListener('click', () => {
+    autoUpdate = !autoUpdate;
+    toggleBtn.setAttribute('aria-checked', String(autoUpdate));
+    actionBar.classList.toggle('auto-on', autoUpdate);
+    if (autoUpdate) renderChart();
+  });
+
+  /* Helper: trigger chart only when auto-update is on */
+  function maybeAutoRender() {
+    if (autoUpdate) renderChart();
+  }
+
+  /* ── Build chips ── */
+  PLANETS.forEach((p, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'planet-chip' + (i === 0 ? ' active' : '');
+    btn.setAttribute('role', 'tab');
+    btn.setAttribute('aria-selected', String(i === 0));
+    btn.setAttribute('aria-label', p.name);
+    btn.innerHTML = `<span class="chip-glyph">${p.glyph}</span><span class="chip-name">${p.name}</span>`;
+    btn.addEventListener('click', () => selectPlanet(i));
+    chipRow.appendChild(btn);
+  });
+
+  /* ── Select planet ── */
+  function selectPlanet(idx: number) {
+    activeIdx = idx;
+    chipRow.querySelectorAll('.planet-chip').forEach((el, i) => {
+      el.classList.toggle('active', i === idx);
+      el.setAttribute('aria-selected', String(i === idx));
+    });
+    refreshPanel();
+  }
+
+  function refreshPanel() {
+    const p = PLANETS[activeIdx];
+    cpGlyph.textContent    = p.glyph;
+    cpName.textContent     = p.name;
+    cpPos.textContent      = posLabel(p);
+    signNameEl.textContent = SIGNS_PT[p.signIdx];
+    degSlider.value        = String(p.deg);
+    setPct(degSlider, p.deg, 29);
+    degVal.textContent     = `${p.deg}°`;
+    minSlider.value        = String(p.min);
+    setPct(minSlider, p.min, 59);
+    minVal.textContent     = `${String(p.min).padStart(2,'0')}'`;
+  }
+
+  /* ── Sign prev/next ── */
+  signPrev.addEventListener('click', () => {
+    PLANETS[activeIdx].signIdx = (PLANETS[activeIdx].signIdx + 11) % 12;
+    refreshPanel();
+    maybeAutoRender();
+  });
+  signNext.addEventListener('click', () => {
+    PLANETS[activeIdx].signIdx = (PLANETS[activeIdx].signIdx + 1) % 12;
+    refreshPanel();
+    maybeAutoRender();
+  });
+
+  /* ── Degree slider ── */
+  degSlider.addEventListener('input', () => {
+    PLANETS[activeIdx].deg = clamp(Number(degSlider.value), 0, 29);
+    refreshPanel();
+  });
+  degSlider.addEventListener('change', () => maybeAutoRender());
+
+  /* ── Minute slider ── */
+  minSlider.addEventListener('input', () => {
+    PLANETS[activeIdx].min = clamp(Number(minSlider.value), 0, 59);
+    refreshPanel();
+  });
+  minSlider.addEventListener('change', () => maybeAutoRender());
+
+  /* ── Manual update button ── */
+  btnUpdate.addEventListener('click', () => {
+    workspace.classList.add('chart-updating');
+    document.querySelector('.chart-card')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    setTimeout(() => {
+      renderChart();
+      workspace.classList.remove('chart-updating');
+    }, 180);
+  });
+
+  /* ── Chart ── */
+  function buildPlanets() {
+    const out: Record<string, [number]> = {};
+    PLANETS.forEach(p => { out[p.key] = [absFrom(p)]; });
+    return out;
+  }
+
+  function renderChart() {
+    const container = document.getElementById('chart');
+    if (!container) return;
+    container.innerHTML = '';
+    const w = container.getBoundingClientRect().width || container.offsetWidth || 600;
+    const size = Math.min(w, 600);
+    const chart = new Chart('chart', size, size, { SYMBOL_SCALE: size / 600 });
+    chart.radix({ planets: buildPlanets(), cusps }).aspects();
+  }
+
+  /* ── Init ── */
+  selectPlanet(0);
+  const init = () => renderChart();
+  if (document.readyState === 'complete') init();
+  else window.addEventListener('load', init);
+
+  let rsz: ReturnType<typeof setTimeout>;
+  window.addEventListener('resize', () => { clearTimeout(rsz); rsz = setTimeout(renderChart, 120); });
+</script>
