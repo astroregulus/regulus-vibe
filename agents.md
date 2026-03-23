@@ -29,6 +29,12 @@ No test framework is configured. Verify changes visually via the dev server.
 - `position: fixed` overlays (action bars, modals) **must be the last child of `<body>`**, i.e. placed after `<Footer />` in the page template — never nested inside `<main>` or any container with `overflow`, `transform`, `will-change`, `filter`, or `backdrop-filter`
 - Avoid `backdrop-filter` on fixed overlays — it creates a stacking context that breaks child positioning in Chrome
 
+### Safe-area & DevTools emulation (learned from /mapa action bar bug)
+- **Always include `viewport-fit=cover`** in `<meta name="viewport">` — without it `env(safe-area-inset-bottom)` always resolves to `0`, so fixed bottom bars appear behind the simulated home-indicator/device bezel in DevTools emulation even though they look fine on a plain browser resize
+- **Any fixed bottom overlay must clear `env(safe-area-inset-bottom)`** in its own padding: `padding-bottom: calc(Xpx + env(safe-area-inset-bottom))`
+- **Page content below a fixed bottom bar** must also add the same clearance so content isn't hidden under it: `padding-bottom: calc(<bar-height> + env(safe-area-inset-bottom))` — apply this to both the default and the `@media (max-width: 900px)` overrides
+- **DevTools emulation ≠ plain browser resize**: emulation also changes `pointer: coarse` / `hover: none` media features and simulates a real device viewport (dynamic viewport height, safe-area insets). A plain resize does none of this — so an element that appears fine on resize may still be broken under emulation
+
 ## Astro-Specific Rules
 - Props interfaces are defined inline with `interface Props` in the component frontmatter
 - `Astro.props` destructuring uses default values inline: `const { x = 'default' } = Astro.props`
