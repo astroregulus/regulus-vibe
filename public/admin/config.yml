@@ -47,17 +47,17 @@ collections:
                 hint: Ex. "6 meses", "4 meses".
 
   - name: instructors
-    label: Instrutores
-    label_singular: Instrutor
+    label: Professores
+    label_singular: Professor
     description: Corpo docente ativo da Escola Regulus de Astrologia.
     files:
       - name: instructors_list
-        label: Lista de Instrutores
+        label: Lista de Professores
         file: src/data/instructors.json
         fields:
           - name: instructors
-            label: Instrutores
-            label_singular: Instrutor
+            label: Professores
+            label_singular: Professor
             widget: list
             fields:
               - name: nome
@@ -73,8 +73,8 @@ collections:
               - name: especialidade
                 label: Especialidade
                 widget: string
-                hint: Área de especialização do instrutor.
+                hint: Área de especialização do professor.
               - name: bio
                 label: Biografia
                 widget: text
-                hint: Breve apresentação profissional do instrutor.
+                hint: Breve apresentação profissional do professor.

@@ -3,18 +3,18 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import instructorsData from '../data/instructors.json';
-const instrutores = instructorsData.instructors;
+const professores = instructorsData.instructors;
 ---
 
-<BaseLayout title="Instrutores" description="Conheça os instrutores da Escola Regulus de Astrologia. Profissionais experientes dedicados ao ensino de qualidade em astrologia.">
-  <Header currentPage="/instrutores" />
+<BaseLayout title="Professores" description="Conheça os professores da Escola Regulus de Astrologia. Profissionais experientes dedicados ao ensino de qualidade em astrologia.">
+  <Header currentPage="/professores" />
   
   <main>
     <!-- Hero Section -->
     <section class="hero">
       <div class="container">
         <div class="hero-content">
-          <h1>Nossos Instrutores</h1>
+          <h1>Nossos Professores</h1>
           <p class="hero-subtitle">
             Corpo docente qualificado com décadas de experiência no ensino e prática da astrologia.
           </p>
@@ -57,15 +57,15 @@ const instrutores = instructorsData.instructors;
         </p>
 
         <div class="instructors-grid">
-          {instrutores.map((instrutor) => (
+          {professores.map((professor) => (
             <article class="instructor-card">
               <div class="instructor-photo">
-                <span class="instructor-initials">{instrutor.iniciais}</span>
+                <span class="instructor-initials">{professor.iniciais}</span>
               </div>
               <div class="instructor-info">
-                <h3>{instrutor.nome}</h3>
-                <span class="instructor-specialty">{instrutor.especialidade}</span>
-                <p class="instructor-bio">{instrutor.bio}</p>
+                <h3>{professor.nome}</h3>
+                <span class="instructor-specialty">{professor.especialidade}</span>
+                <p class="instructor-bio">{professor.bio}</p>
               </div>
             </article>
           ))}
@@ -79,7 +79,7 @@ const instrutores = instructorsData.instructors;
         <div class="cta-content text-center">
           <h2>Aprenda com os Melhores</h2>
           <p>
-            Nossos instrutores estão prontos para guiá-lo em sua jornada de aprendizado astrológico.
+            Nossos professores estão prontos para guiá-lo em sua jornada de aprendizado astrológico.
             Conheça nossos cursos e comece sua formação.
           </p>
           <div class="cta-buttons">
