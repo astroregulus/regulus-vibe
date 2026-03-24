@@ -24,7 +24,7 @@ const toolLinks = [
 ---
 
 <footer class="footer">
-  <div class="footer-container">
+  <div class="container">
     <div class="footer-grid">
       <!-- Brand Column -->
       <div class="footer-col">
@@ -114,11 +114,7 @@ const toolLinks = [
     margin-top: auto;
   }
 
-  .footer-container {
-    max-width: var(--container-max-width);
-    margin: 0 auto;
-    padding: 0 var(--container-padding);
-  }
+  /* layout delegated to global .container */
 
   .footer-grid {
     display: grid;
@@ -134,13 +130,13 @@ const toolLinks = [
   }
 
   .footer-logo {
-    font-size: 24px;
+    font-size: var(--font-size-h3);
     font-weight: var(--font-weight-black);
     letter-spacing: 2px;
   }
 
   .footer-tagline {
-    font-size: 12px;
+    font-size: var(--font-size-xs);
     opacity: 0.9;
   }
 
@@ -212,7 +208,7 @@ const toolLinks = [
   }
 
   .footer-bottom {
-    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    border-top: 1px solid color-mix(in srgb, var(--color-tertiary) 20%, transparent);
     padding-top: var(--spacing-lg);
     text-align: center;
     font-size: var(--font-size-sm);
@@ -232,7 +228,7 @@ const toolLinks = [
   }
 
   @media (max-width: 768px) {
-    .footer-container {
+    .footer > .container {
       padding: 0 var(--spacing-sm);
     }
 

@@ -1,0 +1,93 @@
+---
+interface Props {
+  title: string;
+  subtitle?: string;
+  badge?: string;
+  centered?: boolean;
+}
+
+const { title, subtitle, badge, centered = false } = Astro.props;
+---
+
+<section class:list={['hero', 'dark-section', { 'hero--centered': centered }]}>
+  <div class="container hero-content">
+    {badge && <span class="hero-badge">{badge}</span>}
+    <h1>{title}</h1>
+    {subtitle && <p class="hero-subtitle">{subtitle}</p>}
+    <slot />
+  </div>
+</section>
+
+<style>
+  .hero {
+    background: linear-gradient(
+      135deg,
+      var(--color-primary) 0%,
+      var(--color-primary) 70%,
+      var(--color-accent) 100%
+    );
+    color: var(--color-tertiary);
+    padding: var(--spacing-2xl) 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--color-accent) 0%, var(--color-primary) 100%);
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero--centered .hero-content {
+    text-align: center;
+  }
+
+  .hero-badge {
+    display: inline-block;
+    background-color: var(--color-accent);
+    color: var(--color-tertiary);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-bold);
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border-radius: var(--radius-sm);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: var(--spacing-md);
+  }
+
+  .hero h1 {
+    color: var(--color-tertiary);
+    line-height: var(--line-height-hero);
+    margin-bottom: var(--spacing-md);
+  }
+
+  .hero-subtitle {
+    font-size: var(--font-size-lg);
+    opacity: 0.95;
+    max-width: 800px;
+    line-height: var(--line-height-relaxed);
+  }
+
+  .hero--centered .hero-subtitle {
+    margin: 0 auto;
+  }
+
+  @media (max-width: 768px) {
+    .hero {
+      padding: var(--spacing-xl) 0;
+    }
+
+    .hero h1 {
+      font-size: var(--font-size-h2);
+    }
+  }
+</style>

@@ -2,6 +2,9 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import HeroSection from '../components/HeroSection.astro';
+import CtaSection from '../components/CtaSection.astro';
+import SectionHeader from '../components/SectionHeader.astro';
 import coursesData from '../data/courses.json';
 const courses = coursesData.courses;
 
@@ -16,19 +19,10 @@ const levelColors: Record<string, string> = {
   <Header currentPage="/cursos" />
   
   <main>
-    <!-- Hero Section -->
-    <section class="hero">
-      <div class="container">
-        <div class="hero-content">
-          <h1>Cursos de Astrologia</h1>
-          <p class="hero-subtitle">
-            Formação completa em astrologia com professores experientes e metodologia 
-            comprovada há mais de 50 anos. Do básico ao avançado, desenvolvemos 
-            profissionais capacitados e certificados.
-          </p>
-        </div>
-      </div>
-    </section>
+    <HeroSection
+      title="Cursos de Astrologia"
+      subtitle="Formação completa em astrologia com professores experientes e metodologia comprovada há mais de 50 anos. Do básico ao avançado, desenvolvemos profissionais capacitados e certificados."
+    />
 
     <!-- Main Course Section -->
     <section class="section main-course">
@@ -94,17 +88,17 @@ const levelColors: Record<string, string> = {
     <!-- Courses Grid Section -->
     <section class="section courses">
       <div class="container">
-        <h2 class="section-title text-center">Cursos de Especialização</h2>
-        <p class="section-subtitle text-center">
-          Aprofunde seus conhecimentos em áreas específicas da astrologia com nossos 
-          cursos de extensão e especialização.
-        </p>
+        <SectionHeader
+          title="Cursos de Especialização"
+          subtitle="Aprofunde seus conhecimentos em áreas específicas da astrologia com nossos cursos de extensão e especialização."
+          centered
+        />
         
         <div class="courses-grid">
           {courses.map((course) => (
             <article class="course-card">
               <div class="course-card-header">
-                <span class="course-level" style={`background-color: ${levelColors[course.level]}`}>
+                <span class="course-level" style={`--level-color: ${levelColors[course.level]}`}>
                   {course.level}
                 </span>
               </div>
@@ -130,66 +124,19 @@ const levelColors: Record<string, string> = {
       </div>
     </section>
 
-    <!-- CTA Section -->
-    <section class="section cta">
-      <div class="container">
-        <div class="cta-content text-center">
-          <h2>Pronto para Começar sua Jornada?</h2>
-          <p>
-            Entre em contato conosco para saber mais sobre nossos cursos, 
-            horários das turmas e valores de investimento. 
-            Estamos prontos para ajudá-lo a trilhar o caminho das estrelas.
-          </p>
-          <div class="cta-buttons">
-            <a href="/contato" class="btn-primary">Fale Conosco</a>
-            <a href="https://wa.me/5511999999999" target="_blank" rel="noopener noreferrer" class="btn-secondary">
-              WhatsApp
-            </a>
-          </div>
-        </div>
-      </div>
-    </section>
+    <CtaSection
+      title="Pronto para Começar sua Jornada?"
+      subtitle="Entre em contato conosco para saber mais sobre nossos cursos, horários das turmas e valores de investimento. Estamos prontos para ajudá-lo a trilhar o caminho das estrelas."
+      primaryBtn={{ label: 'Fale Conosco', href: '/contato' }}
+      secondaryBtn={{ label: 'WhatsApp', href: 'https://wa.me/5511999999999' }}
+    />
   </main>
 
   <Footer />
 </BaseLayout>
 
 <style>
-  /* Hero Section */
-  .hero {
-    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary) 70%, #EA883A 100%);
-    color: var(--color-tertiary);
-    padding: var(--spacing-2xl) 0;
-    position: relative;
-  }
-  
-  .hero::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 4px;
-    background: linear-gradient(90deg, var(--color-accent) 0%, var(--color-primary) 100%);
-  }
-
-  .hero-content {
-    max-width: 800px;
-  }
-
-  .hero h1 {
-    font-size: var(--font-size-h1);
-    font-weight: var(--font-weight-black);
-    margin-bottom: var(--spacing-md);
-    color: var(--color-tertiary);
-    line-height: 1.1;
-  }
-
-  .hero-subtitle {
-    font-size: var(--font-size-lg);
-    line-height: var(--line-height-relaxed);
-    opacity: 0.95;
-  }
+  /* (hero styles moved to HeroSection.astro) */
 
   /* Main Course Section */
   .main-course {
@@ -197,7 +144,7 @@ const levelColors: Record<string, string> = {
   }
 
   .main-course-card {
-    background-color: #f8f8f8;
+    background-color: var(--color-surface);
     border-radius: var(--radius-md);
     overflow: hidden;
     box-shadow: var(--shadow-md);
@@ -231,12 +178,12 @@ const levelColors: Record<string, string> = {
   .main-course-content h2::after {
     content: '';
     position: absolute;
-    bottom: -8px;
+    bottom: calc(-1 * var(--spacing-xs));
     left: 0;
     width: 60px;
     height: 4px;
     background-color: var(--color-accent);
-    border-radius: 2px;
+    border-radius: var(--radius-sm);
   }
 
   .main-course-description {
@@ -341,37 +288,7 @@ const levelColors: Record<string, string> = {
     background: linear-gradient(90deg, var(--color-primary) 0%, var(--color-accent) 50%, var(--color-primary) 100%);
   }
 
-  .section-title {
-    margin-bottom: var(--spacing-xs);
-    display: inline-block;
-    position: relative;
-  }
-
-  .text-center .section-title,
-  .section-title.text-center {
-    display: block;
-  }
-
-  .section-title::after {
-    content: '';
-    position: absolute;
-    bottom: -8px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 60px;
-    height: 4px;
-    background-color: var(--color-accent);
-    border-radius: 2px;
-  }
-
-  .section-subtitle {
-    color: var(--color-text);
-    opacity: 0.8;
-    margin-bottom: var(--spacing-lg);
-    max-width: 600px;
-    margin-left: auto;
-    margin-right: auto;
-  }
+  /* (section-title/subtitle styles moved to SectionHeader.astro) */
 
   .courses-grid {
     display: grid;
@@ -380,7 +297,7 @@ const levelColors: Record<string, string> = {
   }
 
   .course-card {
-    background-color: #f8f8f8;
+    background-color: var(--color-surface);
     border-radius: var(--radius-md);
     overflow: hidden;
     box-shadow: var(--shadow-sm);
@@ -401,10 +318,11 @@ const levelColors: Record<string, string> = {
 
   .course-level {
     display: inline-block;
+    background-color: var(--level-color);
     color: var(--color-tertiary);
     font-size: var(--font-size-xs);
     font-weight: var(--font-weight-bold);
-    padding: 4px 12px;
+    padding: var(--spacing-xs) var(--spacing-sm);
     border-radius: var(--radius-sm);
     text-transform: uppercase;
     letter-spacing: 0.5px;
@@ -458,44 +376,7 @@ const levelColors: Record<string, string> = {
     color: var(--color-tertiary);
   }
 
-  /* CTA Section */
-  .cta {
-    background-color: var(--color-primary);
-    color: var(--color-tertiary);
-  }
-
-  .cta-content {
-    max-width: 600px;
-    margin: 0 auto;
-  }
-
-  .cta h2 {
-    color: var(--color-tertiary);
-    margin-bottom: var(--spacing-sm);
-  }
-
-  .cta p {
-    margin-bottom: var(--spacing-lg);
-    opacity: 0.95;
-  }
-
-  .cta-buttons {
-    display: flex;
-    gap: var(--spacing-sm);
-    justify-content: center;
-    flex-wrap: wrap;
-  }
-
-  .cta .btn-primary {
-    background-color: var(--color-tertiary);
-    color: var(--color-primary);
-  }
-
-  .cta .btn-secondary {
-    background-color: transparent;
-    border: 2px solid var(--color-tertiary);
-    color: var(--color-tertiary);
-  }
+  /* (cta styles moved to CtaSection.astro) */
 
   /* Responsive */
   @media (max-width: 1024px) {
@@ -509,14 +390,6 @@ const levelColors: Record<string, string> = {
   }
 
   @media (max-width: 768px) {
-    .hero {
-      padding: var(--spacing-xl) 0;
-    }
-
-    .hero h1 {
-      font-size: var(--font-size-h2);
-    }
-
     .main-course-features {
       grid-template-columns: 1fr;
     }
@@ -531,13 +404,5 @@ const levelColors: Record<string, string> = {
       grid-template-columns: 1fr;
     }
 
-    .cta-buttons {
-      flex-direction: column;
-    }
-
-    .cta-buttons .btn-primary,
-    .cta-buttons .btn-secondary {
-      width: 100%;
-    }
   }
 </style>

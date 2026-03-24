@@ -81,7 +81,7 @@ button {
   font-family: var(--font-primary);
   font-weight: var(--font-weight-bold);
   font-size: var(--font-size-base);
-  padding: 12px 24px;
+  padding: var(--spacing-sm) var(--spacing-md);
   border-radius: var(--radius-sm);
   text-decoration: none;
   transition: var(--transition-fast);
@@ -102,7 +102,7 @@ button {
   font-family: var(--font-primary);
   font-weight: var(--font-weight-bold);
   font-size: var(--font-size-base);
-  padding: 12px 24px;
+  padding: var(--spacing-sm) var(--spacing-md);
   border-radius: var(--radius-sm);
   text-decoration: none;
   transition: var(--transition-fast);
@@ -113,6 +113,19 @@ button {
 .btn-secondary:hover {
   opacity: 0.9;
   text-decoration: none;
+}
+
+/* Dark-section button overrides
+   Add .dark-section to any navy/dark container to flip button colours automatically */
+.dark-section .btn-primary {
+  background-color: var(--color-tertiary);
+  color: var(--color-primary);
+}
+
+.dark-section .btn-secondary {
+  background-color: transparent;
+  border: 2px solid var(--color-tertiary);
+  color: var(--color-tertiary);
 }
 
 /* Utility Classes */

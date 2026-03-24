@@ -2,6 +2,9 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import HeroSection from '../components/HeroSection.astro';
+import CtaSection from '../components/CtaSection.astro';
+import SectionHeader from '../components/SectionHeader.astro';
 
 const featuredCourses = [
   {
@@ -35,22 +38,15 @@ const upcomingEvent = {
   <Header currentPage="/" />
   
   <main>
-    <!-- Hero Section -->
-    <section class="hero">
-      <div class="container">
-        <div class="hero-content">
-          <h1>Escola Regulus de Astrologia</h1>
-          <p class="hero-subtitle">
-            Desde 1975 formando os melhores astrólogos do Brasil. 
-            Uma tradição de excelência no ensino da ciência dos astros.
-          </p>
-          <div class="hero-buttons">
-            <a href="/cursos" class="btn-primary">Conheça Nossos Cursos</a>
-            <a href="/contato" class="btn-secondary">Fale Conosco</a>
-          </div>
-        </div>
+    <HeroSection
+      title="Escola Regulus de Astrologia"
+      subtitle="Desde 1975 formando os melhores astrólogos do Brasil. Uma tradição de excelência no ensino da ciência dos astros."
+    >
+      <div class="hero-buttons">
+        <a href="/cursos" class="btn-primary">Conheça Nossos Cursos</a>
+        <a href="/contato" class="btn-secondary">Fale Conosco</a>
       </div>
-    </section>
+    </HeroSection>
 
     <!-- About Section -->
     <section class="section about">
@@ -75,10 +71,11 @@ const upcomingEvent = {
     <!-- Featured Courses Section -->
     <section class="section courses">
       <div class="container">
-        <h2 class="section-title text-center">Cursos em Destaque</h2>
-        <p class="section-subtitle text-center">
-          Formação completa em astrologia com professores experientes e metodologia comprovada.
-        </p>
+        <SectionHeader
+          title="Cursos em Destaque"
+          subtitle="Formação completa em astrologia com professores experientes e metodologia comprovada."
+          centered
+        />
         
         <div class="courses-grid">
           {featuredCourses.map((course) => (
@@ -124,80 +121,35 @@ const upcomingEvent = {
       </div>
     </section>
 
-    <!-- CTA Section -->
-    <section class="section cta">
-      <div class="container">
-        <div class="cta-content text-center">
-          <h2>Comece Sua Jornada na Astrologia</h2>
-          <p>
-            Entre em contato conosco e descubra como a astrologia pode transformar 
-            sua vida e carreira profissional.
-          </p>
-          <a href="/contato" class="btn-primary">Entre em Contato</a>
-        </div>
-      </div>
-    </section>
+    <CtaSection
+      title="Comece Sua Jornada na Astrologia"
+      subtitle="Entre em contato conosco e descubra como a astrologia pode transformar sua vida e carreira profissional."
+      primaryBtn={{ label: 'Entre em Contato', href: '/contato' }}
+    />
   </main>
 
   <Footer />
 </BaseLayout>
 
 <style>
-  /* Hero Section */
-  .hero {
-    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary) 70%, #EA883A 100%);
-    color: var(--color-tertiary);
-    padding: var(--spacing-2xl) 0;
-    min-height: 60vh;
-    display: flex;
-    align-items: center;
-    position: relative;
-  }
-  
-  .hero::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 4px;
-    background: linear-gradient(90deg, var(--color-accent) 0%, var(--color-primary) 100%);
-  }
-
-  .hero-content {
-    max-width: 800px;
-  }
-
-  .hero h1 {
-    font-size: var(--font-size-h1);
-    font-weight: var(--font-weight-black);
-    margin-bottom: var(--spacing-md);
-    color: var(--color-tertiary);
-    line-height: 1.1;
-  }
-
-  .hero-subtitle {
-    font-size: var(--font-size-lg);
-    line-height: var(--line-height-relaxed);
-    margin-bottom: var(--spacing-lg);
-    opacity: 0.95;
-  }
-
+  /* Hero slot content */
   .hero-buttons {
     display: flex;
     gap: var(--spacing-sm);
     flex-wrap: wrap;
+    margin-top: var(--spacing-lg);
   }
 
-  .hero .btn-primary {
-    background-color: var(--color-tertiary);
-    color: var(--color-primary);
-  }
+  @media (max-width: 768px) {
+    .hero-buttons {
+      flex-direction: column;
+    }
 
-  .hero .btn-secondary {
-    background-color: transparent;
-    border: 2px solid var(--color-tertiary);
-    color: var(--color-tertiary);
+    .hero-buttons .btn-primary,
+    .hero-buttons .btn-secondary {
+      width: 100%;
+      text-align: center;
+    }
   }
 
   /* About Section */
@@ -220,12 +172,12 @@ const upcomingEvent = {
   .about h2::after {
     content: '';
     position: absolute;
-    bottom: -8px;
+    bottom: calc(-1 * var(--spacing-xs));
     left: 0;
     width: 60px;
     height: 4px;
     background-color: var(--color-accent);
-    border-radius: 2px;
+    border-radius: var(--radius-sm);
   }
 
   .about .lead {
@@ -238,34 +190,7 @@ const upcomingEvent = {
 
   /* Courses Section */
   .courses {
-    background-color: #f8f8f8;
-  }
-
-  .section-title {
-    margin-bottom: var(--spacing-xs);
-    display: inline-block;
-    position: relative;
-  }
-
-  .section-title::after {
-    content: '';
-    position: absolute;
-    bottom: -8px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 60px;
-    height: 4px;
-    background-color: var(--color-accent);
-    border-radius: 2px;
-  }
-
-  .section-subtitle {
-    color: var(--color-text);
-    opacity: 0.8;
-    margin-bottom: var(--spacing-lg);
-    max-width: 600px;
-    margin-left: auto;
-    margin-right: auto;
+    background-color: var(--color-surface);
   }
 
   .courses-grid {
@@ -336,7 +261,7 @@ const upcomingEvent = {
     text-align: center;
   }
 
-  /* Event Section */
+  /* Event Section — dark, uses .dark-section from global.css for btn overrides */
   .event {
     background-color: var(--color-primary);
     color: var(--color-tertiary);
@@ -384,48 +309,7 @@ const upcomingEvent = {
     flex-wrap: wrap;
   }
 
-  .event .btn-primary {
-    background-color: var(--color-tertiary);
-    color: var(--color-primary);
-  }
 
-  .event .btn-secondary {
-    background-color: transparent;
-    border: 2px solid var(--color-tertiary);
-    color: var(--color-tertiary);
-  }
-
-  /* CTA Section */
-  .cta {
-    background-color: var(--color-tertiary);
-    position: relative;
-  }
-
-  .cta::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 4px;
-    background: linear-gradient(90deg, var(--color-primary) 0%, var(--color-accent) 50%, var(--color-primary) 100%);
-  }
-
-  .cta-content {
-    max-width: 600px;
-    margin: 0 auto;
-  }
-
-  .cta h2 {
-    margin-bottom: var(--spacing-sm);
-  }
-
-  .cta p {
-    margin-bottom: var(--spacing-md);
-    opacity: 0.9;
-  }
-
-  /* Responsive */
   @media (max-width: 1024px) {
     .courses-grid {
       grid-template-columns: repeat(2, 1fr);
@@ -433,25 +317,6 @@ const upcomingEvent = {
   }
 
   @media (max-width: 768px) {
-    .hero {
-      padding: var(--spacing-xl) 0;
-      min-height: auto;
-    }
-
-    .hero h1 {
-      font-size: var(--font-size-h2);
-    }
-
-    .hero-buttons {
-      flex-direction: column;
-    }
-
-    .hero-buttons .btn-primary,
-    .hero-buttons .btn-secondary {
-      width: 100%;
-      text-align: center;
-    }
-
     .courses-grid {
       grid-template-columns: 1fr;
     }

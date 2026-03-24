@@ -2,6 +2,9 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import HeroSection from '../components/HeroSection.astro';
+import CtaSection from '../components/CtaSection.astro';
+import SectionHeader from '../components/SectionHeader.astro';
 
 const partners = [
   { name: 'Oficina da Alma', description: 'Parceria em cursos e eventos de autoconhecimento' },
@@ -22,18 +25,10 @@ const timeline = [
   <Header currentPage="/sobre" />
   
   <main>
-    <!-- Hero Section -->
-    <section class="hero">
-      <div class="container">
-        <div class="hero-content">
-          <h1>Sobre a Regulus</h1>
-          <p class="hero-subtitle">
-            Uma história de dedicação ao ensino da astrologia, 
-            iluminando caminhos desde 1975.
-          </p>
-        </div>
-      </div>
-    </section>
+    <HeroSection
+      title="Sobre a Regulus"
+      subtitle="Uma história de dedicação ao ensino da astrologia, iluminando caminhos desde 1975."
+    />
 
     <!-- History Section -->
     <section class="section history">
@@ -133,11 +128,11 @@ const timeline = [
     <!-- Partners Section -->
     <section class="section partners">
       <div class="container">
-        <h2 class="section-title text-center">Nossos Parceiros</h2>
-        <p class="section-subtitle text-center">
-          Colaboramos com organizações que compartilham nossa visão de excelência 
-          no conhecimento astrológico e práticas integrativas.
-        </p>
+        <SectionHeader
+          title="Nossos Parceiros"
+          subtitle="Colaboramos com organizações que compartilham nossa visão de excelência no conhecimento astrológico e práticas integrativas."
+          centered
+        />
         <div class="partners-grid">
           {partners.map((partner) => (
             <div class="partner-card">
@@ -208,63 +203,19 @@ const timeline = [
       </div>
     </section>
 
-    <!-- CTA Section -->
-    <section class="section cta">
-      <div class="container">
-        <div class="cta-content text-center">
-          <h2>Faça Parte Desta História</h2>
-          <p>
-            Venha conhecer a Escola Regulus e descubra como podemos ajudá-lo 
-            em sua jornada astrológica.
-          </p>
-          <div class="cta-buttons">
-            <a href="/cursos" class="btn-primary">Conheça Nossos Cursos</a>
-            <a href="/contato" class="btn-secondary">Entre em Contato</a>
-          </div>
-        </div>
-      </div>
-    </section>
+    <CtaSection
+      title="Faça Parte Desta História"
+      subtitle="Venha conhecer a Escola Regulus e descubra como podemos ajudá-lo em sua jornada astrológica."
+      primaryBtn={{ label: 'Conheça Nossos Cursos', href: '/cursos' }}
+      secondaryBtn={{ label: 'Entre em Contato', href: '/contato' }}
+    />
   </main>
 
   <Footer />
 </BaseLayout>
 
 <style>
-  /* Hero Section */
-  .hero {
-    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary) 70%, var(--color-accent) 100%);
-    color: var(--color-tertiary);
-    padding: var(--spacing-2xl) 0;
-    position: relative;
-  }
-
-  .hero::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 4px;
-    background: linear-gradient(90deg, var(--color-accent) 0%, var(--color-primary) 100%);
-  }
-
-  .hero-content {
-    max-width: 800px;
-  }
-
-  .hero h1 {
-    font-size: var(--font-size-h1);
-    font-weight: var(--font-weight-black);
-    margin-bottom: var(--spacing-md);
-    color: var(--color-tertiary);
-    line-height: 1.1;
-  }
-
-  .hero-subtitle {
-    font-size: var(--font-size-lg);
-    line-height: var(--line-height-relaxed);
-    opacity: 0.95;
-  }
+  /* (hero styles moved to HeroSection.astro) */
 
   /* History Section */
   .history {
@@ -280,12 +231,12 @@ const timeline = [
   .history-content h2::after {
     content: '';
     position: absolute;
-    bottom: -8px;
+    bottom: calc(-1 * var(--spacing-xs));
     left: 0;
     width: 60px;
     height: 4px;
     background-color: var(--color-accent);
-    border-radius: 2px;
+    border-radius: var(--radius-sm);
   }
 
   .timeline {
@@ -379,12 +330,12 @@ const timeline = [
   .mission-card h3::after {
     content: '';
     position: absolute;
-    bottom: -4px;
+    bottom: calc(-1 * var(--spacing-xs) / 2);
     left: 0;
     width: 40px;
     height: 3px;
     background-color: var(--color-accent);
-    border-radius: 2px;
+    border-radius: var(--radius-sm);
   }
 
   .mission-card.highlight h3 {
@@ -452,35 +403,9 @@ const timeline = [
 
   /* Partners Section */
   .partners {
-    background-color: #f8f8f8;
+    background-color: var(--color-surface);
   }
-
-  .section-title {
-    margin-bottom: var(--spacing-xs);
-    display: inline-block;
-    position: relative;
-  }
-
-  .section-title::after {
-    content: '';
-    position: absolute;
-    bottom: -8px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 60px;
-    height: 4px;
-    background-color: var(--color-accent);
-    border-radius: 2px;
-  }
-
-  .section-subtitle {
-    color: var(--color-text);
-    opacity: 0.8;
-    margin-bottom: var(--spacing-lg);
-    max-width: 600px;
-    margin-left: auto;
-    margin-right: auto;
-  }
+  /* (section-title/subtitle styles moved to SectionHeader.astro) */
 
   .partners-grid {
     display: grid;
@@ -537,12 +462,12 @@ const timeline = [
   .location-info h2::after {
     content: '';
     position: absolute;
-    bottom: -8px;
+    bottom: calc(-1 * var(--spacing-xs));
     left: 0;
     width: 60px;
     height: 4px;
     background-color: var(--color-accent);
-    border-radius: 2px;
+    border-radius: var(--radius-sm);
   }
 
   .location-address {
@@ -567,7 +492,7 @@ const timeline = [
     display: flex;
     align-items: center;
     gap: var(--spacing-xs);
-    background-color: #f8f8f8;
+    background-color: var(--color-surface);
     padding: var(--spacing-sm);
     border-radius: var(--radius-md);
     margin-bottom: var(--spacing-md);
@@ -588,7 +513,7 @@ const timeline = [
   }
 
   .location-map {
-    background-color: #f8f8f8;
+    background-color: var(--color-surface);
     border-radius: var(--radius-md);
     overflow: hidden;
   }
@@ -596,7 +521,7 @@ const timeline = [
   .map-placeholder {
     padding: var(--spacing-2xl);
     text-align: center;
-    background: linear-gradient(135deg, var(--color-primary) 0%, #0a2d50 100%);
+    background: linear-gradient(135deg, var(--color-primary) 0%, color-mix(in srgb, var(--color-primary) 70%, #fff) 100%);
     color: var(--color-tertiary);
     min-height: 300px;
     display: flex;
@@ -611,9 +536,9 @@ const timeline = [
     margin-bottom: var(--spacing-sm);
   }
 
-  .map-note {
-    font-size: var(--font-size-sm) !important;
-    font-weight: var(--font-weight-regular) !important;
+  .location-map p.map-note {
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-regular);
     opacity: 0.9;
   }
 
@@ -634,7 +559,7 @@ const timeline = [
     height: 3px;
     background-color: var(--color-accent);
     margin: 0 auto var(--spacing-lg);
-    border-radius: 2px;
+    border-radius: var(--radius-sm);
   }
 
   .memorial-divider:last-child {
@@ -686,42 +611,7 @@ const timeline = [
     margin-bottom: 0;
   }
 
-  /* CTA Section */
-  .cta {
-    background-color: var(--color-tertiary);
-    position: relative;
-  }
-
-  .cta::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 4px;
-    background: linear-gradient(90deg, var(--color-accent) 0%, var(--color-primary) 50%, var(--color-accent) 100%);
-  }
-
-  .cta-content {
-    max-width: 600px;
-    margin: 0 auto;
-  }
-
-  .cta h2 {
-    margin-bottom: var(--spacing-sm);
-  }
-
-  .cta p {
-    margin-bottom: var(--spacing-md);
-    opacity: 0.9;
-  }
-
-  .cta-buttons {
-    display: flex;
-    gap: var(--spacing-sm);
-    justify-content: center;
-    flex-wrap: wrap;
-  }
+  /* (cta styles moved to CtaSection.astro) */
 
   /* Responsive */
   @media (max-width: 1024px) {
@@ -739,26 +629,8 @@ const timeline = [
   }
 
   @media (max-width: 768px) {
-    .hero {
-      padding: var(--spacing-xl) 0;
-    }
-
-    .hero h1 {
-      font-size: var(--font-size-h2);
-    }
-
     .partners-grid {
       grid-template-columns: 1fr;
-    }
-
-    .cta-buttons {
-      flex-direction: column;
-    }
-
-    .cta-buttons .btn-primary,
-    .cta-buttons .btn-secondary {
-      width: 100%;
-      text-align: center;
     }
 
     .timeline {

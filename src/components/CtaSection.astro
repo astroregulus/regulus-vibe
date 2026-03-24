@@ -1,0 +1,73 @@
+---
+interface Props {
+  title: string;
+  subtitle?: string;
+  primaryBtn?: { label: string; href: string };
+  secondaryBtn?: { label: string; href: string };
+}
+
+const { title, subtitle, primaryBtn, secondaryBtn } = Astro.props;
+---
+
+<section class="cta dark-section section">
+  <div class="container">
+    <div class="cta-content">
+      <h2>{title}</h2>
+      {subtitle && <p>{subtitle}</p>}
+      {(primaryBtn || secondaryBtn) && (
+        <div class="cta-buttons">
+          {primaryBtn && (
+            <a href={primaryBtn.href} class="btn-primary">{primaryBtn.label}</a>
+          )}
+          {secondaryBtn && (
+            <a href={secondaryBtn.href} class="btn-secondary">{secondaryBtn.label}</a>
+          )}
+        </div>
+      )}
+      <slot />
+    </div>
+  </div>
+</section>
+
+<style>
+  .cta {
+    background-color: var(--color-primary);
+    color: var(--color-tertiary);
+  }
+
+  .cta-content {
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .cta-content h2 {
+    color: var(--color-tertiary);
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .cta-content p {
+    opacity: 0.9;
+    margin-bottom: var(--spacing-lg);
+    line-height: var(--line-height-normal);
+  }
+
+  .cta-buttons {
+    display: flex;
+    gap: var(--spacing-sm);
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  @media (max-width: 768px) {
+    .cta-buttons {
+      flex-direction: column;
+    }
+
+    .cta-buttons .btn-primary,
+    .cta-buttons .btn-secondary {
+      width: 100%;
+      text-align: center;
+    }
+  }
+</style>
