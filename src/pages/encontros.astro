@@ -13,24 +13,23 @@ const featuredEvent = {
     'Workshops práticos e interativos',
     'Networking com profissionais e estudantes de astrologia',
     'Livraria especializada com lançamentos exclusivos',
-    'Certificado de participação',
   ],
 };
 
 const pastEvents = [
-  { number: 'XIII', year: '2024', title: 'XIII Encontro Regulus de Astrologia' },
-  { number: 'XII', year: '2023', title: 'XII Encontro Regulus de Astrologia' },
-  { number: 'XI', year: '2022', title: 'XI Encontro Regulus de Astrologia' },
-  { number: 'X', year: '2019', title: 'X Encontro Regulus de Astrologia' },
-  { number: 'IX', year: '2018', title: 'IX Encontro Regulus de Astrologia' },
-  { number: 'VIII', year: '2017', title: 'VIII Encontro Regulus de Astrologia' },
-  { number: 'VII', year: '2016', title: 'VII Encontro Regulus de Astrologia' },
-  { number: 'VI', year: '2015', title: 'VI Encontro Regulus de Astrologia' },
-  { number: 'V', year: '2014', title: 'V Encontro Regulus de Astrologia' },
-  { number: 'IV', year: '2013', title: 'IV Encontro Regulus de Astrologia' },
-  { number: 'III', year: '2012', title: 'III Encontro Regulus de Astrologia' },
-  { number: 'II', year: '2011', title: 'II Encontro Regulus de Astrologia' },
-  { number: 'I', year: '2010', title: 'I Encontro Regulus de Astrologia' },
+  { number: 'XIII', year: '2024', title: 'XIII Encontro Regulus de Astrologia', online: true },
+  { number: 'XII', year: '2023', title: 'XII Encontro Regulus de Astrologia', online: true },
+  { number: 'XI', year: '2022', title: 'XI Encontro Regulus de Astrologia', online: true },
+  { number: 'X', year: '2021', title: 'X Encontro Regulus de Astrologia', online: true },
+  { number: 'IX', year: '2020', title: 'IX Encontro Regulus de Astrologia', online: true },
+  { number: 'VIII', year: '2019', title: 'VIII Encontro Regulus de Astrologia', online: false },
+  { number: 'VII', year: '2018', title: 'VII Encontro Regulus de Astrologia', online: false },
+  { number: 'VI', year: '2017', title: 'VI Encontro Regulus de Astrologia', online: false },
+  { number: 'V', year: '2016', title: 'V Encontro Regulus de Astrologia', online: false },
+  { number: 'IV', year: '2015', title: 'IV Encontro Regulus de Astrologia', online: false },
+  { number: 'III', year: '2014', title: 'III Encontro Regulus de Astrologia', online: false },
+  { number: 'II', year: '2013', title: 'II Encontro Regulus de Astrologia', online: false },
+  { number: 'I', year: '2012', title: 'I Encontro Regulus de Astrologia', online: false },
 ];
 ---
 
@@ -45,7 +44,7 @@ const pastEvents = [
           <span class="hero-badge">Eventos</span>
           <h1>Encontros Regulus de Astrologia</h1>
           <p class="hero-subtitle">
-            Desde 2010, reunimos a comunidade astrológica brasileira em um evento único, 
+            Desde 2012, reunimos a comunidade astrológica brasileira em um evento único, 
             promovendo conhecimento, troca de experiências e celebração da arte celeste.
           </p>
         </div>
@@ -85,7 +84,7 @@ const pastEvents = [
           <div class="featured-footer">
             <a href="/contato" class="btn-primary">Inscreva-se no XIV Encontro</a>
             <a href="https://youtube.com/@astrologiaregulus" target="_blank" rel="noopener noreferrer" class="btn-secondary">
-              Assista Edições Anteriores
+              Edições Online no YouTube
             </a>
           </div>
         </div>
@@ -99,7 +98,7 @@ const pastEvents = [
           <div class="about-text">
             <h2>O Maior Evento de Astrologia do Brasil</h2>
             <p class="lead">
-              Os Encontros Regulus de Astrologia são uma tradição que começou em 2010 e se consolidou 
+              Os Encontros Regulus de Astrologia são uma tradição que começou em 2012 e se consolidou 
               como o principal evento do calendário astrológico brasileiro.
             </p>
             <p>
@@ -118,7 +117,7 @@ const pastEvents = [
               <span class="stat-label">Edições Realizadas</span>
             </div>
             <div class="stat-card">
-              <span class="stat-number">15+</span>
+              <span class="stat-number">13+</span>
               <span class="stat-label">Anos de Tradição</span>
             </div>
             <div class="stat-card">
@@ -137,31 +136,38 @@ const pastEvents = [
           <h2 class="section-title">Edições Anteriores</h2>
           <p class="section-subtitle">
             Confira a trajetória dos Encontros Regulus de Astrologia ao longo dos anos. 
-            As gravações de várias edições estão disponíveis em nosso canal no YouTube.
+            As gravações das edições realizadas a partir de 2020 estão disponíveis em nosso canal no YouTube.
           </p>
         </div>
         
         <div class="timeline">
           {pastEvents.map((event) => (
-            <div class="timeline-item">
+            <div class={`timeline-item${event.online ? ' timeline-item--online' : ''}`}>
               <div class="timeline-marker">
                 <span class="event-number">{event.number}</span>
               </div>
               <div class="timeline-content">
-                <span class="timeline-year">{event.year}</span>
+                <div class="timeline-year-row">
+                  <span class="timeline-year">{event.year}</span>
+                  {event.online && <span class="badge-online">Online</span>}
+                </div>
                 <h4 class="timeline-title">{event.title}</h4>
               </div>
             </div>
           ))}
         </div>
+
+        <p class="timeline-note">
+          ★ A partir da edição de 2020, os Encontros passaram a ser realizados online e estão disponíveis no YouTube. As edições anteriores não estão disponíveis para acesso.
+        </p>
         
         <div class="youtube-cta text-center">
           <div class="youtube-card">
             <div class="youtube-icon">▶</div>
             <h3>Assista às Gravações no YouTube</h3>
             <p>
-              Não conseguiu participar de alguma edição? Disponibilizamos as gravações das 
-              palestras em nosso canal oficial no YouTube. Inscreva-se e não perca nenhum conteúdo!
+              As edições realizadas a partir de 2020 estão disponíveis em nosso canal oficial no YouTube. 
+              Inscreva-se e não perca nenhum conteúdo!
             </p>
             <a 
               href="https://youtube.com/@astrologiaregulus" 
@@ -496,12 +502,28 @@ const pastEvents = [
     flex: 1;
   }
 
+  .timeline-year-row {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    margin-bottom: 2px;
+  }
+
   .timeline-year {
-    display: block;
     font-size: var(--font-size-sm);
     font-weight: var(--font-weight-bold);
     color: var(--color-accent);
-    margin-bottom: 2px;
+  }
+
+  .badge-online {
+    font-size: 10px;
+    font-weight: var(--font-weight-bold);
+    color: var(--color-tertiary);
+    background-color: var(--color-accent);
+    padding: 1px 6px;
+    border-radius: var(--radius-sm);
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
   }
 
   .timeline-title {
@@ -509,6 +531,16 @@ const pastEvents = [
     font-weight: var(--font-weight-bold);
     color: var(--color-primary);
     margin: 0;
+  }
+
+  .timeline-note {
+    max-width: 800px;
+    margin: 0 auto var(--spacing-xl);
+    font-size: var(--font-size-sm);
+    color: var(--color-text);
+    opacity: 0.75;
+    text-align: center;
+    line-height: var(--line-height-relaxed);
   }
 
   /* YouTube CTA */
