@@ -112,20 +112,20 @@ import Footer from '../components/Footer.astro';
 <style is:global>
   /* ── Hero ── */
   .hero {
-    background: linear-gradient(135deg, #011830 0%, #0a2a4a 100%);
-    padding: 48px 0;
+    background: linear-gradient(135deg, var(--color-primary) 0%, color-mix(in srgb, var(--color-primary) 70%, #fff) 100%);
+    padding: var(--spacing-2xl) 0;
     text-align: center;
   }
   .hero-title {
-    color: #fff;
-    font-size: 48px;
-    font-weight: 900;
-    margin-bottom: 8px;
+    color: var(--color-tertiary);
+    font-size: var(--font-size-h1);
+    font-weight: var(--font-weight-black);
+    margin-bottom: var(--spacing-xs);
   }
   .hero-subtitle {
-    color: #EA883A;
-    font-size: 18px;
-    font-weight: 400;
+    color: var(--color-accent);
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-regular);
     margin: 0;
   }
 
@@ -183,8 +183,8 @@ import Footer from '../components/Footer.astro';
     border-color: rgba(234,136,58,0.4);
   }
   .theme-btn[aria-pressed="true"] {
-    border-color: #EA883A;
-    box-shadow: 0 0 8px rgba(234,136,58,0.25);
+    border-color: var(--color-accent);
+    box-shadow: 0 0 8px var(--color-accent-alpha);
   }
   .theme-btn--elements {
     background: conic-gradient(
@@ -252,8 +252,8 @@ import Footer from '../components/Footer.astro';
     border-color: rgba(255,255,255,0.18);
   }
   .planet-chip.active {
-    background: rgba(234,136,58,0.15);
-    border-color: #EA883A;
+    background: color-mix(in srgb, var(--color-accent) 15%, transparent);
+    border-color: var(--color-accent);
   }
   .chip-glyph {
     font-size: 20px;
@@ -269,7 +269,7 @@ import Footer from '../components/Footer.astro';
     line-height: 1;
   }
   .planet-chip.active .chip-name {
-    color: #EA883A;
+    color: var(--color-accent);
   }
 
   /* ── Control panel ── */
@@ -313,9 +313,9 @@ import Footer from '../components/Footer.astro';
     color: #fff;
   }
   .cp-pos {
-    font-size: 14px;
-    color: #EA883A;
-    font-weight: 400;
+    font-size: var(--font-size-sm);
+    color: var(--color-accent);
+    font-weight: var(--font-weight-regular);
   }
 
   /* ── Sign picker ── */
@@ -345,8 +345,8 @@ import Footer from '../components/Footer.astro';
     background: rgba(255,255,255,0.08);
   }
   .sign-arrow:active {
-    background: rgba(234,136,58,0.2);
-    color: #EA883A;
+    background: var(--color-accent-alpha);
+    color: var(--color-accent);
   }
   .sign-name {
     flex: 1;
@@ -387,8 +387,8 @@ import Footer from '../components/Footer.astro';
     border-radius: 3px;
     background: linear-gradient(
       to right,
-      #EA883A 0%,
-      #EA883A var(--pct, 0%),
+      var(--color-accent) 0%,
+      var(--color-accent) var(--pct, 0%),
       rgba(255,255,255,0.12) var(--pct, 0%),
       rgba(255,255,255,0.12) 100%
     );
@@ -458,8 +458,8 @@ import Footer from '../components/Footer.astro';
     padding: 0;
   }
   .toggle-btn[aria-checked="true"] {
-    background: #EA883A;
-    border-color: #EA883A;
+    background: var(--color-accent);
+    border-color: var(--color-accent);
   }
   .toggle-knob {
     position: absolute;
@@ -485,7 +485,7 @@ import Footer from '../components/Footer.astro';
   /* Update button */
   .btn-update {
     width: 100%;
-    background: #EA883A;
+    background: var(--color-accent);
     color: #fff;
     font-family: inherit;
     font-size: 15px;
@@ -566,7 +566,7 @@ import Footer from '../components/Footer.astro';
       bottom: 0;
       left: 0;
       right: 0;
-      z-index: 9999;
+      z-index: var(--z-overlay);
       background: #07111f;
       border-top: 1px solid rgba(255,255,255,0.1);
       border-radius: 0;

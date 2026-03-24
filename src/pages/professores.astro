@@ -2,6 +2,9 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import HeroSection from '../components/HeroSection.astro';
+import CtaSection from '../components/CtaSection.astro';
+import SectionHeader from '../components/SectionHeader.astro';
 import instructorsData from '../data/instructors.json';
 const professores = instructorsData.instructors;
 ---
@@ -10,17 +13,11 @@ const professores = instructorsData.instructors;
   <Header currentPage="/professores" />
   
   <main>
-    <!-- Hero Section -->
-    <section class="hero">
-      <div class="container">
-        <div class="hero-content">
-          <h1>Nossos Professores</h1>
-          <p class="hero-subtitle">
-            Corpo docente qualificado com décadas de experiência no ensino e prática da astrologia.
-          </p>
-        </div>
-      </div>
-    </section>
+    <HeroSection
+      title="Nossos Professores"
+      subtitle="Corpo docente qualificado com décadas de experiência no ensino e prática da astrologia."
+      centered
+    />
 
     <!-- Founder Tribute Section -->
     <section class="section tribute">
@@ -51,10 +48,11 @@ const professores = instructorsData.instructors;
     <!-- Instructors Grid Section -->
     <section class="section instructors">
       <div class="container">
-        <h2 class="section-title text-center">Corpo Docente Atual</h2>
-        <p class="section-subtitle text-center">
-          Profissionais dedicados à formação de astrólogos qualificados, dando continuidade ao legado do fundador.
-        </p>
+        <SectionHeader
+          title="Corpo Docente Atual"
+          subtitle="Profissionais dedicados à formação de astrólogos qualificados, dando continuidade ao legado do fundador."
+          centered
+        />
 
         <div class="instructors-grid">
           {professores.map((professor) => (
@@ -73,64 +71,19 @@ const professores = instructorsData.instructors;
       </div>
     </section>
 
-    <!-- CTA Section -->
-    <section class="section cta">
-      <div class="container">
-        <div class="cta-content text-center">
-          <h2>Aprenda com os Melhores</h2>
-          <p>
-            Nossos professores estão prontos para guiá-lo em sua jornada de aprendizado astrológico.
-            Conheça nossos cursos e comece sua formação.
-          </p>
-          <div class="cta-buttons">
-            <a href="/cursos" class="btn-primary">Conheça Nossos Cursos</a>
-            <a href="/contato" class="btn-secondary">Entre em Contato</a>
-          </div>
-        </div>
-      </div>
-    </section>
+    <CtaSection
+      title="Aprenda com os Melhores"
+      subtitle="Nossos professores estão prontos para guiá-lo em sua jornada de aprendizado astrológico. Conheça nossos cursos e comece sua formação."
+      primaryBtn={{ label: 'Conheça Nossos Cursos', href: '/cursos' }}
+      secondaryBtn={{ label: 'Entre em Contato', href: '/contato' }}
+    />
   </main>
 
   <Footer />
 </BaseLayout>
 
 <style>
-  /* Hero Section */
-  .hero {
-    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary) 70%, var(--color-accent) 100%);
-    color: var(--color-tertiary);
-    padding: var(--spacing-2xl) 0;
-    text-align: center;
-    position: relative;
-  }
-
-  .hero::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 4px;
-    background: linear-gradient(90deg, var(--color-accent) 0%, var(--color-primary) 100%);
-  }
-
-  .hero-content {
-    max-width: 800px;
-    margin: 0 auto;
-  }
-
-  .hero h1 {
-    font-size: var(--font-size-h1);
-    font-weight: var(--font-weight-black);
-    margin-bottom: var(--spacing-md);
-    color: var(--color-tertiary);
-  }
-
-  .hero-subtitle {
-    font-size: var(--font-size-lg);
-    line-height: var(--line-height-relaxed);
-    opacity: 0.95;
-  }
+  /* (hero styles moved to HeroSection.astro) */
 
   /* Tribute Section */
   .tribute {
@@ -196,7 +149,7 @@ const professores = instructorsData.instructors;
     width: 80px;
     height: 4px;
     background-color: var(--color-accent);
-    border-radius: 2px;
+    border-radius: var(--radius-sm);
     margin-bottom: var(--spacing-md);
   }
 
@@ -215,34 +168,7 @@ const professores = instructorsData.instructors;
 
   /* Instructors Section */
   .instructors {
-    background-color: #f8f8f8;
-  }
-
-  .section-title {
-    margin-bottom: var(--spacing-xs);
-    display: inline-block;
-    position: relative;
-  }
-
-  .section-title::after {
-    content: '';
-    position: absolute;
-    bottom: -8px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 60px;
-    height: 4px;
-    background-color: var(--color-accent);
-    border-radius: 2px;
-  }
-
-  .section-subtitle {
-    color: var(--color-text);
-    opacity: 0.8;
-    margin-bottom: var(--spacing-lg);
-    max-width: 600px;
-    margin-left: auto;
-    margin-right: auto;
+    background-color: var(--color-surface);
   }
 
   .instructors-grid {
@@ -293,7 +219,7 @@ const professores = instructorsData.instructors;
     display: inline-block;
     background-color: var(--color-primary);
     color: var(--color-tertiary);
-    padding: 4px 12px;
+    padding: var(--spacing-xs) var(--spacing-sm);
     border-radius: var(--radius-sm);
     font-size: var(--font-size-sm);
     font-weight: var(--font-weight-bold);
@@ -307,45 +233,7 @@ const professores = instructorsData.instructors;
     opacity: 0.9;
   }
 
-  /* CTA Section */
-  .cta {
-    background-color: var(--color-primary);
-    color: var(--color-tertiary);
-  }
-
-  .cta-content {
-    max-width: 700px;
-    margin: 0 auto;
-  }
-
-  .cta h2 {
-    color: var(--color-tertiary);
-    margin-bottom: var(--spacing-sm);
-  }
-
-  .cta p {
-    font-size: var(--font-size-lg);
-    margin-bottom: var(--spacing-lg);
-    opacity: 0.95;
-  }
-
-  .cta-buttons {
-    display: flex;
-    gap: var(--spacing-sm);
-    justify-content: center;
-    flex-wrap: wrap;
-  }
-
-  .cta .btn-primary {
-    background-color: var(--color-tertiary);
-    color: var(--color-primary);
-  }
-
-  .cta .btn-secondary {
-    background-color: transparent;
-    border: 2px solid var(--color-tertiary);
-    color: var(--color-tertiary);
-  }
+  /* (cta styles moved to CtaSection.astro) */
 
   /* Responsive */
   @media (max-width: 1024px) {
@@ -355,14 +243,6 @@ const professores = instructorsData.instructors;
   }
 
   @media (max-width: 768px) {
-    .hero {
-      padding: var(--spacing-xl) 0;
-    }
-
-    .hero h1 {
-      font-size: var(--font-size-h2);
-    }
-
     .tribute-content {
       flex-direction: column;
       text-align: center;

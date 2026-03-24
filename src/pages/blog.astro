@@ -2,6 +2,8 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import HeroSection from '../components/HeroSection.astro';
+import CtaSection from '../components/CtaSection.astro';
 
 const categories = [
   { name: 'Todos', slug: 'todos' },
@@ -61,18 +63,11 @@ const blogPosts = [
   <Header currentPage="/blog" />
   
   <main>
-    <!-- Hero Section -->
-    <section class="hero">
-      <div class="container">
-        <div class="hero-content">
-          <h1>Blog & Artigos</h1>
-          <p class="hero-subtitle">
-            Acompanhe as últimas novidades, insights astrológicos, dicas práticas 
-            e informações sobre eventos da Escola Regulus.
-          </p>
-        </div>
-      </div>
-    </section>
+    <HeroSection
+      title="Blog & Artigos"
+      subtitle="Acompanhe as últimas novidades, insights astrológicos, dicas práticas e informações sobre eventos da Escola Regulus."
+      centered
+    />
 
     <!-- Blog Section -->
     <section class="section blog-section">
@@ -153,74 +148,18 @@ const blogPosts = [
       </div>
     </section>
 
-    <!-- CTA Section -->
-    <section class="section cta">
-      <div class="container">
-        <div class="cta-content text-center">
-          <h2>Quer Aprender Mais Sobre Astrologia?</h2>
-          <p>
-            Conheça nossos cursos de formação e especialização. 
-            A Regulus oferece a melhor estrutura de ensino em astrologia do Brasil.
-          </p>
-          <a href="/cursos" class="btn-primary">Conheça Nossos Cursos</a>
-        </div>
-      </div>
-    </section>
+    <CtaSection
+      title="Quer Aprender Mais Sobre Astrologia?"
+      subtitle="Conheça nossos cursos de formação e especialização. A Regulus oferece a melhor estrutura de ensino em astrologia do Brasil."
+      primaryBtn={{ label: 'Conheça Nossos Cursos', href: '/cursos' }}
+    />
   </main>
 
   <Footer />
 </BaseLayout>
 
 <style>
-  /* Hero Section */
-  .hero {
-    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary) 70%, #EA883A 100%);
-    color: var(--color-tertiary);
-    padding: var(--spacing-2xl) 0;
-    position: relative;
-  }
-  
-  .hero::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 4px;
-    background: linear-gradient(90deg, var(--color-accent) 0%, var(--color-primary) 100%);
-  }
-
-  .hero-content {
-    max-width: 800px;
-    text-align: center;
-    margin: 0 auto;
-  }
-
-  .hero h1 {
-    font-size: var(--font-size-h1);
-    font-weight: var(--font-weight-black);
-    margin-bottom: var(--spacing-md);
-    color: var(--color-tertiary);
-    line-height: 1.1;
-  }
-
-  .hero-subtitle {
-    font-size: var(--font-size-lg);
-    line-height: var(--line-height-relaxed);
-    opacity: 0.95;
-  }
-
-  /* Container */
-  .container {
-    max-width: var(--container-max-width);
-    margin: 0 auto;
-    padding: 0 var(--container-padding);
-  }
-
-  /* Section */
-  .section {
-    padding: var(--spacing-2xl) 0;
-  }
+  /* (hero, .container, .section styles removed — provided by HeroSection.astro + global.css) */
 
   /* Blog Layout */
   .blog-layout {
@@ -237,7 +176,7 @@ const blogPosts = [
   }
 
   .sidebar-widget {
-    background-color: #f8f8f8;
+    background-color: var(--color-surface);
     padding: var(--spacing-md);
     border-radius: var(--radius-md);
     margin-bottom: var(--spacing-md);
@@ -260,7 +199,7 @@ const blogPosts = [
     width: 40px;
     height: 3px;
     background-color: var(--color-accent);
-    border-radius: 2px;
+    border-radius: var(--radius-sm);
   }
 
   .category-list {
@@ -355,7 +294,7 @@ const blogPosts = [
   .blog-category {
     background-color: var(--color-accent);
     color: var(--color-tertiary);
-    padding: 4px 12px;
+    padding: var(--spacing-xs) var(--spacing-sm);
     border-radius: var(--radius-sm);
     font-size: var(--font-size-xs);
     font-weight: var(--font-weight-bold);
@@ -469,67 +408,7 @@ const blogPosts = [
     opacity: 0.5;
   }
 
-  /* CTA Section */
-  .cta {
-    background-color: var(--color-primary);
-    color: var(--color-tertiary);
-    position: relative;
-  }
-
-  .cta::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 4px;
-    background: linear-gradient(90deg, var(--color-accent) 0%, var(--color-primary) 100%);
-  }
-
-  .cta-content {
-    max-width: 600px;
-    margin: 0 auto;
-  }
-
-  .cta h2 {
-    color: var(--color-tertiary);
-    margin-bottom: var(--spacing-sm);
-  }
-
-  .cta p {
-    margin-bottom: var(--spacing-md);
-    opacity: 0.95;
-  }
-
-  .cta .btn-primary {
-    background-color: var(--color-tertiary);
-    color: var(--color-primary);
-  }
-
-  /* Utility Classes */
-  .text-center {
-    text-align: center;
-  }
-
-  /* Button Styles */
-  .btn-primary {
-    display: inline-block;
-    background-color: var(--color-button-primary-bg);
-    color: var(--color-button-primary-text);
-    padding: var(--spacing-sm) var(--spacing-md);
-    border-radius: var(--radius-sm);
-    font-weight: var(--font-weight-bold);
-    font-size: var(--font-size-base);
-    text-decoration: none;
-    transition: var(--transition-fast);
-    border: none;
-    cursor: pointer;
-  }
-
-  .btn-primary:hover {
-    opacity: 0.9;
-    text-decoration: none;
-  }
+  /* (cta, .text-center, .btn-primary removed — provided by CtaSection.astro + global.css) */
 
   /* Responsive */
   @media (max-width: 1024px) {
@@ -556,10 +435,6 @@ const blogPosts = [
 
     .hero h1 {
       font-size: var(--font-size-h2);
-    }
-
-    .container {
-      padding: 0 var(--spacing-sm);
     }
 
     .sidebar {
