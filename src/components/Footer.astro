@@ -21,6 +21,13 @@ const quickLinks = [
 const toolLinks = [
   { href: '/mapa', label: 'Mapa Astral' },
 ];
+
+const bookstoreLinks = [
+  { href: 'https://www.livrariadaregulus.com.br/categoria/astrologia-1/1', label: 'Astrologia' },
+  { href: 'https://www.livrariadaregulus.com.br/categoria/tarot/1',        label: 'Tarô' },
+  { href: 'https://www.livrariadaregulus.com.br/categoria/esoterismo/1',   label: 'Esoterismo' },
+  { href: 'https://www.livrariadaregulus.com.br/categoria/ocultismo/1',    label: 'Ocultismo' },
+];
 ---
 
 <footer class="footer">
@@ -56,6 +63,28 @@ const toolLinks = [
             <li><a href={link.href}>{link.label}</a></li>
           ))}
         </ul>
+      </div>
+
+      <!-- Bookstore -->
+      <div class="footer-col">
+        <h4 class="footer-title">Livraria</h4>
+        <ul class="footer-links">
+          {bookstoreLinks.map((link) => (
+            <li>
+              <a href={link.href} target="_blank" rel="noopener noreferrer">
+                {link.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+        <a
+          href="https://www.livrariadaregulus.com.br"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="footer-bookstore-cta"
+        >
+          Ver livraria completa ↗
+        </a>
       </div>
 
       <!-- Contact Info -->
@@ -118,7 +147,7 @@ const toolLinks = [
 
   .footer-grid {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(6, 1fr);
     gap: var(--spacing-lg);
     margin-bottom: var(--spacing-xl);
   }
@@ -176,6 +205,21 @@ const toolLinks = [
     text-decoration: underline;
   }
 
+  .footer-bookstore-cta {
+    display: inline-block;
+    margin-top: var(--spacing-sm);
+    color: var(--color-accent);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-bold);
+    opacity: 1;
+    transition: var(--transition-fast);
+  }
+
+  .footer-bookstore-cta:hover {
+    opacity: 0.8;
+    text-decoration: underline;
+  }
+
   .footer-contact {
     font-style: normal;
     font-size: var(--font-size-sm);
@@ -221,9 +265,9 @@ const toolLinks = [
     opacity: 0.8;
   }
 
-  @media (max-width: 1024px) {
+  @media (max-width: 1200px) {
     .footer-grid {
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: repeat(3, 1fr);
     }
   }
 
@@ -243,6 +287,10 @@ const toolLinks = [
 
     .footer-brand {
       align-items: center;
+    }
+
+    .footer-bookstore-cta {
+      display: block;
     }
 
     .social-links {
