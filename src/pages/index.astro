@@ -121,6 +121,43 @@ const upcomingEvent = {
       </div>
     </section>
 
+    <!-- Bookstore Section -->
+    <section class="section bookstore">
+      <div class="container">
+        <div class="bookstore-content">
+          <span class="bookstore-badge">Livraria da Regulus</span>
+          <h2>Livros de Astrologia, Tarô e Esoterismo</h2>
+          <p class="bookstore-description">
+            Fundada junto com a escola, a Livraria da Regulus reúne títulos nacionais
+            e importados em astrologia, tarô, esoterismo e ocultismo. Um acervo construído
+            ao longo de 50 anos para atender alunos e pesquisadores.
+          </p>
+          <div class="bookstore-stats">
+            <div class="bookstore-stat">
+              <span class="bookstore-stat-number">+50</span>
+              <span class="bookstore-stat-label">Anos de acervo</span>
+            </div>
+            <div class="bookstore-stat">
+              <span class="bookstore-stat-number">4</span>
+              <span class="bookstore-stat-label">Áreas especializadas</span>
+            </div>
+            <div class="bookstore-stat">
+              <span class="bookstore-stat-number">📦</span>
+              <span class="bookstore-stat-label">Enviamos para todo o Brasil</span>
+            </div>
+          </div>
+          <a
+            href="https://www.livrariadaregulus.com.br"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn-primary"
+          >
+            Acessar a Livraria
+          </a>
+        </div>
+      </div>
+    </section>
+
     <CtaSection
       title="Comece Sua Jornada na Astrologia"
       subtitle="Entre em contato conosco e descubra como a astrologia pode transformar sua vida e carreira profissional."
@@ -310,6 +347,75 @@ const upcomingEvent = {
   }
 
 
+  /* Bookstore Section */
+  .bookstore {
+    background-color: var(--color-tertiary);
+  }
+
+  .bookstore-content {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .bookstore-badge {
+    display: inline-block;
+    background-color: var(--color-accent);
+    color: var(--color-tertiary);
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border-radius: var(--radius-sm);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-bold);
+    margin-bottom: var(--spacing-md);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .bookstore h2 {
+    color: var(--color-heading);
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .bookstore-description {
+    font-size: var(--font-size-base);
+    line-height: var(--line-height-relaxed);
+    margin-bottom: var(--spacing-lg);
+    color: var(--color-text);
+  }
+
+  .bookstore-stats {
+    display: flex;
+    justify-content: center;
+    gap: var(--spacing-2xl);
+    margin-bottom: var(--spacing-xl);
+    padding: var(--spacing-lg) 0;
+    border-top: 1px solid var(--color-border-light);
+    border-bottom: 1px solid var(--color-border-light);
+  }
+
+  .bookstore-stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .bookstore-stat-number {
+    font-size: var(--font-size-h2);
+    font-weight: var(--font-weight-black);
+    color: var(--color-accent);
+    line-height: 1;
+  }
+
+  .bookstore-stat-label {
+    font-size: var(--font-size-xs);
+    color: var(--color-text);
+    opacity: 0.6;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-weight: var(--font-weight-bold);
+  }
+
   @media (max-width: 1024px) {
     .courses-grid {
       grid-template-columns: repeat(2, 1fr);
@@ -319,6 +425,16 @@ const upcomingEvent = {
   @media (max-width: 768px) {
     .courses-grid {
       grid-template-columns: 1fr;
+    }
+
+    .bookstore-stats {
+      gap: var(--spacing-lg);
+      flex-wrap: wrap;
+    }
+
+    .bookstore .btn-primary {
+      width: 100%;
+      text-align: center;
     }
 
     .event-buttons {
