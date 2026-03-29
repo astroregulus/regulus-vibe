@@ -125,7 +125,7 @@ const levelColors: Record<string, string> = {
         
         <div class="courses-grid">
           {courses.map((course) => (
-            <article class="course-card">
+            <article class="course-card" id={course.slug}>
               <div class="course-card-header">
                 <span class="course-level" style={`--level-color: ${levelColors[course.level]}`}>
                   {course.level}

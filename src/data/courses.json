@@ -1,6 +1,7 @@
 {
   "courses": [
     {
+      "slug": "interpretacao-mapa-natal",
       "title": "Interpretação do Mapa Natal",
       "description": "Aprenda a interpretar o mapa astrológico de nascimento, compreendendo planetas, casas, aspectos e a síntese do mapa.",
       "level": "Básico",
@@ -27,6 +28,7 @@
       ]
     },
     {
+      "slug": "astrologia-horaria",
       "title": "Astrologia Horária",
       "description": "Técnica milenar para responder perguntas específicas através do mapa do momento da pergunta.",
       "level": "Intermediário",
@@ -52,6 +54,7 @@
       ]
     },
     {
+      "slug": "revolucao-solar",
       "title": "Revolução Solar",
       "description": "Análise do mapa anual de aniversário para previsões e tendências do ano pessoal.",
       "level": "Intermediário",
@@ -72,6 +75,7 @@
       ]
     },
     {
+      "slug": "sinastria",
       "title": "Sinastria",
       "description": "Estudo da compatibilidade entre mapas, aplicável a relacionamentos pessoais e profissionais.",
       "level": "Intermediário",
@@ -92,6 +96,7 @@
       ]
     },
     {
+      "slug": "astrologia-medica",
       "title": "Astrologia Médica",
       "description": "Correlações entre o mapa astrológico e tendências de saúde, com foco em prevenção e bem-estar.",
       "level": "Avançado",
@@ -112,6 +117,7 @@
       ]
     },
     {
+      "slug": "transitos-progressoes",
       "title": "Trânsitos e Progressões",
       "description": "Técnicas de previsão através dos movimentos planetários e progressões secundárias.",
       "level": "Intermediário",
