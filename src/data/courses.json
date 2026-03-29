@@ -4,37 +4,132 @@
       "title": "Interpretação do Mapa Natal",
       "description": "Aprenda a interpretar o mapa astrológico de nascimento, compreendendo planetas, casas, aspectos e a síntese do mapa.",
       "level": "Básico",
-      "duration": "6 meses"
+      "duration": "6 meses",
+      "topics": [
+        "Os dez planetas e seus significados",
+        "Os doze signos do zodíaco",
+        "As doze casas astrológicas",
+        "Aspectos planetários e configurações",
+        "Síntese e interpretação da carta natal",
+        "Prática com mapas reais"
+      ],
+      "turmas": [
+        {
+          "startDate": "Março 2025",
+          "time": "19h às 21h",
+          "instructorId": "andre-vieira"
+        },
+        {
+          "startDate": "Abril 2025",
+          "time": "10h às 12h",
+          "instructorId": "andre-vieira"
+        }
+      ]
     },
     {
       "title": "Astrologia Horária",
       "description": "Técnica milenar para responder perguntas específicas através do mapa do momento da pergunta.",
       "level": "Intermediário",
-      "duration": "6 meses"
+      "duration": "6 meses",
+      "topics": [
+        "Fundamentos da astrologia horária clássica",
+        "Dignidades e debilidades planetárias",
+        "Análise de perguntas: amor, trabalho e saúde",
+        "Recepções mútuas e aspectos aplicativos",
+        "Prática supervisionada com mapas reais"
+      ],
+      "turmas": [
+        {
+          "startDate": "Abril 2025",
+          "time": "19h às 21h",
+          "instructorId": "regina-atena"
+        },
+        {
+          "startDate": "Maio 2025",
+          "time": "10h às 12h",
+          "instructorId": "regina-atena"
+        }
+      ]
     },
     {
       "title": "Revolução Solar",
       "description": "Análise do mapa anual de aniversário para previsões e tendências do ano pessoal.",
       "level": "Intermediário",
-      "duration": "4 meses"
+      "duration": "4 meses",
+      "topics": [
+        "Princípios da revolução solar",
+        "Análise de eixos e quadrantes",
+        "Progressão e trânsitos na revolução",
+        "Técnicas de refinamento de previsões",
+        "Estudos de caso práticos"
+      ],
+      "turmas": [
+        {
+          "startDate": "Fevereiro 2025",
+          "time": "10h às 12h",
+          "instructorId": "carlos-lima"
+        }
+      ]
     },
     {
       "title": "Sinastria",
       "description": "Estudo da compatibilidade entre mapas, aplicável a relacionamentos pessoais e profissionais.",
       "level": "Intermediário",
-      "duration": "4 meses"
+      "duration": "4 meses",
+      "topics": [
+        "Comparação de cartas natais",
+        "Aspectos synastria entre dois mapas",
+        "Compatibilidade de elementos e modalidades",
+        "Dinâmicas de relacionamento",
+        "Aplicações em relacionamentos diversos"
+      ],
+      "turmas": [
+        {
+          "startDate": "Março 2025",
+          "time": "15h às 17h",
+          "instructorId": "beatriz-santos"
+        }
+      ]
     },
     {
       "title": "Astrologia Médica",
       "description": "Correlações entre o mapa astrológico e tendências de saúde, com foco em prevenção e bem-estar.",
       "level": "Avançado",
-      "duration": "6 meses"
+      "duration": "6 meses",
+      "topics": [
+        "Planetas, signos e saúde",
+        "As casas 6, 8 e 12 na medicina",
+        "Indicadores de vulnerabilidade física",
+        "Prevenção e tratamentos astrológicos",
+        "Ética e responsabilidade profissional"
+      ],
+      "turmas": [
+        {
+          "startDate": "Maio 2025",
+          "time": "19h às 21h",
+          "instructorId": "maria-santos"
+        }
+      ]
     },
     {
       "title": "Trânsitos e Progressões",
       "description": "Técnicas de previsão através dos movimentos planetários e progressões secundárias.",
       "level": "Intermediário",
-      "duration": "6 meses"
+      "duration": "6 meses",
+      "topics": [
+        "Trânsitos planetários: cálculo e interpretação",
+        "Progressões secundárias",
+        "Direções simbólicas",
+        "Técnicas de timing astrológico",
+        "Integração com revolução solar"
+      ],
+      "turmas": [
+        {
+          "startDate": "Junho 2025",
+          "time": "10h às 12h",
+          "instructorId": "roberto-mendes"
+        }
+      ]
     }
   ]
 }

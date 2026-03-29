@@ -6,7 +6,36 @@ import HeroSection from '../components/HeroSection.astro';
 import CtaSection from '../components/CtaSection.astro';
 import SectionHeader from '../components/SectionHeader.astro';
 import coursesData from '../data/courses.json';
-const courses = coursesData.courses;
+import instructorsData from '../data/instructors.json';
+
+interface Turma {
+  startDate: string;
+  time: string;
+  instructorId: string;
+}
+
+interface Course {
+  title: string;
+  description: string;
+  level: string;
+  duration: string;
+  topics: string[];
+  turmas: Turma[];
+}
+
+interface Instructor {
+  id: string;
+  nome: string;
+  iniciais: string;
+  especialidade: string;
+  bio: string;
+}
+
+const courses = coursesData.courses as Course[];
+
+const instructorMap = Object.fromEntries(
+  instructorsData.instructors.map((i: Instructor) => [i.id, i])
+);
 
 const levelColors: Record<string, string> = {
   'Básico': '#2e7d32',
@@ -116,7 +145,57 @@ const levelColors: Record<string, string> = {
                 </div>
               </div>
               <div class="course-card-footer">
-                <a href="/contato" class="btn-secondary">Saiba Mais</a>
+                <button
+                  class="btn-secondary course-toggle"
+                  aria-expanded="false"
+                  data-course-toggle
+                >
+                  Saiba Mais
+                </button>
+              </div>
+
+              <div class="course-details" aria-hidden="true">
+
+                <div class="course-details-section">
+                  <h4>Conteúdo do Curso</h4>
+                  <ul class="course-topics">
+                    {course.topics.map((topic: string) => (
+                      <li>{topic}</li>
+                    ))}
+                  </ul>
+                </div>
+
+                <div class="course-details-section">
+                  <h4>Próximas Turmas</h4>
+                  {course.turmas.length > 0 ? (
+                    <ul class="course-turmas">
+                      {course.turmas.map((turma: Turma, index: number) => {
+                        const instructor = instructorMap[turma.instructorId];
+                        const turmaInfo = `${turma.startDate} - ${turma.time}${instructor ? ` (${instructor.nome})` : ''}`;
+                        return (
+                          <li class="turma-item">
+                            <div class="turma-info">
+                              <span class="turma-date">{turma.startDate}</span>
+                              <span class="turma-time">{turma.time}</span>
+                              {instructor && (
+                                <span class="turma-instructor">{instructor.nome}</span>
+                              )}
+                            </div>
+                            <a
+                              href={`/contato?curso=${encodeURIComponent(course.title)}&turma=${encodeURIComponent(turmaInfo)}`}
+                              class="turma-btn-inscricao"
+                            >
+                              Inscrever-se
+                            </a>
+                          </li>
+                        );
+                      })}
+                    </ul>
+                  ) : (
+                    <p class="no-turmas">Em breve. Entre em contato para ser avisado.</p>
+                  )}
+                </div>
+
               </div>
             </article>
           ))}
@@ -128,7 +207,6 @@ const levelColors: Record<string, string> = {
       title="Pronto para Começar sua Jornada?"
       subtitle="Entre em contato conosco para saber mais sobre nossos cursos, horários das turmas e valores de investimento. Estamos prontos para ajudá-lo a trilhar o caminho das estrelas."
       primaryBtn={{ label: 'Fale Conosco', href: '/contato' }}
-      secondaryBtn={{ label: 'WhatsApp', href: 'https://wa.me/5511999999999' }}
     />
   </main>
 
@@ -374,6 +452,135 @@ const levelColors: Record<string, string> = {
     text-align: center;
     background-color: var(--color-primary);
     color: var(--color-tertiary);
+    cursor: pointer;
+    border: none;
+    font-family: inherit;
+    font-size: inherit;
+    padding: var(--spacing-sm) var(--spacing-md);
+    border-radius: var(--radius-sm);
+    transition: var(--transition-normal);
+  }
+
+  .course-card-footer .btn-secondary:hover {
+    opacity: 0.85;
+  }
+
+  .course-details {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+    padding: 0 var(--spacing-md);
+    border-top: 0px solid var(--color-border-light);
+  }
+
+  .course-card.expanded .course-details {
+    max-height: 600px;
+    padding-bottom: var(--spacing-md);
+    border-top-width: 1px;
+  }
+
+  .course-details-section {
+    margin-top: var(--spacing-md);
+  }
+
+  .course-details-section h4 {
+    font-size: var(--font-size-sm);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .course-topics {
+    list-style: none;
+    padding: 0;
+  }
+
+  .course-topics li {
+    font-size: var(--font-size-sm);
+    padding: var(--spacing-xs) 0;
+    padding-left: var(--spacing-md);
+    position: relative;
+    line-height: var(--line-height-relaxed);
+  }
+
+  .course-topics li::before {
+    content: '★';
+    position: absolute;
+    left: 0;
+    color: var(--color-accent);
+    font-size: var(--font-size-xs);
+    top: calc(var(--spacing-xs) + 2px);
+  }
+
+  .course-turmas {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+  }
+
+  .turma-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--spacing-sm);
+    font-size: var(--font-size-sm);
+    padding: var(--spacing-sm);
+    background-color: var(--color-tertiary);
+    border-radius: var(--radius-sm);
+  }
+
+  .turma-info {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xs);
+    flex: 1;
+  }
+
+  .turma-date {
+    font-weight: var(--font-weight-bold);
+    color: var(--color-primary);
+  }
+
+  .turma-time {
+    color: var(--color-accent);
+    font-weight: var(--font-weight-bold);
+  }
+
+  .turma-instructor {
+    color: var(--color-text);
+    opacity: 0.8;
+    font-size: var(--font-size-xs);
+  }
+
+  .turma-btn-inscricao {
+    padding: var(--spacing-xs) var(--spacing-sm);
+    background-color: var(--color-accent);
+    color: #fff;
+    border-radius: var(--radius-sm);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-bold);
+    text-decoration: none;
+    transition: var(--transition-normal);
+    white-space: nowrap;
+  }
+
+  .turma-btn-inscricao:hover {
+    opacity: 0.85;
+  }
+
+  .no-turmas {
+    font-size: var(--font-size-sm);
+    opacity: 0.7;
+    font-style: italic;
+  }
+
+
+
+  .course-card.expanded .course-toggle {
+    opacity: 0.7;
   }
 
   /* (cta styles moved to CtaSection.astro) */
@@ -406,3 +613,22 @@ const levelColors: Record<string, string> = {
 
   }
 </style>
+
+<script>
+  document.querySelectorAll('[data-course-toggle]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const card = btn.closest('.course-card');
+      if (!card) return;
+
+      const isExpanded = btn.getAttribute('aria-expanded') === 'true';
+      const details = card.querySelector('.course-details');
+
+      btn.setAttribute('aria-expanded', String(!isExpanded));
+      card.classList.toggle('expanded', !isExpanded);
+
+      if (details) {
+        details.setAttribute('aria-hidden', String(isExpanded));
+      }
+    });
+  });
+</script>
