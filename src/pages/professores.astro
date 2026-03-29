@@ -6,7 +6,13 @@ import HeroSection from '../components/HeroSection.astro';
 import CtaSection from '../components/CtaSection.astro';
 import SectionHeader from '../components/SectionHeader.astro';
 import instructorsData from '../data/instructors.json';
+import coursesData from '../data/courses.json';
+
 const professores = instructorsData.instructors;
+const cursos = coursesData.courses;
+
+// Create lookup map: slug → course
+const cursosPorSlug = new Map(cursos.map(c => [c.slug, c]));
 ---
 
 <BaseLayout title="Professores" description="Conheça os professores da Escola Regulus de Astrologia. Profissionais experientes dedicados ao ensino de qualidade em astrologia.">
@@ -64,6 +70,25 @@ const professores = instructorsData.instructors;
                 <h3>{professor.nome}</h3>
                 <span class="instructor-specialty">{professor.especialidade}</span>
                 <p class="instructor-bio">{professor.bio}</p>
+                {professor.cursos && professor.cursos.length > 0 && (
+                  <div class="instructor-courses">
+                    <p class="instructor-courses-label">Ministra os cursos</p>
+                    <ul class="instructor-courses-list">
+                      {professor.cursos.map((slug) => {
+                        const curso = cursosPorSlug.get(slug);
+                        return curso ? (
+                          <li>
+                            <a href={`/cursos#${slug}`}>
+                              <span class="course-dot" aria-hidden="true"></span>
+                              {curso.title}
+                              <span class="course-arrow" aria-hidden="true">→</span>
+                            </a>
+                          </li>
+                        ) : null;
+                      })}
+                    </ul>
+                  </div>
+                )}
               </div>
             </article>
           ))}
@@ -231,6 +256,68 @@ const professores = instructorsData.instructors;
     line-height: var(--line-height-relaxed);
     color: var(--color-text);
     opacity: 0.9;
+  }
+
+  /* Instructor courses block */
+  .instructor-courses {
+    margin-top: var(--spacing-sm);
+    padding-top: var(--spacing-sm);
+    border-top: 1px solid var(--color-border-light);
+  }
+
+  .instructor-courses-label {
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-bold);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #888;
+    margin-bottom: var(--spacing-xs);
+  }
+
+  .instructor-courses-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    text-align: left;
+  }
+
+  .instructor-courses-list li a {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-primary);
+    text-decoration: none;
+    padding: 6px 10px;
+    border-radius: var(--radius-sm);
+    transition: background var(--transition-normal), color var(--transition-normal);
+  }
+
+  .instructor-courses-list li a:hover {
+    background: var(--color-accent-alpha);
+    color: var(--color-accent);
+  }
+
+  .course-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--color-accent);
+    flex-shrink: 0;
+  }
+
+  .course-arrow {
+    margin-left: auto;
+    color: var(--color-accent);
+    font-size: var(--font-size-base);
+    opacity: 0;
+    transition: opacity var(--transition-normal);
+  }
+
+  .instructor-courses-list li a:hover .course-arrow {
+    opacity: 1;
   }
 
   /* (cta styles moved to CtaSection.astro) */

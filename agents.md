@@ -10,6 +10,18 @@
 
 No test framework is configured. Verify changes visually via the dev server.
 
+### When npm commands fail (dyld / Node environment error)
+If any npm command exits with `dyld: Symbol not found` or `Abort trap: 6`, the Node
+installation is broken and CLI tools are unavailable. **Do not skip validation — use the fallback:**
+- Run `eca__editor_diagnostics` on every modified `.astro` / `.ts` file — this uses the
+  LSP and catches type errors, missing imports, and syntax issues without Node
+- Treat any diagnostic as a blocking error exactly as you would a failed `npm run check`
+
+### Git staging discipline
+**Never use `git add -A` or `git add .`** — always stage only the files that belong to the
+current change. Untracked files that existed before your work must not enter the commit.
+Use `git add <explicit-paths>` and verify with `git status` before committing.
+
 ## Stack & Structure
 - **Astro 6** (static site, `type: module`), **TypeScript strict**, no framework (vanilla JS in `<script>` tags)
 - Pages: `src/pages/` · Components: `src/components/` · Layouts: `src/layouts/` · Styles: `src/styles/`
