@@ -554,13 +554,13 @@ const socialLinks = [
 
     if (courseName) {
       // Set assunto field to "cursos"
-      const assuntoSelect = document.getElementById('assunto');
+      const assuntoSelect = document.getElementById('assunto') as HTMLSelectElement;
       if (assuntoSelect) {
         assuntoSelect.value = 'cursos';
       }
 
       // Pre-fill message with course name
-      const mensagemTextarea = document.getElementById('mensagem');
+      const mensagemTextarea = document.getElementById('mensagem') as HTMLTextAreaElement;
       if (mensagemTextarea) {
         mensagemTextarea.value = `Olá! Tenho interesse no curso de ${courseName}. Gostaria de receber mais informações.`;
       }
