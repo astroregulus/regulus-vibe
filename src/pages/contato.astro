@@ -551,6 +551,7 @@ const socialLinks = [
   document.addEventListener('DOMContentLoaded', () => {
     const urlParams = new URLSearchParams(window.location.search);
     const courseName = urlParams.get('curso');
+    const turmaInfo = urlParams.get('turma');
 
     if (courseName) {
       // Set assunto field to "cursos"
@@ -559,10 +560,15 @@ const socialLinks = [
         assuntoSelect.value = 'cursos';
       }
 
-      // Pre-fill message with course name
+      // Pre-fill message with course name and turma info
       const mensagemTextarea = document.getElementById('mensagem') as HTMLTextAreaElement;
       if (mensagemTextarea) {
-        mensagemTextarea.value = `Olá! Tenho interesse no curso de ${courseName}. Gostaria de receber mais informações.`;
+        let message = `Olá! Tenho interesse no curso de ${courseName}`;
+        if (turmaInfo) {
+          message += ` - Turma: ${turmaInfo}`;
+        }
+        message += `. Gostaria de receber mais informações.`;
+        mensagemTextarea.value = message;
       }
 
       // Scroll to form
