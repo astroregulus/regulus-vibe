@@ -545,3 +545,33 @@ const socialLinks = [
     }
   }
 </style>
+
+<script>
+  // Pre-fill form with course information from URL params
+  document.addEventListener('DOMContentLoaded', () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const courseName = urlParams.get('curso');
+
+    if (courseName) {
+      // Set assunto field to "cursos"
+      const assuntoSelect = document.getElementById('assunto');
+      if (assuntoSelect) {
+        assuntoSelect.value = 'cursos';
+      }
+
+      // Pre-fill message with course name
+      const mensagemTextarea = document.getElementById('mensagem');
+      if (mensagemTextarea) {
+        mensagemTextarea.value = `Olá! Tenho interesse no curso de ${courseName}. Gostaria de receber mais informações.`;
+      }
+
+      // Scroll to form
+      setTimeout(() => {
+        const contactForm = document.querySelector('.contact-form-wrapper');
+        if (contactForm) {
+          contactForm.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }, 100);
+    }
+  });
+</script>

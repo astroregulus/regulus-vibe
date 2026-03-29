@@ -188,10 +188,8 @@ const levelColors: Record<string, string> = {
                 </div>
 
                 <a
-                  href={`https://wa.me/5511999999999?text=${encodeURIComponent(`Olá! Tenho interesse no curso de ${course.title}.`)}`}
-                  class="btn-whatsapp"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  href={`/contato?curso=${encodeURIComponent(course.title)}`}
+                  class="btn-contact"
                 >
                   Envie uma mensagem
                 </a>
@@ -555,13 +553,13 @@ const levelColors: Record<string, string> = {
     font-style: italic;
   }
 
-  .btn-whatsapp {
+  .btn-contact {
     display: flex;
     align-items: center;
     justify-content: center;
     margin-top: var(--spacing-md);
     padding: var(--spacing-sm) var(--spacing-md);
-    background-color: #25d366;
+    background-color: var(--color-accent);
     color: #fff;
     border-radius: var(--radius-sm);
     font-weight: var(--font-weight-bold);
@@ -570,8 +568,8 @@ const levelColors: Record<string, string> = {
     transition: var(--transition-normal);
   }
 
-  .btn-whatsapp:hover {
-    background-color: #1da851;
+  .btn-contact:hover {
+    opacity: 0.9;
   }
 
   .course-card.expanded .course-toggle {
