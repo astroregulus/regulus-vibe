@@ -45,6 +45,37 @@ collections:
                 label: Duração
                 widget: string
                 hint: Ex. "6 meses", "4 meses".
+              - name: topics
+                label: Conteúdo Programático
+                label_singular: Tópico
+                widget: list
+                field:
+                  name: item
+                  label: Tópico
+                  widget: string
+                hint: Lista de tópicos exibidos no painel "Saiba Mais".
+              - name: turmas
+                label: Próximas Turmas
+                label_singular: Turma
+                widget: list
+                fields:
+                  - name: startDate
+                    label: Data de Início
+                    widget: string
+                    hint: 'Ex: "Abril 2025", "Março 2025 — turma vespertina".'
+                  - name: time
+                    label: Horário
+                    widget: string
+                    hint: 'Ex: "19h às 21h", "10h às 12h".'
+                  - name: instructorId
+                    label: Professor
+                    widget: relation
+                    collection: instructors
+                    file: instructors_list
+                    search_fields: ["instructors.*.nome"]
+                    display_fields: ["instructors.*.nome"]
+                    value_field: "instructors.*.id"
+                    hint: Selecione o professor responsável por esta turma.
 
   - name: instructors
     label: Professores
@@ -60,6 +91,15 @@ collections:
             label_singular: Professor
             widget: list
             fields:
+              - name: id
+                label: ID
+                widget: string
+                hint: >
+                  Identificador único em minúsculas sem acentos, separado por hífens.
+                  Ex: "regina-atena". Não alterar após a criação.
+                pattern:
+                  - "^[a-z0-9]+(-[a-z0-9]+)*$"
+                  - Deve conter apenas letras minúsculas, números e hífens.
               - name: nome
                 label: Nome
                 widget: string
