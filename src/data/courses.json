@@ -28,28 +28,23 @@
       ]
     },
     {
-      "slug": "astrologia-horaria",
-      "title": "Astrologia Horária",
-      "description": "Técnica milenar para responder perguntas específicas através do mapa do momento da pergunta.",
+      "slug": "transitos-progressoes",
+      "title": "Trânsitos e Progressões",
+      "description": "Técnicas de previsão através dos movimentos planetários e progressões secundárias.",
       "level": "Intermediário",
       "duration": "6 meses",
       "topics": [
-        "Fundamentos da astrologia horária clássica",
-        "Dignidades e debilidades planetárias",
-        "Análise de perguntas: amor, trabalho e saúde",
-        "Recepções mútuas e aspectos aplicativos",
-        "Prática supervisionada com mapas reais"
+        "Trânsitos planetários: cálculo e interpretação",
+        "Progressões secundárias",
+        "Direções simbólicas",
+        "Técnicas de timing astrológico",
+        "Integração com revolução solar"
       ],
       "turmas": [
         {
-          "startDate": "Abril 2025",
-          "time": "19h às 21h",
-          "instructorId": "regina-atena"
-        },
-        {
-          "startDate": "Maio 2025",
+          "startDate": "Junho 2025",
           "time": "10h às 12h",
-          "instructorId": "regina-atena"
+          "instructorId": "roberto-mendes"
         }
       ]
     },
@@ -96,6 +91,32 @@
       ]
     },
     {
+      "slug": "astrologia-horaria",
+      "title": "Astrologia Horária",
+      "description": "Técnica milenar para responder perguntas específicas através do mapa do momento da pergunta.",
+      "level": "Intermediário",
+      "duration": "6 meses",
+      "topics": [
+        "Fundamentos da astrologia horária clássica",
+        "Dignidades e debilidades planetárias",
+        "Análise de perguntas: amor, trabalho e saúde",
+        "Recepções mútuas e aspectos aplicativos",
+        "Prática supervisionada com mapas reais"
+      ],
+      "turmas": [
+        {
+          "startDate": "Abril 2025",
+          "time": "19h às 21h",
+          "instructorId": "regina-atena"
+        },
+        {
+          "startDate": "Maio 2025",
+          "time": "10h às 12h",
+          "instructorId": "regina-atena"
+        }
+      ]
+    },
+    {
       "slug": "astrologia-medica",
       "title": "Astrologia Médica",
       "description": "Correlações entre o mapa astrológico e tendências de saúde, com foco em prevenção e bem-estar.",
@@ -113,27 +134,6 @@
           "startDate": "Maio 2025",
           "time": "19h às 21h",
           "instructorId": "maria-santos"
-        }
-      ]
-    },
-    {
-      "slug": "transitos-progressoes",
-      "title": "Trânsitos e Progressões",
-      "description": "Técnicas de previsão através dos movimentos planetários e progressões secundárias.",
-      "level": "Intermediário",
-      "duration": "6 meses",
-      "topics": [
-        "Trânsitos planetários: cálculo e interpretação",
-        "Progressões secundárias",
-        "Direções simbólicas",
-        "Técnicas de timing astrológico",
-        "Integração com revolução solar"
-      ],
-      "turmas": [
-        {
-          "startDate": "Junho 2025",
-          "time": "10h às 12h",
-          "instructorId": "roberto-mendes"
         }
       ]
     }
